@@ -1,0 +1,30 @@
+{
+	"private": true,
+	"scripts": {
+		"start": "concurrently 'wp-scripts start' 'wp-scripts start src/entrypoints/*.* --output-path build/entrypoints'",
+		"build": "npm run build:clean && concurrently npm:build:jed npm:build:mo npm:build:scripts",
+		"build:clean": "rm -Rf build languages/*.{json,mo}",
+		"build:jed": "composer exec -- wp i18n make-json languages --no-purge",
+		"build:mo": "composer exec -- wp i18n make-mo languages",
+		"build:scripts": "wp-scripts build && wp-scripts build src/entrypoints/*.* --output-path build/entrypoints && rm -Rf build/entrypoints/blocks",
+		"i18n": "npm run i18n:po",
+		"i18n:pot": "npm run build:scripts && composer exec -- wp i18n make-pot .",
+		"i18n:po": "npm run i18n:pot && ( cd languages && find . -name '*.po' -print -exec msgmerge -U --backup=none {} *.pot \\; )",
+		"lint": "concurrently npm:lint:style npm:lint:js npm:lint:php",
+		"lint:style": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:php": "composer exec -- phpcs --ignore=vendor,node_modules,build --extensions=php --standard=Wordpress .",
+		"format": "concurrently npm:format:scripts npm:format:php",
+		"format:scripts": "wp-scripts format",
+		"format:php": "composer exec -- phpcbf --ignore=vendor,node_modules,build --extensions=php --standard=Wordpress ."
+	},
+	"prettier": "@wordpress/prettier-config",
+	"devDependencies": {
+		"@wordpress/blocks": "^11.2.1",
+		"@wordpress/element": "^4.1.1",
+		"@wordpress/i18n": "^4.3.1",
+		"@wordpress/prettier-config": "^1.1.2",
+		"@wordpress/scripts": "^21.0.2",
+		"concurrently": "^7.0.0"
+	}
+}

@@ -1,0 +1,45 @@
+# Copyright (C) 2022 Ossian Eriksson
+# This file is distributed under the same license as the Template WordPress Plugin package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Template WordPress Plugin 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/template-wp-"
+"plugin\n"
+"POT-Creation-Date: 2022-02-17T01:44:29+00:00\n"
+"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: node-wp-i18n 1.2.6\n"
+
+#. Plugin Name of the plugin
+msgid "Template WordPress Plugin"
+msgstr "Mall för ett WordPress-plugin"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/OssianEriksson/template-wp-plugin"
+msgstr ""
+
+#. Description of the plugin
+msgid "GitHub template for a WordPress plugin"
+msgstr "GitHub-mall för ett WordPress-plugin"
+
+#. Author of the plugin
+msgid "Ossian Eriksson"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/OssianEriksson"
+msgstr ""
+
+#: build/blocks/my-block/editor.js:1 build/entrypoints/my-script.tsx.js:1
+msgid "Hello from MyComponent!"
+msgstr "Hej från MyComponent!"
+
+#: build/blocks/my-block/block.json src/blocks/my-block/block.json
+msgctxt "block title"
+msgid "My Block"
+msgstr "Mitt Block"
