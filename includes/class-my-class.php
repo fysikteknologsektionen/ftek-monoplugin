@@ -27,7 +27,7 @@ class My_Class {
 		add_action(
 			'init',
 			function(): void {
-				register_block_type_from_metadata( PLUGIN_ROOT . '/build/blocks/my-block' );
+				register_block_type( PLUGIN_ROOT . '/build/blocks/my-block' );
 				wp_set_script_translations(
 					'template-wp-plugin-my-block-editor-script',
 					'template-wp-plugin',
