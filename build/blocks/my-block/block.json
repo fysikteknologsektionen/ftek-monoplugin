@@ -3,5 +3,5 @@
 	"name": "template-wp-plugin/my-block",
 	"title": "My Block",
 	"textdomain": "template-wp-plugin",
-	"editorScript": "file:./editor.js"
+	"editorScript": "file:editor.js"
 }
