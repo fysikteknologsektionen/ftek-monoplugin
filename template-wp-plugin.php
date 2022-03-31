@@ -34,7 +34,7 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 		$src = implode( '.js', $src );
 	}
 
-	$base_path = '/build/entrypoints/' . $src;
+	$base_path = '/build/' . $src;
 
 	$asset = require PLUGIN_ROOT . $base_path . '.asset.php';
 	if ( file_exists( PLUGIN_ROOT . $base_path . '.css' ) ) {
