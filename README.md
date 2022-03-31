@@ -6,16 +6,6 @@ A template for WordPress plugins.
 
 Things to install before you start developing.
 
-### WSL (Windows only)
-
-This README will be aimed at people using a Linux environment. If you are using the Microsoft Windows operating system, you might want to use [WSL(2)](https://docs.microsoft.com/en-us/windows/wsl/), Windows Subsystem for Linux, for development of WordPress plugins. To install for example the [Debian](https://www.debian.org/intro/why_debian) linux distribution, run
-
-```console
-wsl --install -d Debian
-```
-
-If errors appear, make sure you have enabled hardware virtualization from your [BIOS](https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/boot-to-uefi-mode-or-legacy-bios-mode). After a successfull installation, you can enter the linux environment by searching for the distribution name ("Debian") from the start menu.
-
 ### PHP and Composer
 
 Install PHP and [Composer](https://getcomposer.org/doc/00-intro.md) using your package manager. Composer is a package manager for PHP.
@@ -23,6 +13,10 @@ Install PHP and [Composer](https://getcomposer.org/doc/00-intro.md) using your p
 ### Node.js and NPM
 
 [Node.js](https://nodejs.org/en/about/) is a JavaScript runtime. It often comes bundeled with it's own package manager, [npm](https://docs.npmjs.com/about-npm). Installation instructions for both packages can be found [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
+### Visual Studio Code (recommended)
+
+This repository contains some settings and recommended extensions for the text editor/IDE [VS Code](https://code.visualstudio.com/).
 
 ### wp-env (optional)
 
