@@ -1,7 +1,0 @@
-{
-	"apiVersion": 2,
-	"name": "template-wp-plugin/my-block",
-	"title": "My Block",
-	"textdomain": "template-wp-plugin",
-	"editorScript": "file:editor.js"
-}

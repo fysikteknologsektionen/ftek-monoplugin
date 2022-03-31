@@ -1,1 +1,0 @@
-!function(){"use strict";var e=window.wp.element,n=window.wp.i18n;function t(){return(0,e.createElement)("div",{className:"VdklFlWWSKZbt90Yvjyx"},(0,n.__)("Hello from MyComponent!","template-wp-plugin"))}document.addEventListener("DOMContentLoaded",(()=>{const n=document.createElement("div");document.body.prepend(n),(0,e.render)((0,e.createElement)(t,null),n)}))}();
