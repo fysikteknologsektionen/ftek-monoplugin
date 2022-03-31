@@ -2,39 +2,23 @@
 
 A template for WordPress plugins.
 
-## Prerequisites
+## Dependencies
 
-Things to install before you start developing.
+-   PHP (>=7.x.x)
+-   Composer (>=2.x.x)
+-   WordPress (>=5.9.x)
 
-### PHP and Composer
+## Contributing
 
-Install PHP and [Composer](https://getcomposer.org/doc/00-intro.md) using your package manager. Composer is a package manager for PHP.
+### VS Code
 
-### Node.js and NPM
+This project is set up for development with the editor/IDE [VS Code](https://code.visualstudio.com/). It is strongly recommended that you use this editor.
 
-[Node.js](https://nodejs.org/en/about/) is a JavaScript runtime. It often comes bundeled with it's own package manager, [npm](https://docs.npmjs.com/about-npm). Installation instructions for both packages can be found [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+### Devcontainer
 
-### Visual Studio Code (recommended)
+The project includes a [devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container) configuration which contains all tools needed for development. To use this you need to install Docker (either CLI or [Docker Desktop](https://www.docker.com/products/docker-desktop/)), and the (remote development extension pack)[https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack] after which you can simply select "Clone Repository in Container Volume..." from the Remote Explorer tab.
 
-This repository contains some settings and recommended extensions for the text editor/IDE [VS Code](https://code.visualstudio.com/).
-
-### wp-env (optional)
-
-The npm package [@wordpress/env](https://www.npmjs.com/package/@wordpress/env) lets you test plugins inside [Docker](https://docs.docker.com/get-started/overview/) containers. First [install](https://docs.docker.com/get-docker/) and [start](https://docs.docker.com/config/daemon/systemd/) Docker, also install [Docker compose](https://docs.docker.com/compose/install/), then install `@wordpress/env` globally:
-
-```console
-npm install -g @wordpress/env
-```
-
-Some useful wp-env commands to be run from the plugin root directory are
-
-```console
-wp-env start   # Start local environment
-wp-env stop    # Stop local environment
-wp-env destroy # WARNING: This will permanently delete any posts, pages, media, etc. in the local WordPress installation.
-```
-
-## Getting started
+### Getting started
 
 Install npm and Composer dependencies:
 
@@ -48,6 +32,8 @@ During development, the following command will automatically rebuild code as sou
 ```console
 npm run start
 ```
+
+This will make a development installation of WordPress available on <http://localhost:8888>. Go through the installation procedure, log in to wordpress by visiting <http://localhost:8888/wp-login.php> and enable the plugin from the plugins menu.
 
 You can check for (stylistic) errors in your code by running
 

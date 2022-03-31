@@ -3,7 +3,7 @@
 	"scripts": {
 		"start": "wp-scripts start src/entrypoints/*.*",
 		"build": "npm run build:clean && npm run build:scripts && npm run i18n:pot && npm run i18n:po && concurrently npm:build:jed npm:build:mo",
-		"build:clean": "rm -Rf build languages/*.{json,mo}",
+		"build:clean": "rm -Rf build languages/*.{json,mo,pot}",
 		"build:jed": "composer exec -- wp i18n make-json languages --no-purge",
 		"build:mo": "composer exec -- wp i18n make-mo languages",
 		"build:scripts": "wp-scripts build src/entrypoints/*.*",
