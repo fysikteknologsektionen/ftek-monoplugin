@@ -18,8 +18,9 @@
 		"format:scripts": "wp-scripts format",
 		"format:php": "composer exec -- phpcbf --ignore=vendor,node_modules,build --extensions=php --standard=Wordpress ."
 	},
-	"prettier": "@wordpress/prettier-config",
 	"devDependencies": {
+		"@types/prettier": "^2.4.4",
+		"@types/webpack": "^5.28.0",
 		"@wordpress/blocks": "^11.2.1",
 		"@wordpress/element": "^4.1.1",
 		"@wordpress/i18n": "^4.3.1",
