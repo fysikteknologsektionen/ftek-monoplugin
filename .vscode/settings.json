@@ -6,5 +6,6 @@
 	"phpSniffer.standard": "WordPress",
 	"[php]": {
 		"editor.defaultFormatter": "wongjn.php-sniffer"
-	}
+	},
+	"typescript.tsdk": "./node_modules/typescript/lib"
 }
