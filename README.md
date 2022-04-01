@@ -16,7 +16,7 @@ This project is set up for development with the editor/IDE [VS Code](https://cod
 
 ### Devcontainer
 
-The project includes a [devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container) configuration which contains all tools needed for development. To use this you need to install Docker (either CLI or [Docker Desktop](https://www.docker.com/products/docker-desktop/)), and the (remote development extension pack)[https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack] after which you can simply select "Clone Repository in Container Volume..." from the Remote Explorer tab.
+The project includes a [devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container) configuration which contains all tools needed for development. To use this you need to install Docker (either CLI or [Docker Desktop](https://www.docker.com/products/docker-desktop/)), and the [remote development extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) after which you can simply select "Clone Repository in Container Volume..." from the Remote Explorer tab.
 
 ### Getting started
 
