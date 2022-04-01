@@ -72,3 +72,13 @@ npm run i18n
 ```
 
 to scan the source code for translatable strings (which are stored in a POT file inside the `languages` folder) and update existing translations (PO files also stored inside `languages`) from the POT file. To edit an existing localization, edit the corresponding PO file. To create a new localization, copy the POT file to a new PO file inside `languages`. Assuming the POT file is named `my-text-domain.pot`, name the PO file `my-text-domain-{locale}.po`, for example `my-text-domain-en_US.po`. Lists of locale codes available in WordPress can be found [online](https://wpastra.com/docs/complete-list-wordpress-locale-codes/).
+
+## Releases
+
+[GitHub Actions](https://github.com/features/actions) is configured to automatically create a new release when a new [tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) is pushed. Some useful commands are
+
+```console
+git tag                 # Lists existing tags
+git tag -a vx.x.x       # Creates a new tag for the specified version number
+git push --follow-tags  # Pushes commits and tags to the remote
+```

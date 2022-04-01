@@ -6,3 +6,6 @@ vendor/
 
 # Build files
 build/
+
+# Release
+release.zip
