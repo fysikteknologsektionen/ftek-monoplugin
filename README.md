@@ -19,7 +19,7 @@ The project includes a [devcontainer](https://code.visualstudio.com/docs/remote/
 
 ### Getting started
 
-Install npm and Composer dependencies:
+Install npm and Composer dependencies (performed automatically when a devcontainer is first created):
 
 ```console
 npm install
