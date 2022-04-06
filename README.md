@@ -5,7 +5,6 @@ A template for WordPress plugins.
 ## Dependencies
 
 -   PHP (^7.4.x)
--   Composer (^2.x.x)
 -   WordPress (>=5.9.x)
 
 ## Contributing

@@ -1,6 +1,6 @@
-FROM 'wordpress'
+FROM 'wordpress:5.9.2-php7.4'
 
-RUN set -ex; \
+RUN set -e; \
     curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && \
     apt-get update; \
     apt-get install -y \
@@ -10,7 +10,7 @@ RUN set -ex; \
         sudo \
     ;
 
-RUN set -ex; \
+RUN set -e; \
     EXPECTED_CHECKSUM="$(php -r 'copy("https://composer.github.io/installer.sig", "php://stdout");')"; \
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"; \
     ACTUAL_CHECKSUM="$(php -r "echo hash_file('sha384', 'composer-setup.php');")"; \

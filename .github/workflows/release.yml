@@ -3,7 +3,7 @@ name: 'Release'
 on:
   push:
     tags:
-      - "v*.*.*"
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -12,10 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup node LTS
+      - name: Setup node 16
         uses: actions/setup-node@v2
         with:
-          node-version: 'lts/*'
+          node-version: '16'
           cache: 'npm'
 
       - name: Setup PHP 7.4 with composer v2
@@ -31,11 +31,11 @@ jobs:
 
       - name: Perform build
         run: npm run build
-      
+
       - name: Remove build dependencies
         run: |
           rm -Rf vendor/ node_modules/
-          npm i --production
+          npm ci --production
           composer i --no-dev
 
       - name: Collect release files
