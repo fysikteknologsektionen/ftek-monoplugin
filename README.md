@@ -17,6 +17,11 @@ This project is set up for development with the editor/IDE [VS Code](https://cod
 
 The project includes a [devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container) configuration which contains all tools needed for development. To use this you need to install Docker (either CLI or [Docker Desktop](https://www.docker.com/products/docker-desktop/)), and the [remote development extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) after which you can simply select "Clone Repository in Container Volume..." from the Remote Explorer tab.
 
+After starting the devcontainer, WordPress will be accessable at <http://localhost:8888> on your local machine. You may log in by visiting <http://localhost:8888/wp-login.php> and entering the default credentials:
+
+-   Username: `admin`
+-   Password: `password`
+
 ### Getting started
 
 Install npm and Composer dependencies (performed automatically when a devcontainer is first created):
