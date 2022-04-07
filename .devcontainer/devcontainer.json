@@ -6,5 +6,5 @@
 	"forwardPorts": [8888],
 	"extensions": ["esbenp.prettier-vscode", "wongjn.php-sniffer"],
 	"remoteUser": "wordpress",
-	"onCreateCommand": "sudo -Eu www-data setup-wordpress && npm i && composer i && npm run build"
+	"onCreateCommand": "sudo -Eu www-data setup-wordpress"
 }

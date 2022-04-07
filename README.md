@@ -17,14 +17,16 @@ This project is set up for development with the editor/IDE [VS Code](https://cod
 
 The project includes a [devcontainer](https://code.visualstudio.com/docs/remote/create-dev-container) configuration which contains all tools needed for development. To use this you need to install Docker (either CLI or [Docker Desktop](https://www.docker.com/products/docker-desktop/)), and the [remote development extension pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) after which you can simply select "Clone Repository in Container Volume..." from the Remote Explorer tab.
 
-After starting the devcontainer, WordPress will be accessable at <http://localhost:8888> on your local machine. You may log in by visiting <http://localhost:8888/wp-login.php> and entering the default credentials:
+After starting the devcontainer, WordPress will be accessable at <http://localhost:8888> on your local machine. If you have not yet built any javascript files, WordPress will display an error in the browser at this stage. Running first `npm run start` or `npm run build` (see instructions [below](#getting-started)) should resolve the errors.
+
+You may log in to WordPress by visiting <http://localhost:8888/wp-login.php> and entering the default credentials:
 
 -   Username: `admin`
 -   Password: `password`
 
 ### Getting started
 
-Install npm and Composer dependencies (performed automatically when a devcontainer is first created):
+Before continuing you must install npm and Composer dependencies:
 
 ```console
 npm install
@@ -37,9 +39,7 @@ During development, the following command will automatically rebuild code as sou
 npm run start
 ```
 
-This will make a development installation of WordPress available on <http://localhost:8888>. Go through the installation procedure, log in to wordpress by visiting <http://localhost:8888/wp-login.php> and enable the plugin from the plugins menu.
-
-You can check for (stylistic) errors in your code by running
+You should check for (stylistic) errors in your code by running
 
 ```console
 npm run lint
