@@ -1,15 +1,15 @@
 <?php
 /**
  * Plugin Name:     Template WordPress Plugin
- * Plugin URI:      https://github.com/OssianEriksson/template-wp-plugin
+ * Plugin URI:      https://github.com/OssianEriksson/ftek-plugin-template
  * Description:     GitHub template for a WordPress plugin
  * Author:          Ossian Eriksson
  * Author URI:      https://github.com/OssianEriksson
- * Text Domain:     template-wp-plugin
+ * Text Domain:     ftek-plugin-template
  * Domain Path:     /languages
  * Version:         0.1.0
  *
- * @package ftek\template-wp-plugin
+ * @package ftek\ftek-plugin-template
  */
 
 namespace Ftek\TemplateWPPlugin;
@@ -54,7 +54,7 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 	);
 	wp_set_script_translations(
 		$handle,
-		'template-wp-plugin',
+		'ftek-plugin-template',
 		PLUGIN_ROOT . '/languages'
 	);
 }
@@ -64,7 +64,7 @@ add_action(
 	'init',
 	function(): void {
 		$plugin_rel_path = plugin_basename( dirname( PLUGIN_FILE ) ) . '/languages';
-		load_plugin_textdomain( 'template-wp-plugin', false, $plugin_rel_path );
+		load_plugin_textdomain( 'ftek-plugin-template', false, $plugin_rel_path );
 	}
 );
 

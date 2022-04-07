@@ -2,7 +2,7 @@
 /**
  * My_Class definition
  *
- * @package ftek\template-wp-plugin
+ * @package ftek\ftek-plugin-template
  */
 
 namespace Ftek\TemplateWPPlugin;
@@ -19,8 +19,8 @@ class My_Class {
 		add_action(
 			'wp_enqueue_scripts',
 			function(): void {
-				enqueue_entrypoint_script( 'template-wp-plugin-my-script', 'my-script.tsx' );
-				enqueue_entrypoint_script( 'template-wp-plugin-my-style', 'my-style.scss' );
+				enqueue_entrypoint_script( 'ftek-plugin-template-my-script', 'my-script.tsx' );
+				enqueue_entrypoint_script( 'ftek-plugin-template-my-style', 'my-style.scss' );
 			}
 		);
 
@@ -29,8 +29,8 @@ class My_Class {
 			function(): void {
 				register_block_type( PLUGIN_ROOT . '/build/blocks/my-block' );
 				wp_set_script_translations(
-					'template-wp-plugin-my-block-editor-script',
-					'template-wp-plugin',
+					'ftek-plugin-template-my-block-editor-script',
+					'ftek-plugin-template',
 					PLUGIN_ROOT . '/languages'
 				);
 			}

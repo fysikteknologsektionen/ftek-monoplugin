@@ -1,4 +1,4 @@
-# template-wp-plugin
+# ftek-plugin-template
 
 A template for WordPress plugins.
 

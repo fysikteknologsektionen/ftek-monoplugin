@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
-	"name": "template-wp-plugin/my-block",
+	"name": "ftek-plugin-template/my-block",
 	"title": "My Block",
-	"textdomain": "template-wp-plugin",
+	"textdomain": "ftek-plugin-template",
 	"editorScript": "file:editor.js"
 }

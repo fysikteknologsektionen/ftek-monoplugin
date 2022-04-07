@@ -20,7 +20,7 @@ msgid "Template WordPress Plugin"
 msgstr "Mall för ett WordPress-plugin"
 
 #. Plugin URI of the plugin
-msgid "https://github.com/OssianEriksson/template-wp-plugin"
+msgid "https://github.com/OssianEriksson/ftek-plugin-template"
 msgstr ""
 
 #. Description of the plugin
