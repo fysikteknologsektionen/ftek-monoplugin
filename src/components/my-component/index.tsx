@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 export default function MyComponent(): JSX.Element {
 	return (
 		<div className={styles['my-class']}>
-			{__('Hello from MyComponent!', 'ftek-plugin-template')}
+			{__('Hello from MyComponent!', 'ftek')}
 		</div>
 	);
 }

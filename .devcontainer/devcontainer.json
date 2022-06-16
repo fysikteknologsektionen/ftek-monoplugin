@@ -2,7 +2,7 @@
 	"name": "WordPress plugin",
 	"dockerComposeFile": "./docker-compose.yml",
 	"service": "wordpress",
-	"workspaceFolder": "/var/www/html/wp-content/plugins/ftek-plugin-template",
+	"workspaceFolder": "/var/www/html/wp-content/plugins/ftek-monoplugin",
 	"forwardPorts": [8888],
 	"extensions": ["esbenp.prettier-vscode", "wongjn.php-sniffer"],
 	"remoteUser": "wordpress",

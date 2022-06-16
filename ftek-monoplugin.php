@@ -1,18 +1,18 @@
 <?php
 /**
- * Plugin Name:     Template WordPress Plugin
- * Plugin URI:      https://github.com/OssianEriksson/ftek-plugin-template
- * Description:     GitHub template for a WordPress plugin
+ * Plugin Name:     Ftek Monoplugin
+ * Plugin URI:      https://github.com/fysikteknologsektionen/ftek-monoplugin
+ * Description:     WordPress monoplugin for ftek
  * Author:          Ossian Eriksson
  * Author URI:      https://github.com/OssianEriksson
- * Text Domain:     ftek-plugin-template
+ * Text Domain:     ftek
  * Domain Path:     /languages
  * Version:         0.1.0
  *
- * @package ftek\ftek-plugin-template
+ * @package ftek\monoplugin
  */
 
-namespace Ftek\TemplateWPPlugin;
+namespace Ftek\Monoplugin;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -20,6 +20,20 @@ require_once __DIR__ . '/vendor/autoload.php';
 define( __NAMESPACE__ . '\PLUGIN_FILE', __FILE__ );
 define( __NAMESPACE__ . '\PLUGIN_ROOT', dirname( PLUGIN_FILE ) );
 
+
+/**
+ * Returns an array of all user roles with the upload_files capability
+ */
+function _get_available_roles(): array {
+	$roles = array();
+	foreach ( wp_roles()->role_objects as $key => $role ) {
+		$roles[] = array(
+			'key'  => $key,
+			'name' => translate_user_role( ucfirst( $role->name ) ),
+		);
+	}
+	return $roles;
+}
 
 /**
  * Enqueue an entrypoint script
@@ -35,8 +49,8 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 	}
 
 	$base_path = '/build/' . $src;
+	$asset     = require PLUGIN_ROOT . $base_path . '.asset.php';
 
-	$asset = require PLUGIN_ROOT . $base_path . '.asset.php';
 	if ( file_exists( PLUGIN_ROOT . $base_path . '.css' ) ) {
 		wp_enqueue_style(
 			$handle,
@@ -44,7 +58,10 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 			in_array( 'wp-components', $asset['dependencies'], true ) ? array( 'wp-components' ) : array(),
 			$asset['version']
 		);
+	} else {
+		wp_enqueue_style( 'wp-components' );
 	}
+
 	wp_enqueue_script(
 		$handle,
 		plugins_url( $base_path . '.js', PLUGIN_FILE ),
@@ -52,11 +69,31 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 		$asset['version'],
 		true
 	);
+
 	wp_set_script_translations(
 		$handle,
-		'ftek-plugin-template',
+		'ftek',
 		PLUGIN_ROOT . '/languages'
 	);
+
+	wp_add_inline_script(
+		$handle,
+		'const ftek_inline = ' . wp_json_encode(
+			array(
+				'roles'              => _get_available_roles(),
+				'oauth_redirect_uri' => OAuth::get_redirect_uri(),
+			)
+		),
+		'before'
+	);
+}
+
+/**
+ * Uninstall hook callback
+ */
+function uninstall(): void {
+	Options::purge();
+	User_Meta::purge();
 }
 
 
@@ -64,9 +101,14 @@ add_action(
 	'init',
 	function(): void {
 		$plugin_rel_path = plugin_basename( dirname( PLUGIN_FILE ) ) . '/languages';
-		load_plugin_textdomain( 'ftek-plugin-template', false, $plugin_rel_path );
+		load_plugin_textdomain( 'ftek', false, $plugin_rel_path );
 	}
 );
 
+register_uninstall_hook( PLUGIN_FILE, __NAMESPACE__ . '\uninstall' );
 
-$my_instance = new My_Class();
+// Enable settings page.
+Options::init();
+
+// Enable OAuth login.
+Login::init();

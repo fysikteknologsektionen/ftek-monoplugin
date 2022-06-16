@@ -1,6 +1,6 @@
-# ftek-plugin-template
+# ftek-monoplugin
 
-A template for WordPress plugins.
+WordPress monoplugin for ftek.
 
 ## Dependencies
 
