@@ -1,8 +1,7 @@
 import { render, useEffect, useState } from '@wordpress/element';
-import { check } from '@wordpress/icons';
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
-import { trash, menu } from '@wordpress/icons';
+import { check, trash, menu } from '@wordpress/icons';
 import {
 	Placeholder,
 	Spinner,
@@ -16,7 +15,7 @@ import {
 
 import { Option, Inline, OAuthUser, RoleKey } from '../types';
 
-declare const ftek_inline: Inline;
+declare const ftekInline: Inline;
 
 type SettingsSectionParams = {
 	option: Option;
@@ -35,7 +34,7 @@ const OAuthSettings = ({
 			)}
 		</p>
 		<p>
-			<code>{ftek_inline.oauth_redirect_uri}</code>
+			<code>{ftekInline.oauth_redirect_uri}</code>
 		</p>
 		<TextControl
 			label={__('OAuth discovery document URL', 'ftek')}
@@ -68,7 +67,7 @@ const UsersSettings = ({
 	const UserRow = ({
 		user,
 		onDelete,
-		onChange,
+		onChange: onUserChange,
 	}: {
 		user: OAuthUser;
 		onDelete: () => void;
@@ -82,7 +81,7 @@ const UsersSettings = ({
 			} else if (index < 0 && enable) {
 				a.roles.push(role);
 			}
-			onChange(a);
+			onUserChange(a);
 		};
 
 		return (
@@ -114,7 +113,7 @@ const UsersSettings = ({
 					<TextControl
 						label={__('Email regex pattern', 'ftek')}
 						onChange={(value: string) =>
-							onChange({ email_pattern: value })
+							onUserChange({ email_pattern: value })
 						}
 						value={user.email_pattern}
 					/>
@@ -131,7 +130,7 @@ const UsersSettings = ({
 						label={__('Select roles', 'ftek')}
 					>
 						{() =>
-							ftek_inline.roles.map((role, i) => (
+							ftekInline.roles.map((role, i) => (
 								<MenuItem key={`${i}`}>
 									<CheckboxControl
 										label={role.name}
@@ -159,6 +158,7 @@ const UsersSettings = ({
 			</p>
 			{option.oauth_users.map((user, i) => (
 				<UserRow
+					key={i}
 					user={user}
 					onDelete={() => {
 						const a = [...option.oauth_users];

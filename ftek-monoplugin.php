@@ -78,7 +78,7 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 
 	wp_add_inline_script(
 		$handle,
-		'const ftek_inline = ' . wp_json_encode(
+		'const ftekInline = ' . wp_json_encode(
 			array(
 				'roles'              => _get_available_roles(),
 				'oauth_redirect_uri' => OAuth::get_redirect_uri(),

@@ -26,6 +26,7 @@
 		"@wordpress/components": "^19.12.0",
 		"@wordpress/element": "^4.1.1",
 		"@wordpress/i18n": "^4.3.1",
+		"@wordpress/icons": "^9.2.0",
 		"@wordpress/prettier-config": "^1.1.2",
 		"@wordpress/scripts": "^21.0.2",
 		"concurrently": "^7.0.0",
