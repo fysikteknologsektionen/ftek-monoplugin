@@ -1,8 +1,0 @@
-{
-	"apiVersion": 2,
-	"name": "ftek/my-block",
-	"title": "My Block",
-	"textdomain": "ftek",
-	"editorScript": "file:editor.js",
-	"style": "file:editor.css"
-}

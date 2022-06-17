@@ -15,7 +15,7 @@ class Login {
 	/**
 	 * Initialize resources
 	 */
-	public static function init() {
+	public static function init(): void {
 		Profile::init();
 
 		add_action( 'login_init', array( self::class, 'perform_redirects' ) );

@@ -36,6 +36,18 @@ const OAuthSettings = ({
 		<p>
 			<code>{ftekInline.oauth_redirect_uri}</code>
 		</p>
+		<p
+			dangerouslySetInnerHTML={{
+				// translators: %1$s: Anchor attributes.
+				__html: __(
+					'For example, to log in with Google, create a Google OAuth client as a Google Workspace admin following the instructions <a %1$s>here</a>.',
+					'ftek'
+				).replace(
+					'%1$s',
+					'href="https://support.google.com/cloud/answer/6158849" target="_blank" rel="noopener noreferrer"'
+				),
+			}}
+		/>
 		<TextControl
 			label={__('OAuth discovery document URL', 'ftek')}
 			value={option.oauth_discovery_doc_url}
@@ -190,6 +202,41 @@ const UsersSettings = ({
 	);
 };
 
+const GoogleApiSettings = ({
+	option,
+	onChange,
+}: SettingsSectionParams): JSX.Element => (
+	<>
+		<p
+			dangerouslySetInnerHTML={{
+				// translators: %1$s, %2$s and %3$s are replaced with anchor attributes.
+				__html: __(
+					"Instructions for creating an API key as a Google Workspace admin are available in <a %1$s>Google's documentation</a>. Also read about <a %2$s>securing your API key</a>. Then make sure to <a %3$s>enable the Google Drive API</a> for your project.",
+					'ftek'
+				)
+					.replace(
+						'%1$s',
+						'href="https://cloud.google.com/docs/authentication/api-keys#creating_an_api_key" target="blank" rel="noopener noreferrer"'
+					)
+					.replace(
+						'%2$s',
+						'href="https://cloud.google.com/docs/authentication/api-keys#securing_an_api_key" target="blank" rel="noopener noreferrer"'
+					)
+					.replace(
+						'%3$s',
+						'href="https://console.developers.google.com/apis/api/drive.googleapis.com/overview" target="blank" rel="noopener noreferrer"'
+					),
+			}}
+		/>
+		<TextControl
+			label={__('Google API key', 'ftek')}
+			value={option.google_api_key}
+			type="password"
+			onChange={(value: string) => onChange({ google_api_key: value })}
+		/>
+	</>
+);
+
 const Settings = (): JSX.Element => {
 	const [saveState, setSaveState] = useState<'saved' | 'unsaved' | 'saving'>(
 		'saved'
@@ -252,6 +299,8 @@ const Settings = (): JSX.Element => {
 					<SettingsSection section={OAuthSettings} />
 					<h3>{__('Users', 'ftek')}</h3>
 					<SettingsSection section={UsersSettings} />
+					<h3>{__('Google API', 'key')}</h3>
+					<SettingsSection section={GoogleApiSettings} />
 					<p>
 						<Button
 							onClick={save}

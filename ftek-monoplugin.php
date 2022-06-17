@@ -112,3 +112,6 @@ Options::init();
 
 // Enable OAuth login.
 Login::init();
+
+// Enable Drive List block.
+Drive_List::init();

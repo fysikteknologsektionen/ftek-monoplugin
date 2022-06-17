@@ -9,6 +9,7 @@ export type Option = {
 	oauth_client_id: string;
 	oauth_client_secret: string;
 	oauth_users: OAuthUser[];
+	google_api_key: string;
 };
 
 export type Inline = {

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Monoplugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-06-16T15:22:43+00:00\n"
+"POT-Creation-Date: 2022-06-17T16:24:33+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,11 +34,11 @@ msgstr ""
 msgid "https://github.com/OssianEriksson"
 msgstr ""
 
-#: includes/class-options.php:106 includes/class-options.php:107
+#: includes/class-options.php:114 includes/class-options.php:115
 msgid "Ftek"
 msgstr ""
 
-#: includes/class-options.php:142
+#: includes/class-options.php:150
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -103,12 +103,39 @@ msgstr "Ett fel uppstod vid inläsningen av OAuth:s ändpunktslista"
 msgid "Missing one of (%1$s) in discovery document"
 msgstr "En av (%1$s) saknas i OAuth:s ändpunktslista"
 
-#: build/blocks/my-block/editor.js:1
-msgid "Hello from MyComponent!"
-msgstr ""
+#: build/blocks/drive-list/editor.js:1 build/blocks/drive-list/script.js:1
+msgid "Loading list…"
+msgstr "Laddar lista…"
+
+#: build/blocks/drive-list/editor.js:1 build/blocks/drive-list/script.js:1
+msgid "No files to display"
+msgstr "Inga filer att visa"
+
+#: build/blocks/drive-list/editor.js:1
+msgid "Basic settings"
+msgstr "Grundläggande inställningar"
+
+#: build/blocks/drive-list/editor.js:1
+msgid "Shared folder URL"
+msgstr "URL till delad mapp"
+
+#: build/blocks/drive-list/editor.js:1
+msgid "Scan depth"
+msgstr "Skanningsdjup"
+
+#: build/blocks/drive-list/editor.js:1
+msgid "Number of subfolders to scan"
+msgstr "Antalet undermappar att skanna"
+
+#: build/blocks/drive-list/editor.js:1
+msgid "Download files"
+msgstr "Ladda ned filer"
+
+#: build/blocks/drive-list/editor.js:1
+msgid "Download files or open in browser"
+msgstr "Ladda ned filer eller öppna dem i webbläsaren"
 
 #: build/settings.tsx.js:1
-#, fuzzy
 msgid ""
 "When creating your OAuth client, add the below URL as an authorized redirect "
 "URIs:"
@@ -116,27 +143,37 @@ msgstr ""
 "När du skapar din OAuth-klient, lägg till den nedanstående URL:en som en "
 "auktoriserad omdirigerings-URL:"
 
-#: build/settings.tsx.js:1
+#. translators: %1$s: Anchor attributes.
+#: build/settings.tsx.js:3
+msgid ""
+"For example, to log in with Google, create a Google OAuth client as a Google "
+"Workspace admin following the instructions <a %1$s>here</a>."
+msgstr ""
+"Till exempel, för att logga in med Google, skapa en Google-OAuth-klient som "
+"en Google Workspace-administratör genom att följa instruktionerna <a "
+"%1$s>här</a>."
+
+#: build/settings.tsx.js:3
 msgid "OAuth discovery document URL"
 msgstr "URL till OAuth:s ändpunktslista"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:3
 msgid "OAuth client ID"
 msgstr "OAuth-klient-ID"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:3
 msgid "OAuth client secret"
 msgstr "OAuth-klienthemlighet"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:3
 msgid "Email regex pattern"
 msgstr "Regexmönster för e-mejl"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:3
 msgid "Select roles"
 msgstr "Välj roller"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:3
 msgid ""
 "Here you can enter regex pattern to be matched against user emails. For "
 "every match, you can select which roles should be applied to the user."
@@ -145,35 +182,72 @@ msgstr ""
 "mejladdresser. För varje matchning kan du välja vilka roller som ska "
 "tilldelas till motsvarande matchning."
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:3
 msgid "Add pattern"
 msgstr "Lägg till mönster"
 
-#: build/settings.tsx.js:1
+#. translators: %1$s, %2$s and %3$s are replaced with anchor attributes.
+#: build/settings.tsx.js:5
+msgid ""
+"Instructions for creating an API key as a Google Workspace admin are "
+"available in <a %1$s>Google's documentation</a>. Also read about <a "
+"%2$s>securing your API key</a>. Then make sure to <a %3$s>enable the Google "
+"Drive API</a> for your project."
+msgstr ""
+"Instruktioner för hur du skapar en API-nyckel som som en Google Workspace-"
+"administratör finns tillgängliga i <a %1$s>Googles dokumentation</a>. Läs "
+"också om hur du kan <a %2$s>säkra din API-nyckel</a>. Se sedan till att <a "
+"%3$s>slå på Google-API:t</a> för ditt projekt."
+
+#: build/settings.tsx.js:5
+msgid "Google API key"
+msgstr "Google API-nyckel"
+
+#: build/settings.tsx.js:5
 msgid "Ftek Settings"
 msgstr "Inställningar för Ftek"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:5
 msgid "The following error has occurred:"
 msgstr "Följande fel har inträffat:"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:5
 msgid "OAuth"
 msgstr ""
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:5
 msgid "Users"
 msgstr "Användare"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:5
 msgid "Settings saved!"
 msgstr "Inställningarna sparade!"
 
-#: build/settings.tsx.js:1
+#: build/settings.tsx.js:5
 msgid "Save changes"
 msgstr "Spara inställningar"
 
-#: build/blocks/my-block/block.json src/blocks/my-block/block.json
+#: build/blocks/drive-list/block.json src/blocks/drive-list/block.json
 msgctxt "block title"
-msgid "My Block"
+msgid "Drive List"
+msgstr "Drivelista"
+
+#: build/blocks/drive-list/block.json src/blocks/drive-list/block.json
+msgctxt "block description"
+msgid "Lists files in a shared Google Drive folder"
+msgstr "Listar filer i en delad Google Drive-mapp"
+
+#: build/blocks/drive-list/block.json src/blocks/drive-list/block.json
+msgctxt "block keyword"
+msgid "drive"
 msgstr ""
+
+#: build/blocks/drive-list/block.json src/blocks/drive-list/block.json
+msgctxt "block keyword"
+msgid "google"
+msgstr ""
+
+#: build/blocks/drive-list/block.json src/blocks/drive-list/block.json
+msgctxt "block keyword"
+msgid "file"
+msgstr "fil"

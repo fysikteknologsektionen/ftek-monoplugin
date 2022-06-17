@@ -17,6 +17,7 @@ class Options {
 		'oauth_client_id'         => '',
 		'oauth_client_secret'     => '',
 		'oauth_users'             => array(),
+		'google_api_key'          => '',
 	);
 
 	/**
@@ -77,18 +78,25 @@ class Options {
 								'type'     => 'array',
 								'required' => true,
 								'items'    => array(
-									'email_pattern' => array(
-										'type'     => 'string',
-										'required' => true,
-									),
-									'roles'         => array(
-										'type'     => 'array',
-										'required' => true,
-										'items'    => array(
-											'type' => 'string',
+									'type'       => 'object',
+									'properties' => array(
+										'email_pattern' => array(
+											'type'     => 'string',
+											'required' => true,
+										),
+										'roles'         => array(
+											'type'     => 'array',
+											'required' => true,
+											'items'    => array(
+												'type' => 'string',
+											),
 										),
 									),
 								),
+							),
+							'google_api_key'          => array(
+								'type'     => 'string',
+								'required' => true,
 							),
 						),
 					),
