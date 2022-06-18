@@ -7,12 +7,7 @@ import {
 	TextControl,
 	CheckboxControl,
 } from '@wordpress/components';
-import {
-	DriveList,
-	Attributes,
-	attrsOrDefault,
-	DriveListLoading,
-} from './drive-list';
+import { DriveList, Attributes, attrsOrDefault } from './drive-list';
 
 import metadata from './block.json';
 
@@ -86,7 +81,7 @@ const Edit = ({
 
 const Save = ({ attributes }: { attributes: Attributes }): JSX.Element => (
 	<div {...useBlockProps.save()} data={JSON.stringify(attributes)}>
-		<DriveListLoading />
+		<DriveList.Loading />
 	</div>
 );
 

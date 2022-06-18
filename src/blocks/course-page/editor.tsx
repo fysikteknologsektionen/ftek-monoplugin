@@ -1,8 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import {
 	useBlockProps,
-	InspectorControls,
 	InnerBlocks,
+	InspectorControls,
 } from '@wordpress/block-editor';
 import { useEntityProp } from '@wordpress/core-data';
 import { useSelect } from '@wordpress/data';
@@ -15,7 +15,7 @@ import {
 	RadioControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { trash } from '@wordpress/icons';
+import { mapMarker, trash } from '@wordpress/icons';
 import { __, _x } from '@wordpress/i18n';
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
@@ -55,110 +55,30 @@ type PostMeta = {
 
 type WPPostMeta = { ftek_course_page_meta: PostMeta };
 
-const CoursePage = ({
-	meta,
-	children,
-}: {
-	meta: PostMeta;
-	children: React.ReactNode;
-}): JSX.Element => {
-	const studentRepresentatives = meta.student_representatives.filter(
-		(representative) => representative.name || representative.cid
-	);
+const icon = (
+	<SVGImage
+		url={ftekInline.assets.openBook}
+		style={{ width: 24, height: 24, marginLeft: 12 }}
+	/>
+);
 
-	const courseLinks: { text: string; url: string }[] = [
-		{
-			text: __('Course homepage', 'ftek'),
-			url: meta.homepage_url,
-		},
-		{
-			text: __('General info', 'ftek'),
-			url: meta.info_url,
-		},
-		{
-			text: __('Latest survey', 'ftek'),
-			url: meta.survey_url,
-		},
-		...(meta.code
-			? [
-					{
-						text: __('Exam statistics', 'ftek'),
-						url: `https://stats.ftek.se/${meta.code}`,
-					},
-			  ]
-			: []),
-	].filter((link) => link.url);
-
-	return (
-		<>
-			<h2>{`${fmtCourseCode(meta.code)} | ${fmtCourseCredits(
-				meta.credits
-			)} | ${fmtProgramsYear(meta.programs, meta.year)} | ${fmtSPs(
-				meta.study_perionds
-			)}`}</h2>
-			<SectionedPage>
-				<SectionedPage.Main>{children}</SectionedPage.Main>
-				<SectionedPage.Aside>
-					{courseLinks.length > 0 && (
-						<>
-							<h3>{__('Links', 'ftek')}</h3>
-							<ul
-								style={{
-									listStyle: 'none',
-									margin: 0,
-									padding: 0,
-								}}
-							>
-								{courseLinks.map((link, i) => (
-									<li key={i}>
-										<a
-											target="_blank"
-											rel="noopener noreferrer"
-											href={link.url}
-										>
-											{link.text}
-										</a>
-									</li>
-								))}
-							</ul>
-						</>
-					)}
-					{studentRepresentatives.length > 0 && (
-						<>
-							<h3>{__('Student Representatives', 'ftek')}</h3>
-							<ul>
-								{studentRepresentatives.map((repr, i) => {
-									const name = repr.name || repr.cid;
-									return (
-										<li key={i}>
-											{repr.cid ? (
-												<a
-													href={`mailto:${repr.cid}@student.chalmers.se`}
-												>
-													{name}
-												</a>
-											) : (
-												name
-											)}
-										</li>
-									);
-								})}
-							</ul>
-						</>
-					)}
-					<h3>{__('Is Anything Missing?', 'ftek')}</h3>
-					<span
-						dangerouslySetInnerHTML={{
-							__html: __(
-								'Contact <a %$1s>SNF</a>.',
-								'ftek'
-							).replace('%$1s', 'href="mailto:snf@ftek.se"'),
-						}}
-					/>
-				</SectionedPage.Aside>
-			</SectionedPage>
-		</>
+const useMeta = (): false | [PostMeta, (m: Partial<PostMeta>) => void] => {
+	const postType = useSelect(
+		(select) => select('core/editor').getCurrentPostType(),
+		[]
 	);
+	const [wpPostMeta, setWpPostMeta]: [WPPostMeta, (m: WPPostMeta) => void] =
+		useEntityProp('postType', postType, 'meta');
+
+	if (postType !== 'course-page') {
+		return false;
+	}
+
+	const meta = wpPostMeta.ftek_course_page_meta;
+	const updateMeta = (m: Partial<PostMeta>) =>
+		setWpPostMeta({ ftek_course_page_meta: { ...meta, ...m } });
+
+	return [meta, updateMeta];
 };
 
 const Controls = ({
@@ -167,21 +87,13 @@ const Controls = ({
 }: {
 	meta: PostMeta;
 	updateMeta: (m: Partial<PostMeta>) => void;
-}): JSX.Element => {
+}) => {
 	const [creditsText, setCreditsText] = useState<string>(null);
 	const [participantCountText, setParticipantCountText] =
 		useState<string>(null);
+
 	return (
-		<PanelBody
-			title={__('Course Page', 'ftek')}
-			initialOpen={true}
-			icon={
-				<SVGImage
-					url={ftekInline.assets.openBook}
-					style={{ width: 24, height: 24, marginLeft: 12 }}
-				/>
-			}
-		>
+		<>
 			<PanelRow>
 				<TextControl
 					label={__('Course code', 'ftek')}
@@ -399,11 +311,123 @@ const Controls = ({
 					onChange={(value) => updateMeta({ comment: value })}
 				/>
 			</PanelRow>
-		</PanelBody>
+		</>
 	);
 };
 
-const Edit = ({ attributes, setAttributes }): JSX.Element => {
+const CoursePage = ({
+	meta,
+	children,
+}: {
+	meta: PostMeta;
+	children: React.ReactNode;
+}): JSX.Element => {
+	const studentRepresentatives = meta.student_representatives.filter(
+		(representative) => representative.name || representative.cid
+	);
+
+	const courseLinks: { text: string; url: string }[] = [
+		{
+			text: __('Course homepage', 'ftek'),
+			url: meta.homepage_url,
+		},
+		{
+			text: __('General info', 'ftek'),
+			url: meta.info_url,
+		},
+		{
+			text: __('Latest survey', 'ftek'),
+			url: meta.survey_url,
+		},
+		...(meta.code
+			? [
+					{
+						text: __('Exam statistics', 'ftek'),
+						url: `https://stats.ftek.se/${meta.code}`,
+					},
+			  ]
+			: []),
+	].filter((link) => link.url);
+
+	return (
+		<>
+			<h2>{`${fmtCourseCode(meta.code)} | ${fmtCourseCredits(
+				meta.credits
+			)} | ${fmtProgramsYear(meta.programs, meta.year)} | ${fmtSPs(
+				meta.study_perionds
+			)}`}</h2>
+			<SectionedPage>
+				<SectionedPage.Main>{children}</SectionedPage.Main>
+				<SectionedPage.Aside>
+					{courseLinks.length > 0 && (
+						<>
+							<h3>{__('Links', 'ftek')}</h3>
+							<ul
+								style={{
+									listStyle: 'none',
+									margin: 0,
+									padding: 0,
+								}}
+							>
+								{courseLinks.map((link, i) => (
+									<li key={i}>
+										<a
+											target="_blank"
+											rel="noopener noreferrer"
+											href={link.url}
+										>
+											{link.text}
+										</a>
+									</li>
+								))}
+							</ul>
+						</>
+					)}
+					{studentRepresentatives.length > 0 && (
+						<>
+							<h3>{__('Student Representatives', 'ftek')}</h3>
+							<ul>
+								{studentRepresentatives.map((repr, i) => {
+									const name = repr.name || repr.cid;
+									return (
+										<li key={i}>
+											{repr.cid ? (
+												<a
+													href={`mailto:${repr.cid}@student.chalmers.se`}
+												>
+													{name}
+												</a>
+											) : (
+												name
+											)}
+										</li>
+									);
+								})}
+							</ul>
+						</>
+					)}
+					<h3>{__('Is Anything Missing?', 'ftek')}</h3>
+					<span
+						dangerouslySetInnerHTML={{
+							__html: __(
+								'Contact <a %$1s>SNF</a>.',
+								'ftek'
+							).replace('%$1s', 'href="mailto:snf@ftek.se"'),
+						}}
+					/>
+				</SectionedPage.Aside>
+			</SectionedPage>
+		</>
+	);
+};
+
+const Edit = ({
+	attributes,
+	setAttributes,
+}: {
+	attributes: PostMeta;
+	setAttributes: (m: PostMeta) => void;
+}): JSX.Element => {
 	const hasDriveList = !!useSelect(
 		(select) => select('core/blocks').getBlockType('ftek/drive-list'),
 		[]
@@ -440,29 +464,33 @@ const Edit = ({ attributes, setAttributes }): JSX.Element => {
 			: []),
 	];
 
-	const postType = useSelect(
-		(select) => select('core/editor').getCurrentPostType(),
-		[]
-	);
-	const [wpPostMeta, setWpPostMeta]: [WPPostMeta, (m: WPPostMeta) => void] =
-		useEntityProp('postType', postType, 'meta');
+	const updateAttributes = (m: Partial<PostMeta>) =>
+		setAttributes({ ...meta, ...m });
 
-	const meta: PostMeta = {
-		...attributes,
-		...(postType === 'course-page' ? wpPostMeta.ftek_course_page_meta : {}),
-	};
-	const setMeta = (m: PostMeta) => {
-		setAttributes(m);
-		if (postType === 'course-page') {
-			setWpPostMeta({ ftek_course_page_meta: m });
-		}
-	};
-	const updateMeta = (m: Partial<PostMeta>) => setMeta({ ...meta, ...m });
+	const maybeMeta = useMeta();
+	const [meta, updateMeta] = maybeMeta
+		? maybeMeta
+		: [attributes, updateAttributes];
+
+	if (maybeMeta) {
+		setAttributes(meta);
+	}
 
 	return (
 		<div {...useBlockProps()}>
 			<InspectorControls>
-				<Controls meta={meta} updateMeta={updateMeta} />
+				<PanelBody
+					title={__('Course Page', 'ftek')}
+					initialOpen={true}
+					icon={
+						<SVGImage
+							url={ftekInline.assets.openBook}
+							style={{ width: 24, height: 24, marginLeft: 12 }}
+						/>
+					}
+				>
+					<Controls meta={meta} updateMeta={updateMeta} />
+				</PanelBody>
 			</InspectorControls>
 			<CoursePage meta={meta}>
 				<InnerBlocks template={innerBlocksTemplate} />
@@ -471,7 +499,7 @@ const Edit = ({ attributes, setAttributes }): JSX.Element => {
 	);
 };
 
-const Save = ({ attributes }): JSX.Element => (
+const Save = ({ attributes }: { attributes: PostMeta }): JSX.Element => (
 	<div {...useBlockProps.save()}>
 		<CoursePage meta={attributes}>
 			<InnerBlocks.Content />
@@ -479,31 +507,18 @@ const Save = ({ attributes }): JSX.Element => (
 	</div>
 );
 
-const icon = <SVGImage url={ftekInline.assets.openBook} />;
-
-registerBlockType(metadata, {
-	edit: Edit,
-	save: Save,
-	icon,
-});
-
-const PluginDocumentSettingPanelDemo = () => {
-	const postType = useSelect(
-		(select) => select('core/editor').getCurrentPostType(),
-		[]
-	);
-
-	const [wpPostMeta, setWpPostMeta]: [WPPostMeta, (m: WPPostMeta) => void] =
-		useEntityProp('postType', postType, 'meta');
-	const meta = wpPostMeta.ftek_course_page_meta;
-	const updateMeta = (m: Partial<PostMeta>) =>
-		setWpPostMeta({ ftek_course_page_meta: { ...meta, ...m } });
+const DocumentSettings = () => {
+	const maybeMeta = useMeta();
+	if (!maybeMeta) {
+		return <></>;
+	}
+	const [meta, updateMeta] = maybeMeta;
 
 	return (
 		<PluginDocumentSettingPanel
-			initialOpen={true}
-			name="course-page"
-			title={__('Course page', 'ftek')}
+			title={__('Course Page', 'ftek')}
+			opened={true}
+			icon={icon}
 		>
 			<Controls meta={meta} updateMeta={updateMeta} />
 		</PluginDocumentSettingPanel>
@@ -511,6 +526,12 @@ const PluginDocumentSettingPanelDemo = () => {
 };
 
 registerPlugin('ftek-monoplugin', {
-	render: PluginDocumentSettingPanelDemo,
+	render: DocumentSettings,
+	icon,
+});
+
+registerBlockType(metadata, {
+	edit: Edit,
+	save: Save,
 	icon,
 });

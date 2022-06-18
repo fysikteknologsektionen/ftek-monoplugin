@@ -48,17 +48,6 @@ const Folder = ({ tree }: { tree: Tree }): JSX.Element => (
 	</ul>
 );
 
-export const DriveListLoading = (): JSX.Element => (
-	<Folder
-		tree={[
-			{
-				type: 'file',
-				name: __('Loading list…', 'ftek'),
-			},
-		]}
-	/>
-);
-
 export const DriveList = ({
 	attributes,
 }: {
@@ -77,7 +66,7 @@ export const DriveList = ({
 	}, [url, depth, download]);
 
 	if (loading) {
-		return <DriveListLoading />;
+		return <DriveList.Loading />;
 	}
 
 	return tree.length > 0 ? (
@@ -86,3 +75,14 @@ export const DriveList = ({
 		<span>{__('No files to display', 'ftek')}</span>
 	);
 };
+
+DriveList.Loading = (): JSX.Element => (
+	<Folder
+		tree={[
+			{
+				type: 'file',
+				name: __('Loading list…', 'ftek'),
+			},
+		]}
+	/>
+);
