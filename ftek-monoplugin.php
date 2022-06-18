@@ -36,6 +36,27 @@ function _get_available_roles(): array {
 }
 
 /**
+ * Adds the constant ftekInline to a script
+ *
+ * @param string $handle Script handle.
+ */
+function add_global_js_variable( string $handle ): void {
+	wp_add_inline_script(
+		$handle,
+		'const ftekInline = ' . wp_json_encode(
+			array(
+				'roles'            => _get_available_roles(),
+				'oauthRedirectUri' => OAuth::get_redirect_uri(),
+				'assets'           => array(
+					'openBook' => plugins_url( '/assets/open-book.svg', PLUGIN_FILE ),
+				),
+			)
+		),
+		'before'
+	);
+}
+
+/**
  * Enqueue an entrypoint script
  *
  * @param string $handle Script and style handle.
@@ -76,16 +97,15 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 		PLUGIN_ROOT . '/languages'
 	);
 
-	wp_add_inline_script(
-		$handle,
-		'const ftekInline = ' . wp_json_encode(
-			array(
-				'roles'              => _get_available_roles(),
-				'oauth_redirect_uri' => OAuth::get_redirect_uri(),
-			)
-		),
-		'before'
-	);
+	add_global_js_variable( $handle );
+}
+
+/**
+ * Activation hook callback
+ */
+function activate() {
+	Options::activate();
+	Course_Pages::activate();
 }
 
 /**
@@ -105,6 +125,7 @@ add_action(
 	}
 );
 
+register_activation_hook( PLUGIN_FILE, __NAMESPACE__ . '\activate' );
 register_uninstall_hook( PLUGIN_FILE, __NAMESPACE__ . '\uninstall' );
 
 // Enable settings page.
@@ -115,3 +136,6 @@ Login::init();
 
 // Enable Drive List block.
 Drive_List::init();
+
+// Enable course pages.
+Course_Pages::init();

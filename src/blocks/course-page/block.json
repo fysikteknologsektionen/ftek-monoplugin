@@ -1,0 +1,58 @@
+{
+	"apiVersion": 2,
+	"name": "ftek/course-page",
+	"title": "Course page",
+	"category": "design",
+	"textdomain": "ftek",
+	"attributes": {
+		"code": {
+			"type": "string",
+			"default": ""
+		},
+		"credits": {
+			"type": "number",
+			"default": 0
+		},
+		"homepage_url": {
+			"type": "string",
+			"default": ""
+		},
+		"info_url": {
+			"type": "string",
+			"default": ""
+		},
+		"survey_url": {
+			"type": "string",
+			"default": ""
+		},
+		"student_representatives": {
+			"type": "array",
+			"default": []
+		},
+		"study_perionds": {
+			"type": "array",
+			"default": []
+		},
+		"year": {
+			"enum": ["", "1", "2", "3", "master"],
+			"default": ""
+		},
+		"programs": {
+			"type": "array",
+			"default": []
+		},
+		"participant_count": {
+			"type": "number",
+			"default": 0
+		},
+		"elective": {
+			"type": "boolean",
+			"default": false
+		},
+		"comment": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:editor.js"
+}

@@ -18,6 +18,38 @@ class Options {
 		'oauth_client_secret'     => '',
 		'oauth_users'             => array(),
 		'google_api_key'          => '',
+		'study_period_ends'       => array(
+			'1' => array(
+				'month' => 1,
+				'day'   => 1,
+			),
+			'2' => array(
+				'month' => 1,
+				'day'   => 1,
+			),
+			'3' => array(
+				'month' => 1,
+				'day'   => 1,
+			),
+			'4' => array(
+				'month' => 1,
+				'day'   => 1,
+			),
+		),
+		'schedules'               => array(
+			'1' => array(
+				'F'  => '',
+				'TM' => '',
+			),
+			'2' => array(
+				'F'  => '',
+				'TM' => '',
+			),
+			'3' => array(
+				'F'  => '',
+				'TM' => '',
+			),
+		),
 	);
 
 	/**
@@ -42,6 +74,16 @@ class Options {
 	}
 
 	/**
+	 * Should be called on plugin activation
+	 *
+	 * Makes sure all settings exist
+	 */
+	public static function activate(): void {
+		self::add_option();
+		self::set( 'ftek_option', array_intersect_key( self::get(), self::DEFAULTS ) );
+	}
+
+	/**
 	 * Should be called on uninstall
 	 */
 	public static function purge(): void {
@@ -52,6 +94,36 @@ class Options {
 	 * Registers option with the WordPress Settings API
 	 */
 	public static function add_option(): void {
+		$sp_end_schema = array(
+			'type'       => 'object',
+			'required'   => true,
+			'properties' => array(
+				'month' => array(
+					'type'     => 'number',
+					'required' => true,
+				),
+				'day'   => array(
+					'type'     => 'number',
+					'required' => true,
+				),
+			),
+		);
+
+		$schedule_schema = array(
+			'type'       => 'object',
+			'required'   => true,
+			'properties' => array(
+				'F'  => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+				'TM' => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+			),
+		);
+
 		register_setting(
 			'ftek_option_group',
 			'ftek_option',
@@ -97,6 +169,25 @@ class Options {
 							'google_api_key'          => array(
 								'type'     => 'string',
 								'required' => true,
+							),
+							'study_period_ends'       => array(
+								'type'       => 'object',
+								'required'   => true,
+								'properties' => array(
+									'1' => $sp_end_schema,
+									'2' => $sp_end_schema,
+									'3' => $sp_end_schema,
+									'4' => $sp_end_schema,
+								),
+							),
+							'schedules'               => array(
+								'type'       => 'object',
+								'required'   => true,
+								'properties' => array(
+									'1' => $schedule_schema,
+									'2' => $schedule_schema,
+									'3' => $schedule_schema,
+								),
 							),
 						),
 					),

@@ -1,5 +1,5 @@
-import { render, useEffect, useState } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
+import { render, useEffect, useState, Fragment } from '@wordpress/element';
+import { __, _x } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { check, trash, menu } from '@wordpress/icons';
 import {
@@ -11,9 +11,19 @@ import {
 	DropdownMenu,
 	MenuItem,
 	CheckboxControl,
+	SelectControl,
 } from '@wordpress/components';
 
-import { Option, Inline, OAuthUser, RoleKey } from '../types';
+import {
+	Option,
+	OAuthUser,
+	RoleKey,
+	Year,
+	Program,
+	WPOption,
+	Inline,
+} from './util/types';
+import { fmtProgramsYear } from './util/format';
 
 declare const ftekInline: Inline;
 
@@ -34,7 +44,7 @@ const OAuthSettings = ({
 			)}
 		</p>
 		<p>
-			<code>{ftekInline.oauth_redirect_uri}</code>
+			<code>{ftekInline.oauthRedirectUri}</code>
 		</p>
 		<p
 			dangerouslySetInnerHTML={{
@@ -111,7 +121,7 @@ const UsersSettings = ({
 						paddingBottom: '0.4em',
 					}}
 				>
-					<Button onClick={onDelete} isSecondary>
+					<Button onClick={onDelete} variant="secondary">
 						<Icon icon={trash} size={24} />
 					</Button>
 				</div>
@@ -194,7 +204,7 @@ const UsersSettings = ({
 						] as typeof option.oauth_users,
 					});
 				}}
-				isSecondary
+				variant="secondary"
 			>
 				{__('Add pattern', 'ftek')}
 			</Button>
@@ -237,6 +247,99 @@ const GoogleApiSettings = ({
 	</>
 );
 
+const StudyPeriodsSettings = ({
+	option,
+	onChange,
+}: SettingsSectionParams): JSX.Element => (
+	<>
+		<p>{__('Enter the final date of each study period.', 'ftek')}</p>
+		{['1', '2', '3', '4'].map((sp) => (
+			<div
+				key={sp}
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					gap: '1rem',
+				}}
+			>
+				<span>
+					{__('Last day of study period %$1s', 'ftek').replace(
+						'%$1s',
+						sp
+					)}
+				</span>
+				<SelectControl
+					label={__('Month', 'ftek')}
+					value={option.study_period_ends[sp].month}
+					options={[...Array(12).keys()].map((i) => ({
+						label: `${i + 1}`,
+						value: i + 1,
+					}))}
+					onChange={(value) => {
+						const sps = { ...option.study_period_ends };
+						sps[sp] = { ...sps[sp], month: Number(value) };
+						onChange({ study_period_ends: sps });
+					}}
+				/>
+				<SelectControl
+					label={__('Day', 'ftek')}
+					value={option.study_period_ends[sp].day}
+					options={[...Array(31).keys()].map((i) => ({
+						label: `${i + 1}`,
+						value: i + 1,
+					}))}
+					onChange={(value) => {
+						const sps = { ...option.study_period_ends };
+						sps[sp] = { ...sps[sp], day: Number(value) };
+						onChange({ study_period_ends: sps });
+					}}
+				/>
+			</div>
+		))}
+	</>
+);
+
+const SchedulesSettings = ({
+	option,
+	onChange,
+}: SettingsSectionParams): JSX.Element => (
+	<>
+		<p>
+			{__(
+				'Enter the URL to the schedule for each class. The schedule should begin at the current week and end one year later.',
+				'ftek'
+			)}
+		</p>
+		{(['1', '2', '3'] as Year[]).map((year, i) => {
+			return (
+				<Fragment key={i}>
+					<h4>
+						{_x('Year %$1s', 'grade', 'ftek').replace('%$1s', year)}
+					</h4>
+					{(['F', 'TM'] as Program[]).map((program, j) => (
+						<TextControl
+							key={j}
+							label={__(
+								'URL to schedule for %$1s',
+								'ftek'
+							).replace('%$1s', fmtProgramsYear([program], year))}
+							value={option.schedules[year][program]}
+							onChange={(value: string) => {
+								const schedules = { ...option.schedules };
+								schedules[year] = {
+									...schedules[year],
+									[program]: value,
+								};
+								onChange({ schedules });
+							}}
+						/>
+					))}
+				</Fragment>
+			);
+		})}
+	</>
+);
+
 const Settings = (): JSX.Element => {
 	const [saveState, setSaveState] = useState<'saved' | 'unsaved' | 'saving'>(
 		'saved'
@@ -251,7 +354,7 @@ const Settings = (): JSX.Element => {
 
 	useEffect(() => {
 		apiFetch({ path: '/wp/v2/settings' })
-			.then((response: { ftek_option: Option }) => {
+			.then((response: WPOption) => {
 				setOption(response?.ftek_option);
 			})
 			.catch(setError);
@@ -299,13 +402,17 @@ const Settings = (): JSX.Element => {
 					<SettingsSection section={OAuthSettings} />
 					<h3>{__('Users', 'ftek')}</h3>
 					<SettingsSection section={UsersSettings} />
-					<h3>{__('Google API', 'key')}</h3>
+					<h3>{__('Google API', 'ftek')}</h3>
 					<SettingsSection section={GoogleApiSettings} />
+					<h3>{__('Study Periods', 'ftek')}</h3>
+					<SettingsSection section={StudyPeriodsSettings} />
+					<h3>{__('Schedules', 'ftek')}</h3>
+					<SettingsSection section={SchedulesSettings} />
 					<p>
 						<Button
 							onClick={save}
 							disabled={saveState !== 'unsaved'}
-							isPrimary
+							variant="primary"
 						>
 							{saveState === 'saved'
 								? __('Settings saved!', 'ftek')

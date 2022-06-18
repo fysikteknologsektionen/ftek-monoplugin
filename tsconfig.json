@@ -3,6 +3,7 @@
 		"plugins": [{ "name": "typescript-plugin-css-modules" }],
 		"jsx": "preserve",
 		"esModuleInterop": true,
-		"resolveJsonModule": true
+		"resolveJsonModule": true,
+		"downlevelIteration": true
 	}
 }
