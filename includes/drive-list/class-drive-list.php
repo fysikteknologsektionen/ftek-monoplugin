@@ -107,8 +107,6 @@ class Drive_List {
 
 		$tree = array();
 		for ( $i = $depth; $i > 0 && $leaves; $i-- ) {
-			$curls = array();
-
 			$leave_count = count( $leaves );
 			for ( $j = 0; $j < $leave_count; $j++ ) {
 				$url = add_query_arg(

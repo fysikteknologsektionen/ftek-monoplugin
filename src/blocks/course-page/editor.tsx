@@ -15,7 +15,7 @@ import {
 	RadioControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { mapMarker, trash } from '@wordpress/icons';
+import { trash } from '@wordpress/icons';
 import { __, _x } from '@wordpress/i18n';
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
@@ -30,30 +30,19 @@ import {
 	fmtSPs,
 	fmtYear,
 } from '../../util/format';
-import { Inline, Program, StudyPeriod, WPBlock, Year } from '../../util/types';
+import {
+	CoursePageMeta,
+	Inline,
+	Program,
+	StudyPeriod,
+	WPBlock,
+	WPCoursePageMeta,
+	Year,
+} from '../../util/types';
 
 import metadata from './block.json';
 
 declare const ftekInline: Inline;
-
-type StudentRepresentative = { name: string; cid: string };
-
-type PostMeta = {
-	code: string;
-	credits: number;
-	homepage_url: string;
-	info_url: string;
-	survey_url: string;
-	student_representatives: StudentRepresentative[];
-	study_perionds: StudyPeriod[];
-	year: '' | Year;
-	programs: Program[];
-	participant_count: number;
-	elective: boolean;
-	comment: string;
-};
-
-type WPPostMeta = { ftek_course_page_meta: PostMeta };
 
 const icon = (
 	<SVGImage
@@ -62,21 +51,25 @@ const icon = (
 	/>
 );
 
-const useMeta = (): false | [PostMeta, (m: Partial<PostMeta>) => void] => {
+const useMeta = ():
+	| false
+	| [CoursePageMeta, (m: Partial<CoursePageMeta>) => void] => {
 	const postType = useSelect(
 		(select) => select('core/editor').getCurrentPostType(),
 		[]
 	);
-	const [wpPostMeta, setWpPostMeta]: [WPPostMeta, (m: WPPostMeta) => void] =
-		useEntityProp('postType', postType, 'meta');
+	const [wpCoursePageMeta, setWpCoursePageMeta]: [
+		WPCoursePageMeta,
+		(m: WPCoursePageMeta) => void
+	] = useEntityProp('postType', postType, 'meta');
 
 	if (postType !== 'course-page') {
 		return false;
 	}
 
-	const meta = wpPostMeta.ftek_course_page_meta;
-	const updateMeta = (m: Partial<PostMeta>) =>
-		setWpPostMeta({ ftek_course_page_meta: { ...meta, ...m } });
+	const meta = wpCoursePageMeta.ftek_course_page_meta;
+	const updateMeta = (m: Partial<CoursePageMeta>) =>
+		setWpCoursePageMeta({ ftek_course_page_meta: { ...meta, ...m } });
 
 	return [meta, updateMeta];
 };
@@ -85,8 +78,8 @@ const Controls = ({
 	meta,
 	updateMeta,
 }: {
-	meta: PostMeta;
-	updateMeta: (m: Partial<PostMeta>) => void;
+	meta: CoursePageMeta;
+	updateMeta: (m: Partial<CoursePageMeta>) => void;
 }) => {
 	const [creditsText, setCreditsText] = useState<string>(null);
 	const [participantCountText, setParticipantCountText] =
@@ -319,7 +312,7 @@ const CoursePage = ({
 	meta,
 	children,
 }: {
-	meta: PostMeta;
+	meta: CoursePageMeta;
 	children: React.ReactNode;
 }): JSX.Element => {
 	const studentRepresentatives = meta.student_representatives.filter(
@@ -425,8 +418,8 @@ const Edit = ({
 	attributes,
 	setAttributes,
 }: {
-	attributes: PostMeta;
-	setAttributes: (m: PostMeta) => void;
+	attributes: CoursePageMeta;
+	setAttributes: (m: CoursePageMeta) => void;
 }): JSX.Element => {
 	const hasDriveList = !!useSelect(
 		(select) => select('core/blocks').getBlockType('ftek/drive-list'),
@@ -464,7 +457,7 @@ const Edit = ({
 			: []),
 	];
 
-	const updateAttributes = (m: Partial<PostMeta>) =>
+	const updateAttributes = (m: Partial<CoursePageMeta>) =>
 		setAttributes({ ...meta, ...m });
 
 	const maybeMeta = useMeta();
@@ -499,7 +492,7 @@ const Edit = ({
 	);
 };
 
-const Save = ({ attributes }: { attributes: PostMeta }): JSX.Element => (
+const Save = ({ attributes }: { attributes: CoursePageMeta }): JSX.Element => (
 	<div {...useBlockProps.save()}>
 		<CoursePage meta={attributes}>
 			<InnerBlocks.Content />

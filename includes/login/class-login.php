@@ -16,11 +16,11 @@ class Login {
 	 * Initialize resources
 	 */
 	public static function init(): void {
-		Profile::init();
-
 		add_action( 'login_init', array( self::class, 'perform_redirects' ) );
 		add_action( 'init', array( self::class, 'perform_login' ) );
 		add_filter( 'wp_login_errors', array( self::class, 'wp_login_errors' ) );
+
+		Profile::init();
 	}
 
 	/**

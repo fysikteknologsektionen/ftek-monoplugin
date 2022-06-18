@@ -33,6 +33,8 @@ class Course_Pages {
 	public static function init(): void {
 		add_action( 'init', array( self::class, 'register_post_type' ) );
 		add_action( 'update_post_metadata', array( self::class, 'update_post_slug' ), 10, 4 );
+
+		Course_Blocks::init();
 	}
 
 	/**
