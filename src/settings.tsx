@@ -263,8 +263,8 @@ const StudyPeriodsSettings = ({
 				}}
 			>
 				<span>
-					{__('Last day of study period %$1s', 'ftek').replace(
-						'%$1s',
+					{__('Last day of study period %1$s', 'ftek').replace(
+						'%1$s',
 						sp
 					)}
 				</span>
@@ -314,15 +314,15 @@ const SchedulesSettings = ({
 			return (
 				<Fragment key={i}>
 					<h4>
-						{_x('Year %$1s', 'grade', 'ftek').replace('%$1s', year)}
+						{_x('Year %1$s', 'grade', 'ftek').replace('%1$s', year)}
 					</h4>
 					{(['F', 'TM'] as Program[]).map((program, j) => (
 						<TextControl
 							key={j}
 							label={__(
-								'URL to schedule for %$1s',
+								'URL to schedule for %1$s',
 								'ftek'
-							).replace('%$1s', fmtProgramsYear([program], year))}
+							).replace('%1$s', fmtProgramsYear([program], year))}
 							value={option.schedules[year][program]}
 							onChange={(value: string) => {
 								const schedules = { ...option.schedules };
@@ -353,8 +353,8 @@ const Settings = (): JSX.Element => {
 	};
 
 	useEffect(() => {
-		apiFetch({ path: '/wp/v2/settings' })
-			.then((response: WPOption) => {
+		apiFetch<WPOption>({ path: '/wp/v2/settings' })
+			.then((response) => {
 				setOption(response?.ftek_option);
 			})
 			.catch(setError);

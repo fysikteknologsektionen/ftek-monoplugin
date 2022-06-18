@@ -14,16 +14,16 @@ export default function useFetchAll<T>(
 
 	useEffect(() => {
 		if (data.length % PAGE_SIZE === 0) {
-			apiFetch({
+			apiFetch<T[]>({
 				...options,
 				path: addQueryArgs(options.path, {
 					per_page: PAGE_SIZE,
 					offset: data.length,
 				}),
 			})
-				.then((morePosts) => {
-					if (Array.isArray(morePosts) && morePosts.length > 0) {
-						setData([...data, ...morePosts]);
+				.then((moreData) => {
+					if (Array.isArray(moreData) && moreData.length > 0) {
+						setData([...data, ...moreData]);
 					} else {
 						setLoading(false);
 					}

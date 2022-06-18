@@ -34,5 +34,17 @@ class Course_Blocks {
 			'ftek',
 			PLUGIN_ROOT . '/languages'
 		);
+
+		register_block_type( PLUGIN_ROOT . '/build/blocks/current-courses' );
+		wp_set_script_translations(
+			'ftek-current-courses-script',
+			'ftek',
+			PLUGIN_ROOT . '/languages'
+		);
+		wp_set_script_translations(
+			'ftek-current-courses-editor-script',
+			'ftek',
+			PLUGIN_ROOT . '/languages'
+		);
 	}
 }

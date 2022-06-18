@@ -122,7 +122,7 @@ const YearOverview = ({
 			<th />
 			{(['1', '2', '3', '4'] as StudyPeriod[]).map((sp, i) => (
 				<th key={i}>
-					{__('Study period %$1s', 'ftek').replace('%$1s', sp)}
+					{__('Study period %1$s', 'ftek').replace('%1$s', sp)}
 				</th>
 			))}
 		</tr>
@@ -136,7 +136,7 @@ const YearOverview = ({
 				{j === 0 && (
 					<th rowSpan={rows}>
 						{program === 'multiple'
-							? _x('Y%$1s', 'grade', 'ftek').replace('%$1s', year)
+							? _x('Y%1$s', 'grade', 'ftek').replace('%1$s', year)
 							: fmtProgramsYear([program], year)}
 					</th>
 				)}
@@ -193,7 +193,7 @@ const OverviewTable = ({
 		{(['1', '2', '3'] as BachelorYear[]).map((year, i) => (
 			<Fragment key={i}>
 				<h3>
-					{_x('Year %$1s', 'grade', 'ftek').replace('%$1s', year)}
+					{_x('Year %1$s', 'grade', 'ftek').replace('%1$s', year)}
 				</h3>
 				<YearOverview
 					year={year}

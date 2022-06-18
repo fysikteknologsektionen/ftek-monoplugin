@@ -12,13 +12,15 @@ export type Program = 'F' | 'TM';
 
 export type StudyPeriod = '1' | '2' | '3' | '4';
 
+export type StudyPeriodEnd = { month: number; day: number };
+
 export type Option = {
 	oauth_discovery_doc_url: string;
 	oauth_client_id: string;
 	oauth_client_secret: string;
 	oauth_users: OAuthUser[];
 	google_api_key: string;
-	study_period_ends: { [sp in StudyPeriod]: { month: number; day: number } };
+	study_period_ends: { [sp in StudyPeriod]: StudyPeriodEnd };
 	schedules: { [y in Exclude<Year, 'master'>]: { [p in Program]: string } };
 };
 

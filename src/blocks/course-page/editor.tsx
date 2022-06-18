@@ -212,8 +212,8 @@ const Controls = ({
 					{(['1', '2', '3', '4'] as StudyPeriod[]).map((sp, i) => (
 						<CheckboxControl
 							key={i}
-							label={_x('SP%$1s', 'study period', 'ftek').replace(
-								'%$1s',
+							label={_x('SP%1$s', 'study period', 'ftek').replace(
+								'%1$s',
 								sp
 							)}
 							checked={meta.study_perionds.includes(sp)}
@@ -403,9 +403,9 @@ const CoursePage = ({
 					<span
 						dangerouslySetInnerHTML={{
 							__html: __(
-								'Contact <a %$1s>SNF</a>.',
+								'Contact <a %1$s>SNF</a>.',
 								'ftek'
-							).replace('%$1s', 'href="mailto:snf@ftek.se"'),
+							).replace('%1$s', 'href="mailto:snf@ftek.se"'),
 						}}
 					/>
 				</SectionedPage.Aside>
