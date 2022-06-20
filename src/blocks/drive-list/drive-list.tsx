@@ -1,6 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { useState, useEffect } from '@wordpress/element';
+import Dropdown from '../../components/dropdown';
 
 export type Attributes = {
 	url: string;

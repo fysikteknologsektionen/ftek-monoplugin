@@ -3,7 +3,7 @@ export const SVGImage = ({
 	...attributes
 }: {
 	url: string;
-} & React.HTMLAttributes<SVGElement>): JSX.Element => (
+} & React.SVGAttributes<SVGElement>): JSX.Element => (
 	<svg {...attributes}>
 		<image style={{ width: '100%' }} xlinkHref={url} />
 	</svg>

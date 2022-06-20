@@ -5,13 +5,17 @@ import useFetchAll from '../../hooks/useFetchAll';
 import {
 	WPPost,
 	WPCoursePageMeta,
-	Program,
 	StudyPeriod,
 	BachelorYear,
-} from '../../util/types';
-import { fmtProgramsYear } from '../../util/format';
+	BACHELOR_YEARS,
+	PROGRAMS,
+	STUDY_PERIODS,
+} from '../../utils/types';
+import { fmtProgramsYear, fmtYear } from '../../utils/format';
 
-type ExtendedProgram = Program | 'multiple';
+const EXTENDED_PROGRAMS = ['multiple', ...PROGRAMS] as const;
+
+type ExtendedProgram = typeof EXTENDED_PROGRAMS[number];
 
 type PostView = {
 	title: string;
@@ -31,19 +35,13 @@ const organizePosts = (
 	allPosts: WPPost<WPCoursePageMeta>[]
 ): [AllBachelorsCourses, Footnotes] => {
 	const posts = Object.fromEntries(
-		(['1', '2', '3'] as BachelorYear[]).map((year) => [
+		BACHELOR_YEARS.map((year) => [
 			year,
 			Object.fromEntries(
-				(['F', 'TM', 'multiple'] as ExtendedProgram[]).map(
-					(program) => [
-						program,
-						Object.fromEntries(
-							(['1', '2', '3', '4'] as StudyPeriod[]).map(
-								(sp) => [sp, []]
-							)
-						),
-					]
-				)
+				EXTENDED_PROGRAMS.map((program) => [
+					program,
+					Object.fromEntries(STUDY_PERIODS.map((sp) => [sp, []])),
+				])
 			),
 		])
 	) as AllBachelorsCourses;
@@ -100,10 +98,8 @@ const YearOverview = ({
 	loading: boolean;
 	footnotes: { [k: string]: number };
 }): JSX.Element => {
-	const allPrograms = ['multiple', 'F', 'TM'] as ExtendedProgram[];
-
 	const maxCourses = Object.fromEntries(
-		allPrograms.map((program) => [
+		EXTENDED_PROGRAMS.map((program) => [
 			program,
 			Math.max(...Object.values(posts[program]).map((p) => p.length)),
 		])
@@ -120,15 +116,18 @@ const YearOverview = ({
 	const head = (
 		<tr>
 			<th />
-			{(['1', '2', '3', '4'] as StudyPeriod[]).map((sp, i) => (
+			{STUDY_PERIODS.map((sp, i) => (
 				<th key={i}>
-					{__('Study period %1$s', 'ftek').replace('%1$s', sp)}
+					{
+						// translators: %1$s Number of the study period
+						__('Study period %1$s', 'ftek').replace('%1$s', sp)
+					}
 				</th>
 			))}
 		</tr>
 	);
 
-	const body = allPrograms.map((program, i) => {
+	const body = EXTENDED_PROGRAMS.map((program, i) => {
 		const p = posts[program];
 		const rows = maxCourses[program];
 		return [...Array(maxCourses[program]).keys()].map((j) => (
@@ -136,11 +135,12 @@ const YearOverview = ({
 				{j === 0 && (
 					<th rowSpan={rows}>
 						{program === 'multiple'
-							? _x('Y%1$s', 'grade', 'ftek').replace('%1$s', year)
+							? // translators: %1$s Number of the year
+							  _x('Y%1$s', 'grade', 'ftek').replace('%1$s', year)
 							: fmtProgramsYear([program], year)}
 					</th>
 				)}
-				{(['1', '2', '3', '4'] as StudyPeriod[]).flatMap((sp, l) => {
+				{STUDY_PERIODS.flatMap((sp, l) => {
 					if (j > p[sp].length) {
 						return [];
 					}
@@ -190,11 +190,9 @@ const OverviewTable = ({
 	loading: boolean;
 }): JSX.Element => (
 	<>
-		{(['1', '2', '3'] as BachelorYear[]).map((year, i) => (
+		{BACHELOR_YEARS.map((year, i) => (
 			<Fragment key={i}>
-				<h3>
-					{_x('Year %1$s', 'grade', 'ftek').replace('%1$s', year)}
-				</h3>
+				<h3>{fmtYear(year)}</h3>
 				<YearOverview
 					year={year}
 					posts={posts[year]}

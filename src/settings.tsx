@@ -22,8 +22,11 @@ import {
 	Program,
 	WPOption,
 	Inline,
-} from './util/types';
-import { fmtProgramsYear } from './util/format';
+	STUDY_PERIODS,
+	BACHELOR_YEARS,
+	PROGRAMS,
+} from './utils/types';
+import { fmtProgramsYear, fmtYear } from './utils/format';
 
 declare const ftekInline: Inline;
 
@@ -253,7 +256,7 @@ const StudyPeriodsSettings = ({
 }: SettingsSectionParams): JSX.Element => (
 	<>
 		<p>{__('Enter the final date of each study period.', 'ftek')}</p>
-		{['1', '2', '3', '4'].map((sp) => (
+		{STUDY_PERIODS.map((sp) => (
 			<div
 				key={sp}
 				style={{
@@ -263,10 +266,13 @@ const StudyPeriodsSettings = ({
 				}}
 			>
 				<span>
-					{__('Last day of study period %1$s', 'ftek').replace(
-						'%1$s',
-						sp
-					)}
+					{
+						// translators: %1$s Number of the study period
+						__('Last day of study period %1$s', 'ftek').replace(
+							'%1$s',
+							sp
+						)
+					}
 				</span>
 				<SelectControl
 					label={__('Month', 'ftek')}
@@ -310,19 +316,20 @@ const SchedulesSettings = ({
 				'ftek'
 			)}
 		</p>
-		{(['1', '2', '3'] as Year[]).map((year, i) => {
+		{BACHELOR_YEARS.map((year, i) => {
 			return (
 				<Fragment key={i}>
-					<h4>
-						{_x('Year %1$s', 'grade', 'ftek').replace('%1$s', year)}
-					</h4>
-					{(['F', 'TM'] as Program[]).map((program, j) => (
+					<h4>{fmtYear(year)}</h4>
+					{PROGRAMS.map((program, j) => (
 						<TextControl
 							key={j}
-							label={__(
-								'URL to schedule for %1$s',
-								'ftek'
-							).replace('%1$s', fmtProgramsYear([program], year))}
+							label={
+								// translators: %1$s Name of program
+								__('URL to schedule for %1$s', 'ftek').replace(
+									'%1$s',
+									fmtProgramsYear([program], year)
+								)
+							}
 							value={option.schedules[year][program]}
 							onChange={(value: string) => {
 								const schedules = { ...option.schedules };

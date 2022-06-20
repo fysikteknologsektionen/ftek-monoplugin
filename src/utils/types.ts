@@ -4,13 +4,15 @@ export type Role = { key: RoleKey; name: string };
 
 export type OAuthUser = { email_pattern: string; roles: RoleKey[] };
 
-export type BachelorYear = '1' | '2' | '3';
+export const BACHELOR_YEARS = ['1', '2', '3'] as const;
+export const YEARS = [...BACHELOR_YEARS, 'master'] as const;
+export const PROGRAMS = ['F', 'TM'] as const;
+export const STUDY_PERIODS = ['1', '2', '3', '4'] as const;
 
-export type Year = BachelorYear | 'master';
-
-export type Program = 'F' | 'TM';
-
-export type StudyPeriod = '1' | '2' | '3' | '4';
+export type BachelorYear = typeof BACHELOR_YEARS[number];
+export type Year = typeof YEARS[number];
+export type Program = typeof PROGRAMS[number];
+export type StudyPeriod = typeof STUDY_PERIODS[number];
 
 export type StudyPeriodEnd = { month: number; day: number };
 

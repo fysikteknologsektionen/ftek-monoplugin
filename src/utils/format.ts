@@ -5,6 +5,7 @@ export const fmtCourseCode = (code: string): string =>
 	code || __('Course Code', 'ftek');
 
 export const fmtCourseCredits = (credits: number): string =>
+	// translators: %1$s Number of hec
 	_x('%1$s hec', 'higher education credits', 'ftek').replace(
 		'%1$s',
 		(credits || 0).toString()
@@ -30,7 +31,10 @@ export const fmtYear = (year: Year): string => {
 	if (year === 'master') {
 		return __("Master's course", 'ftek');
 	}
-	return _x('Year %1$s', 'grade', 'ftek').replace('%1$s', year);
+	return (
+		// translators: %1$s Number of the year
+		_x('Year %1$s', 'grade', 'ftek').replace('%1$s', year)
+	);
 };
 
 export const fmtSPs = (sps: StudyPeriod[]): string =>
@@ -48,6 +52,7 @@ export const fmtSPs = (sps: StudyPeriod[]): string =>
 					return previous;
 				})
 				.map((range) =>
+					// translators: %1$s Number of the study period
 					_x('SP%1$s', 'study period', 'ftek').replace(
 						'%1$s',
 						range.length > 1

@@ -29,18 +29,22 @@ import {
 	fmtProgramsYear,
 	fmtSPs,
 	fmtYear,
-} from '../../util/format';
+} from '../../utils/format';
 import {
 	CoursePageMeta,
 	Inline,
 	Program,
+	PROGRAMS,
 	StudyPeriod,
+	STUDY_PERIODS,
 	WPBlock,
 	WPCoursePageMeta,
 	Year,
-} from '../../util/types';
+	YEARS,
+} from '../../utils/types';
 
 import metadata from './block.json';
+import CourseLinks from '../../components/course-links';
 
 declare const ftekInline: Inline;
 
@@ -209,13 +213,10 @@ const Controls = ({
 			<PanelRow>
 				<div>
 					<p>{__('Study period', 'ftek')}</p>
-					{(['1', '2', '3', '4'] as StudyPeriod[]).map((sp, i) => (
+					{STUDY_PERIODS.map((sp, i) => (
 						<CheckboxControl
 							key={i}
-							label={_x('SP%1$s', 'study period', 'ftek').replace(
-								'%1$s',
-								sp
-							)}
+							label={fmtSPs([sp])}
 							checked={meta.study_perionds.includes(sp)}
 							onChange={() => {
 								const sps = [...meta.study_perionds];
@@ -238,12 +239,10 @@ const Controls = ({
 				<RadioControl
 					label={_x('Year', 'grade', 'ftek')}
 					selected={meta.year}
-					options={(['1', '2', '3', 'master'] as Year[]).map(
-						(year) => ({
-							label: fmtYear(year),
-							value: year,
-						})
-					)}
+					options={YEARS.map((year) => ({
+						label: fmtYear(year),
+						value: year,
+					}))}
 					onChange={(value: Year) => updateMeta({ year: value })}
 				/>
 			</PanelRow>
@@ -251,7 +250,7 @@ const Controls = ({
 			<PanelRow>
 				<div>
 					<p>{__('Progammes', 'ftek')}</p>
-					{(['F', 'TM'] as Program[]).map((program, i) => (
+					{PROGRAMS.map((program, i) => (
 						<CheckboxControl
 							key={i}
 							label={program}
@@ -319,29 +318,6 @@ const CoursePage = ({
 		(representative) => representative.name || representative.cid
 	);
 
-	const courseLinks: { text: string; url: string }[] = [
-		{
-			text: __('Course homepage', 'ftek'),
-			url: meta.homepage_url,
-		},
-		{
-			text: __('General info', 'ftek'),
-			url: meta.info_url,
-		},
-		{
-			text: __('Latest survey', 'ftek'),
-			url: meta.survey_url,
-		},
-		...(meta.code
-			? [
-					{
-						text: __('Exam statistics', 'ftek'),
-						url: `https://stats.ftek.se/${meta.code}`,
-					},
-			  ]
-			: []),
-	].filter((link) => link.url);
-
 	return (
 		<>
 			<h2>{`${fmtCourseCode(meta.code)} | ${fmtCourseCredits(
@@ -352,30 +328,10 @@ const CoursePage = ({
 			<SectionedPage>
 				<SectionedPage.Main>{children}</SectionedPage.Main>
 				<SectionedPage.Aside>
-					{courseLinks.length > 0 && (
-						<>
-							<h3>{__('Links', 'ftek')}</h3>
-							<ul
-								style={{
-									listStyle: 'none',
-									margin: 0,
-									padding: 0,
-								}}
-							>
-								{courseLinks.map((link, i) => (
-									<li key={i}>
-										<a
-											target="_blank"
-											rel="noopener noreferrer"
-											href={link.url}
-										>
-											{link.text}
-										</a>
-									</li>
-								))}
-							</ul>
-						</>
-					)}
+					<CourseLinks
+						header={<h3>{__('Links', 'ftek')}</h3>}
+						meta={meta}
+					/>
 					{studentRepresentatives.length > 0 && (
 						<>
 							<h3>{__('Student Representatives', 'ftek')}</h3>
@@ -402,6 +358,7 @@ const CoursePage = ({
 					<h3>{__('Is Anything Missing?', 'ftek')}</h3>
 					<span
 						dangerouslySetInnerHTML={{
+							// translators: %1$s Anchor attributes
 							__html: __(
 								'Contact <a %1$s>SNF</a>.',
 								'ftek'

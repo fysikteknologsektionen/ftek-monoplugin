@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Monoplugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-06-17T16:24:33+00:00\n"
+"POT-Creation-Date: 2022-06-20T17:06:11+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,13 +34,115 @@ msgstr ""
 msgid "https://github.com/OssianEriksson"
 msgstr ""
 
-#: includes/class-options.php:114 includes/class-options.php:115
+#: includes/class-options.php:205 includes/class-options.php:206
 msgid "Ftek"
 msgstr ""
 
-#: includes/class-options.php:150
+#: includes/class-options.php:241
 msgid "Settings"
 msgstr "Inställningar"
+
+#: includes/course-pages/class-course-pages.php:86
+msgid "Course pages"
+msgstr "Kurssidor"
+
+#: includes/course-pages/class-course-pages.php:87
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+msgid "Course page"
+msgstr "Kurssida"
+
+#: includes/course-pages/class-course-pages.php:88
+msgctxt "course page"
+msgid "Add new"
+msgstr "Skapa ny"
+
+#: includes/course-pages/class-course-pages.php:89
+msgid "Add New Course page"
+msgstr "Skapa ny kurssida"
+
+#: includes/course-pages/class-course-pages.php:90
+msgid "Edit Course page"
+msgstr "Redigera kurssida"
+
+#: includes/course-pages/class-course-pages.php:91
+msgid "New Course page"
+msgstr "Ny kurssida"
+
+#: includes/course-pages/class-course-pages.php:92
+msgid "View Course page"
+msgstr "Visa kurssida"
+
+#: includes/course-pages/class-course-pages.php:93
+msgid "View Course pages"
+msgstr "Visa kurssidor"
+
+#: includes/course-pages/class-course-pages.php:94
+msgid "Search Course pages"
+msgstr "Sök kurssidor"
+
+#: includes/course-pages/class-course-pages.php:95
+msgid "No Course pages found"
+msgstr "Inga kurssidor hittades"
+
+#: includes/course-pages/class-course-pages.php:96
+msgid "No Course pages found in Trash"
+msgstr "Inga kurssidor hittades i papperskorgen"
+
+#: includes/course-pages/class-course-pages.php:97
+msgid "All Course pages"
+msgstr "Alla kurssidor"
+
+#: includes/course-pages/class-course-pages.php:98
+msgid "Course page Attributes"
+msgstr "Kurssidoattribut"
+
+#: includes/course-pages/class-course-pages.php:99
+msgid "Insert into Course page"
+msgstr "Infoga i kurssida"
+
+#: includes/course-pages/class-course-pages.php:100
+msgid "Uploaded to this Course page"
+msgstr "Uppladdad till denna kurssida"
+
+#: includes/course-pages/class-course-pages.php:101
+msgid "Filter Course page list"
+msgstr "Filtrera kurssidolista"
+
+#: includes/course-pages/class-course-pages.php:102
+msgid "Course page list navigation"
+msgstr "Navigera kurssidolista"
+
+#: includes/course-pages/class-course-pages.php:103
+msgid "Course page list"
+msgstr "Kurssidolista"
+
+#: includes/course-pages/class-course-pages.php:104
+msgid "Course page published"
+msgstr "Kurssida publicerad"
+
+#: includes/course-pages/class-course-pages.php:105
+msgid "Course page reverted to draft"
+msgstr "Kurssida återställd från utkast"
+
+#: includes/course-pages/class-course-pages.php:106
+msgid "Course page scheduled"
+msgstr "Kurssida schemalagd"
+
+#: includes/course-pages/class-course-pages.php:107
+msgid "Course page updated"
+msgstr "Kurssida uppdaterad"
+
+#: includes/course-pages/class-course-pages.php:108
+msgid "Course page link"
+msgstr "Länk till kurssida"
+
+#: includes/course-pages/class-course-pages.php:109
+msgid "A link to a Course page"
+msgstr "En länk till en kurssida"
+
+#: includes/course-pages/class-course-pages.php:111
+msgid "Information about a course"
+msgstr "Information om en kurs"
 
 #: includes/login/class-login.php:31 includes/login/class-login.php:84
 msgid "OAuth login was not possible since required settings are unset"
@@ -77,7 +179,7 @@ msgid ""
 msgstr ""
 "Då inloggningen med OpenID misslyckades togs du till den vanliga "
 "inloggningssidan för WordPress. Om du vill försöka logga in med OpenID igen, "
-"klicka <a %s>här</a>."
+"klicka <a %1$s>här</a>."
 
 #. translators: %1$s: HTTP status code.
 #: includes/login/class-oauth.php:114
@@ -103,13 +205,267 @@ msgstr "Ett fel uppstod vid inläsningen av OAuth:s ändpunktslista"
 msgid "Missing one of (%1$s) in discovery document"
 msgstr "En av (%1$s) saknas i OAuth:s ändpunktslista"
 
-#: build/blocks/drive-list/editor.js:1 build/blocks/drive-list/script.js:1
-msgid "Loading list…"
-msgstr "Laddar lista…"
+#: build/blocks/all-courses/editor.js:1 build/blocks/all-courses/editor.js:4
+#: build/blocks/all-courses/script.js:1 build/blocks/all-courses/script.js:4
+#: build/blocks/course-overview/editor.js:3
+#: build/blocks/course-overview/script.js:3
+#: build/blocks/course-page/editor.js:1 build/blocks/course-page/editor.js:4
+#: build/blocks/current-courses/editor.js:1
+#: build/blocks/current-courses/script.js:1 build/settings.tsx.js:1
+#: build/settings.tsx.js:6
+msgid "Master's course"
+msgstr "Masterskurs"
+
+#. translators: %1$s Number of the year
+#: build/blocks/all-courses/editor.js:2 build/blocks/all-courses/script.js:2
+#: build/blocks/course-overview/editor.js:4
+#: build/blocks/course-overview/script.js:4
+#: build/blocks/course-page/editor.js:2
+#: build/blocks/current-courses/editor.js:2
+#: build/blocks/current-courses/script.js:2 build/settings.tsx.js:7
+msgctxt "grade"
+msgid "Year %1$s"
+msgstr "Årskurs %1$s"
+
+#. translators: %1$s Number of the study period
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgctxt "study period"
+msgid "SP%1$s"
+msgstr ""
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgctxt "study period"
+msgid "SP"
+msgstr "LP"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "Course homepage"
+msgstr "Kurshemsida"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "General info"
+msgstr "Allmän information"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "Latest survey"
+msgstr "Senaste kursnämndsprotokoll"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "Exam statistics"
+msgstr "Tentastatistik"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+msgid "Entries to display: "
+msgstr "Poster att visa: "
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+msgid "Clear filters"
+msgstr "Återställ filter"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+msgctxt "course page"
+msgid "Search: "
+msgstr "Sök: "
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "Course code"
+msgstr "Kurskod"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "Credits"
+msgstr "Högskolepoäng"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/editor.js:4
+#: build/blocks/all-courses/script.js:3 build/blocks/all-courses/script.js:4
+#: build/blocks/course-overview/editor.js:3
+#: build/blocks/course-overview/script.js:3
+#: build/blocks/course-page/editor.js:3 build/blocks/course-page/editor.js:4
+#: build/settings.tsx.js:1
+msgctxt "grade"
+msgid "Year"
+msgstr "Årskurs"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "Study period"
+msgstr "Läsperiod"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:4
+msgid "Links"
+msgstr "Länkar"
+
+#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:3
+msgid "Course Code"
+msgstr "Kurskod"
+
+#. translators: %1$s Number of hec
+#: build/blocks/all-courses/editor.js:4 build/blocks/all-courses/script.js:4
+#: build/blocks/course-page/editor.js:4
+msgctxt "higher education credits"
+msgid "%1$s hec"
+msgstr "%1$s hp"
+
+#: build/blocks/all-courses/editor.js:4 build/blocks/all-courses/script.js:4
+#: build/blocks/course-overview/editor.js:1
+#: build/blocks/course-overview/script.js:1
+#: build/blocks/current-courses/editor.js:3
+#: build/blocks/current-courses/script.js:3
+msgid "Loading courses…"
+msgstr "Laddar kurser…"
+
+#: build/blocks/all-courses/editor.js:4 build/blocks/all-courses/script.js:4
+#: build/blocks/course-overview/editor.js:1
+#: build/blocks/course-overview/script.js:1
+#: build/blocks/current-courses/editor.js:3
+#: build/blocks/current-courses/script.js:3
+msgid "No courses found"
+msgstr "Inga kurssidor hittades"
+
+#: build/blocks/all-courses/editor.js:4 build/blocks/all-courses/script.js:4
+#: build/blocks/course-overview/editor.js:3
+#: build/blocks/course-overview/script.js:3
+#: build/blocks/current-courses/editor.js:3
+#: build/blocks/current-courses/script.js:3
+msgid "Loading more courses…"
+msgstr "Laddar mer kurser…"
+
+#. translators: %1$s %2$s %3$s Numbers
+#: build/blocks/all-courses/editor.js:5 build/blocks/all-courses/script.js:5
+msgid "Showing %1$s to %2$s of %3$s entries"
+msgstr "Visar %1$s till %2$s av %3$s poster"
+
+#: build/blocks/all-courses/editor.js:5 build/blocks/all-courses/script.js:5
+msgctxt "course page"
+msgid "Previous"
+msgstr "Föregående"
+
+#: build/blocks/all-courses/editor.js:5 build/blocks/all-courses/script.js:5
+msgctxt "course page"
+msgid "Next"
+msgstr "Nästa"
+
+#: build/blocks/course-overview/editor.js:1
+#: build/blocks/course-overview/script.js:1
+#: build/blocks/course-page/editor.js:3
+msgid "Elective course"
+msgstr "Valbar kurs"
+
+#. translators: %1$s Number of the study period
+#: build/blocks/course-overview/editor.js:2
+#: build/blocks/course-overview/script.js:2
+msgid "Study period %1$s"
+msgstr "Läsperiod %1$s"
+
+#. translators: %1$s Number of the year
+#: build/blocks/course-overview/editor.js:3
+#: build/blocks/course-overview/script.js:3
+msgctxt "grade"
+msgid "Y%1$s"
+msgstr "ÅK%1$s"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Course homepage URL"
+msgstr "URL för kurshemsidan"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Course info URL"
+msgstr "URL för kursinformation"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Latest course survey URL"
+msgstr "URL för senaste kursnämndsprotokoll"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Student representatives"
+msgstr "Kursutvärderare"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Full Name"
+msgstr "Namn"
+
+#: build/blocks/course-page/editor.js:3
+msgctxt "Chalmers ID"
+msgid "CID"
+msgstr ""
+
+#: build/blocks/course-page/editor.js:3
+msgctxt "student representative"
+msgid "Add"
+msgstr "Ny"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Progammes"
+msgstr "Program"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Approximate number of participants"
+msgstr "Ungefärligt antal deltagare"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Used for sorting courses"
+msgstr "Används för att sortera kurser"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Comment"
+msgstr "Kommentar"
+
+#: build/blocks/course-page/editor.js:3
+msgid "Shown as footnote in course table"
+msgstr "Visas som fotnot i kurstabeller"
+
+#: build/blocks/course-page/editor.js:4
+msgid "Student Representatives"
+msgstr "Kursutvärderare"
+
+#: build/blocks/course-page/editor.js:4
+msgid "Is Anything Missing?"
+msgstr "Saknas något?"
+
+#. translators: %1$s Anchor attributes
+#: build/blocks/course-page/editor.js:6
+msgid "Contact <a %1$s>SNF</a>."
+msgstr "Kontakta <a %1$s>SNF</a>."
+
+#: build/blocks/course-page/editor.js:6
+msgid "Course Page"
+msgstr "Kurssida"
+
+#: build/blocks/course-page/editor.js:6
+msgid "Description"
+msgstr "Beskrivning"
+
+#: build/blocks/course-page/editor.js:6
+msgid "Description goes here."
+msgstr "Skriv beskrivning här."
+
+#: build/blocks/course-page/editor.js:6
+msgctxt "drive list heading"
+msgid "Documents"
+msgstr "Veckobladeriet"
+
+#. translators: %1$s Hyperlink to a schedule
+#: build/blocks/current-courses/editor.js:3
+#: build/blocks/current-courses/script.js:3
+msgid "(Schedule %1$s)"
+msgstr "(Schema %1$s)"
 
 #: build/blocks/drive-list/editor.js:1 build/blocks/drive-list/script.js:1
 msgid "No files to display"
 msgstr "Inga filer att visa"
+
+#: build/blocks/drive-list/editor.js:1 build/blocks/drive-list/script.js:1
+msgid "Loading files…"
+msgstr "Laddar filer…"
 
 #: build/blocks/drive-list/editor.js:1
 msgid "Basic settings"
@@ -204,28 +560,92 @@ msgid "Google API key"
 msgstr "Google API-nyckel"
 
 #: build/settings.tsx.js:5
+msgid "Enter the final date of each study period."
+msgstr "Ange det sista datumet i varje läsperiod."
+
+#. translators: %1$s Number of the study period
+#: build/settings.tsx.js:6
+msgid "Last day of study period %1$s"
+msgstr "Sista dagen i läsperiod %1$s"
+
+#: build/settings.tsx.js:6
+msgid "Month"
+msgstr "Månad"
+
+#: build/settings.tsx.js:6
+msgid "Day"
+msgstr "Dag"
+
+#: build/settings.tsx.js:6
+msgid ""
+"Enter the URL to the schedule for each class. The schedule should begin at "
+"the current week and end one year later."
+msgstr ""
+"Ange URL:en till schemat för varje klass. Schemat ska börja vid den "
+"nuvarande veckan och sluta ett år senare."
+
+#. translators: %1$s Name of program
+#: build/settings.tsx.js:8
+msgid "URL to schedule for %1$s"
+msgstr "URL till schemat för %1$s"
+
+#: build/settings.tsx.js:8
 msgid "Ftek Settings"
 msgstr "Inställningar för Ftek"
 
-#: build/settings.tsx.js:5
+#: build/settings.tsx.js:8
 msgid "The following error has occurred:"
 msgstr "Följande fel har inträffat:"
 
-#: build/settings.tsx.js:5
+#: build/settings.tsx.js:8
 msgid "OAuth"
 msgstr ""
 
-#: build/settings.tsx.js:5
+#: build/settings.tsx.js:8
 msgid "Users"
 msgstr "Användare"
 
-#: build/settings.tsx.js:5
+#: build/settings.tsx.js:8
+msgid "Google API"
+msgstr "Google API"
+
+#: build/settings.tsx.js:8
+msgid "Study Periods"
+msgstr "Läsperioder"
+
+#: build/settings.tsx.js:8
+msgid "Schedules"
+msgstr "Scheman"
+
+#: build/settings.tsx.js:8
 msgid "Settings saved!"
 msgstr "Inställningarna sparade!"
 
-#: build/settings.tsx.js:5
+#: build/settings.tsx.js:8
 msgid "Save changes"
 msgstr "Spara inställningar"
+
+#: build/blocks/all-courses/block.json src/blocks/all-courses/block.json
+msgctxt "block title"
+msgid "All courses"
+msgstr "Alla kurser"
+
+#: build/blocks/course-overview/block.json
+#: src/blocks/course-overview/block.json
+msgctxt "block title"
+msgid "Course overview"
+msgstr "Kursöversikt"
+
+#: build/blocks/course-page/block.json src/blocks/course-page/block.json
+msgctxt "block title"
+msgid "Course page"
+msgstr "Kurssida"
+
+#: build/blocks/current-courses/block.json
+#: src/blocks/current-courses/block.json
+msgctxt "block title"
+msgid "Current courses"
+msgstr "Pågående kurser"
 
 #: build/blocks/drive-list/block.json src/blocks/drive-list/block.json
 msgctxt "block title"

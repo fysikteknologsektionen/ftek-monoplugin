@@ -7,13 +7,14 @@ import {
 	WPCoursePageMeta,
 	WPPost,
 	StudyPeriod,
-	Year,
 	WPOption,
 	StudyPeriodEnd,
 	Program,
-} from '../../util/types';
+	YEARS,
+	PROGRAMS,
+} from '../../utils/types';
 import useFetchAll from '../../hooks/useFetchAll';
-import { fmtYear } from '../../util/format';
+import { fmtYear } from '../../utils/format';
 
 const CurrentCoursesList = ({
 	posts,
@@ -25,7 +26,7 @@ const CurrentCoursesList = ({
 	loading: boolean;
 }): JSX.Element => (
 	<>
-		{(['1', '2', '3'] as Year[]).map((year) => {
+		{YEARS.map((year) => {
 			const currentPosts = posts
 				.filter((post) => post.meta.ftek_course_page_meta.year === year)
 				.sort(
@@ -34,8 +35,9 @@ const CurrentCoursesList = ({
 						a.meta.ftek_course_page_meta.participant_count
 				);
 
-			const scheduleLinks = (['F', 'TM'] as Program[])
-				.filter((prog) => option?.schedules?.[prog])
+			const scheduleLinks = PROGRAMS.filter(
+				(prog) => option?.schedules?.[prog]
+			)
 				.map(
 					(prog) =>
 						`<a href="${option?.schedules?.[prog]}">${prog}</a>`
@@ -46,6 +48,7 @@ const CurrentCoursesList = ({
 				fmtYear(year) +
 				(scheduleLinks
 					? ' ' +
+					  // translators: %1$s Hyperlink to a schedule
 					  __('(Schedule %1$s)', 'ftek').replace(
 							'%1$s',
 							scheduleLinks
