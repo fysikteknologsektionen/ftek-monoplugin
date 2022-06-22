@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Main = ({ children }: { children: React.ReactNode }) => (
 	<div>{children}</div>
 );

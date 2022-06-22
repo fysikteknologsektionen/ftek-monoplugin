@@ -21,7 +21,6 @@ import {
 } from '../../utils/types';
 import { filter as filterIcon, Icon } from '@wordpress/icons';
 import useFetchAll from '../../hooks/useFetchAll';
-import React from 'react';
 import Dropdown from '../../components/dropdown';
 import CourseLinks from '../../components/course-links';
 
@@ -52,29 +51,29 @@ const intersects = <T,>(a: T[], b: T[]) => {
 	return false;
 };
 
-const genRanHex = (size: number) =>
-	[...Array(size)]
-		.map(() => Math.floor(Math.random() * 16).toString(16))
-		.join('');
-
 const withLabel =
-	<T extends { name?: string; label?: never; labelPosition?: never }>(
-		Elem: React.ComponentType<T>
+	<T,>(
+		Elem: (attr: T) => JSX.Element
 	): ((
-		attr: Omit<T, 'name'> & {
-			label?: string;
-			labelPosition?: 'before' | 'after';
-		}
+		attr: T & { label?: string; labelPosition?: 'before' | 'after' }
 	) => JSX.Element) =>
-	({ label, labelPosition = 'before', ...props }) => {
-		const name = genRanHex(8);
-		const labelElem = label && <label htmlFor={name}>{label}</label>;
+	(props) => {
+		if (!props.label) {
+			return <Elem {...props} />;
+		}
+
+		const key = props.label
+			.split('')
+			.map((v) => v.charCodeAt(0))
+			.reduce((a, v) => (a + ((a << 7) + (a << 3))) ^ v) // eslint-disable-line no-bitwise
+			.toString(16);
+
 		return (
-			<>
-				{labelPosition === 'before' && labelElem}
-				<Elem {...({ ...props, name } as T)} />
-				{labelPosition === 'after' && labelElem}
-			</>
+			<label htmlFor={key}>
+				{props?.labelPosition !== 'after' && props.label}
+				<Elem {...props} id={key} />
+				{props?.labelPosition === 'after' && props.label}
+			</label>
 		);
 	};
 
@@ -158,7 +157,7 @@ function CourseList({
 		);
 
 	return (
-		<div style={{ overflowX: 'auto' }}>
+		<div>
 			<div style={{ display: 'flex', flexWrap: 'wrap-reverse' }}>
 				<div style={{ flexGrow: 1 }}>
 					<Select
@@ -200,14 +199,7 @@ function CourseList({
 					/>
 				</div>
 			</div>
-			<div
-				style={{
-					// width: '100%',
-					// overflowX: 'auto',
-					// overflowY: 'hidden',
-					whiteSpace: 'nowrap',
-				}}
-			>
+			<div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
 				<table style={{ width: '100%' }}>
 					<thead>
 						<tr>

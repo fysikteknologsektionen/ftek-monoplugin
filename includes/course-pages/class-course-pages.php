@@ -48,11 +48,11 @@ class Course_Pages {
 	 * @param mixed  $meta_value Metadata value.
 	 */
 	public static function update_post_slug( ?bool $check, int $object_id, string $meta_key, $meta_value ): ?bool {
-		if ( 'wp_ftek_course_pages_code' === $meta_key && $meta_value ) {
+		if ( 'ftek_course_page_meta' === $meta_key && $meta_value ) {
 			wp_update_post(
 				array(
 					'ID'        => $object_id,
-					'post_name' => $meta_value,
+					'post_name' => $meta_value['code'],
 				)
 			);
 		}
@@ -86,19 +86,19 @@ class Course_Pages {
 					'name'                   => __( 'Course pages', 'ftek' ),
 					'singular_name'          => __( 'Course page', 'ftek' ),
 					'add_new'                => _x( 'Add new', 'course page', 'ftek' ),
-					'add_new_item'           => __( 'Add New Course page', 'ftek' ),
-					'edit_item'              => __( 'Edit Course page', 'ftek' ),
-					'new_item'               => __( 'New Course page', 'ftek' ),
-					'view_item'              => __( 'View Course page', 'ftek' ),
-					'view_items'             => __( 'View Course pages', 'ftek' ),
-					'search_items'           => __( 'Search Course pages', 'ftek' ),
-					'not_found'              => __( 'No Course pages found', 'ftek' ),
-					'not_found_in_trash'     => __( 'No Course pages found in Trash', 'ftek' ),
-					'all_items'              => __( 'All Course pages', 'ftek' ),
+					'add_new_item'           => __( 'Add new course page', 'ftek' ),
+					'edit_item'              => __( 'Edit course page', 'ftek' ),
+					'new_item'               => __( 'New course page', 'ftek' ),
+					'view_item'              => __( 'View course page', 'ftek' ),
+					'view_items'             => __( 'View course pages', 'ftek' ),
+					'search_items'           => __( 'Search course pages', 'ftek' ),
+					'not_found'              => __( 'No course pages found', 'ftek' ),
+					'not_found_in_trash'     => __( 'No course pages found in Trash', 'ftek' ),
+					'all_items'              => __( 'All course pages', 'ftek' ),
 					'attributes'             => __( 'Course page Attributes', 'ftek' ),
-					'insert_into_item'       => __( 'Insert into Course page', 'ftek' ),
-					'uploaded_to_this_item'  => __( 'Uploaded to this Course page', 'ftek' ),
-					'filter_items_list'      => __( 'Filter Course page list', 'ftek' ),
+					'insert_into_item'       => __( 'Insert into course page', 'ftek' ),
+					'uploaded_to_this_item'  => __( 'Uploaded to this course page', 'ftek' ),
+					'filter_items_list'      => __( 'Filter course page list', 'ftek' ),
 					'items_list_navigation'  => __( 'Course page list navigation', 'ftek' ),
 					'items_list'             => __( 'Course page list', 'ftek' ),
 					'item_published'         => __( 'Course page published', 'ftek' ),
@@ -106,7 +106,7 @@ class Course_Pages {
 					'item_scheduled'         => __( 'Course page scheduled', 'ftek' ),
 					'item_updated'           => __( 'Course page updated', 'ftek' ),
 					'item_link'              => __( 'Course page link', 'ftek' ),
-					'item_link_description'  => __( 'A link to a Course page', 'ftek' ),
+					'item_link_description'  => __( 'A link to a course page', 'ftek' ),
 				),
 				'description'         => __( 'Information about a course', 'ftek' ),
 				'public'              => false,
@@ -126,8 +126,17 @@ class Course_Pages {
 					'with_front' => false,
 				),
 				'template'            => array(
-					array( 'ftek/course-page' ),
+					array(
+						'ftek/course-page',
+						array(
+							'lock' => array(
+								'move'   => true,
+								'remove' => true,
+							),
+						),
+					),
 				),
+				'template_lock'       => 'all',
 			)
 		);
 

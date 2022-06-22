@@ -9,7 +9,6 @@ import {
 	StudyPeriod,
 	WPOption,
 	StudyPeriodEnd,
-	Program,
 	YEARS,
 	PROGRAMS,
 } from '../../utils/types';

@@ -43,12 +43,13 @@ function _get_available_roles(): array {
 function add_global_js_variable( string $handle ): void {
 	wp_add_inline_script(
 		$handle,
-		'const ftekInline = ' . wp_json_encode(
+		'window.ftekInline = ' . wp_json_encode(
 			array(
 				'roles'            => _get_available_roles(),
 				'oauthRedirectUri' => OAuth::get_redirect_uri(),
 				'assets'           => array(
 					'openBook' => plugins_url( '/assets/open-book.svg', PLUGIN_FILE ),
+					'group'    => plugins_url( '/assets/group.svg', PLUGIN_FILE ),
 				),
 			)
 		),
@@ -139,3 +140,6 @@ Drive_List::init();
 
 // Enable course pages.
 Course_Pages::init();
+
+// Enable group/society pages.
+Group_Pages::init();

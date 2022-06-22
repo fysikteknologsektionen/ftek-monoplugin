@@ -4,8 +4,7 @@ import {
 	InnerBlocks,
 	InspectorControls,
 } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 import {
 	PanelBody,
 	PanelRow,
@@ -22,6 +21,7 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 
 import SVGImage from '../../components/svg-image';
 import SectionedPage from '../../components/sectioned-page';
+import CourseLinks from '../../components/course-links';
 
 import {
 	fmtCourseCode,
@@ -33,18 +33,16 @@ import {
 import {
 	CoursePageMeta,
 	Inline,
-	Program,
 	PROGRAMS,
-	StudyPeriod,
 	STUDY_PERIODS,
 	WPBlock,
 	WPCoursePageMeta,
 	Year,
 	YEARS,
 } from '../../utils/types';
+import usePostMeta from '../../hooks/usePostMeta';
 
 import metadata from './block.json';
-import CourseLinks from '../../components/course-links';
 
 declare const ftekInline: Inline;
 
@@ -54,29 +52,6 @@ const icon = (
 		style={{ width: 24, height: 24, marginLeft: 12 }}
 	/>
 );
-
-const useMeta = ():
-	| false
-	| [CoursePageMeta, (m: Partial<CoursePageMeta>) => void] => {
-	const postType = useSelect(
-		(select) => select('core/editor').getCurrentPostType(),
-		[]
-	);
-	const [wpCoursePageMeta, setWpCoursePageMeta]: [
-		WPCoursePageMeta,
-		(m: WPCoursePageMeta) => void
-	] = useEntityProp('postType', postType, 'meta');
-
-	if (postType !== 'course-page') {
-		return false;
-	}
-
-	const meta = wpCoursePageMeta.ftek_course_page_meta;
-	const updateMeta = (m: Partial<CoursePageMeta>) =>
-		setWpCoursePageMeta({ ftek_course_page_meta: { ...meta, ...m } });
-
-	return [meta, updateMeta];
-};
 
 const Controls = ({
 	meta,
@@ -378,6 +353,10 @@ const Edit = ({
 	attributes: CoursePageMeta;
 	setAttributes: (m: CoursePageMeta) => void;
 }): JSX.Element => {
+	// This is a hack which forces the template to appear valid.
+	// See https://github.com/WordPress/gutenberg/issues/11681
+	useDispatch('core/block-editor').setTemplateValidity(true);
+
 	const hasDriveList = !!useSelect(
 		(select) => select('core/blocks').getBlockType('ftek/drive-list'),
 		[]
@@ -417,7 +396,10 @@ const Edit = ({
 	const updateAttributes = (m: Partial<CoursePageMeta>) =>
 		setAttributes({ ...meta, ...m });
 
-	const maybeMeta = useMeta();
+	const maybeMeta = usePostMeta<CoursePageMeta, WPCoursePageMeta>(
+		'ftek_course_page_meta',
+		'course-page'
+	);
 	const [meta, updateMeta] = maybeMeta
 		? maybeMeta
 		: [attributes, updateAttributes];
@@ -430,20 +412,18 @@ const Edit = ({
 		<div {...useBlockProps()}>
 			<InspectorControls>
 				<PanelBody
-					title={__('Course Page', 'ftek')}
+					title={__('Course page', 'ftek')}
 					initialOpen={true}
-					icon={
-						<SVGImage
-							url={ftekInline.assets.openBook}
-							style={{ width: 24, height: 24, marginLeft: 12 }}
-						/>
-					}
+					icon={icon}
 				>
 					<Controls meta={meta} updateMeta={updateMeta} />
 				</PanelBody>
 			</InspectorControls>
 			<CoursePage meta={meta}>
-				<InnerBlocks template={innerBlocksTemplate} />
+				<InnerBlocks
+					template={innerBlocksTemplate}
+					templateLock={false}
+				/>
 			</CoursePage>
 		</div>
 	);
@@ -458,7 +438,10 @@ const Save = ({ attributes }: { attributes: CoursePageMeta }): JSX.Element => (
 );
 
 const DocumentSettings = () => {
-	const maybeMeta = useMeta();
+	const maybeMeta = usePostMeta<CoursePageMeta, WPCoursePageMeta>(
+		'ftek_course_page_meta',
+		'course-page'
+	);
 	if (!maybeMeta) {
 		return <></>;
 	}
@@ -466,7 +449,7 @@ const DocumentSettings = () => {
 
 	return (
 		<PluginDocumentSettingPanel
-			title={__('Course Page', 'ftek')}
+			title={__('Course page', 'ftek')}
 			opened={true}
 			icon={icon}
 		>
@@ -475,7 +458,7 @@ const DocumentSettings = () => {
 	);
 };
 
-registerPlugin('ftek-monoplugin', {
+registerPlugin('couse-page', {
 	render: DocumentSettings,
 	icon,
 });

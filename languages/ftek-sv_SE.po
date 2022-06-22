@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Monoplugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-06-20T17:06:11+00:00\n"
+"POT-Creation-Date: 2022-06-22T19:20:08+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,6 +48,7 @@ msgstr "Kurssidor"
 
 #: includes/course-pages/class-course-pages.php:87
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
+#: build/blocks/course-page/editor.js:6
 msgid "Course page"
 msgstr "Kurssida"
 
@@ -57,39 +58,39 @@ msgid "Add new"
 msgstr "Skapa ny"
 
 #: includes/course-pages/class-course-pages.php:89
-msgid "Add New Course page"
+msgid "Add new course page"
 msgstr "Skapa ny kurssida"
 
 #: includes/course-pages/class-course-pages.php:90
-msgid "Edit Course page"
+msgid "Edit course page"
 msgstr "Redigera kurssida"
 
 #: includes/course-pages/class-course-pages.php:91
-msgid "New Course page"
+msgid "New course page"
 msgstr "Ny kurssida"
 
 #: includes/course-pages/class-course-pages.php:92
-msgid "View Course page"
+msgid "View course page"
 msgstr "Visa kurssida"
 
 #: includes/course-pages/class-course-pages.php:93
-msgid "View Course pages"
+msgid "View course pages"
 msgstr "Visa kurssidor"
 
 #: includes/course-pages/class-course-pages.php:94
-msgid "Search Course pages"
+msgid "Search course pages"
 msgstr "Sök kurssidor"
 
 #: includes/course-pages/class-course-pages.php:95
-msgid "No Course pages found"
+msgid "No course pages found"
 msgstr "Inga kurssidor hittades"
 
 #: includes/course-pages/class-course-pages.php:96
-msgid "No Course pages found in Trash"
+msgid "No course pages found in Trash"
 msgstr "Inga kurssidor hittades i papperskorgen"
 
 #: includes/course-pages/class-course-pages.php:97
-msgid "All Course pages"
+msgid "All course pages"
 msgstr "Alla kurssidor"
 
 #: includes/course-pages/class-course-pages.php:98
@@ -97,15 +98,15 @@ msgid "Course page Attributes"
 msgstr "Kurssidoattribut"
 
 #: includes/course-pages/class-course-pages.php:99
-msgid "Insert into Course page"
+msgid "Insert into course page"
 msgstr "Infoga i kurssida"
 
 #: includes/course-pages/class-course-pages.php:100
-msgid "Uploaded to this Course page"
+msgid "Uploaded to this course page"
 msgstr "Uppladdad till denna kurssida"
 
 #: includes/course-pages/class-course-pages.php:101
-msgid "Filter Course page list"
+msgid "Filter course page list"
 msgstr "Filtrera kurssidolista"
 
 #: includes/course-pages/class-course-pages.php:102
@@ -137,12 +138,118 @@ msgid "Course page link"
 msgstr "Länk till kurssida"
 
 #: includes/course-pages/class-course-pages.php:109
-msgid "A link to a Course page"
+msgid "A link to a course page"
 msgstr "En länk till en kurssida"
 
 #: includes/course-pages/class-course-pages.php:111
 msgid "Information about a course"
 msgstr "Information om en kurs"
+
+#: includes/group-pages/class-group-pages.php:45
+msgid "Group pages"
+msgstr "Föreningssidor"
+
+#: includes/group-pages/class-group-pages.php:46
+msgid "Group page"
+msgstr "Föreningssida"
+
+#: includes/group-pages/class-group-pages.php:47
+msgctxt "group page"
+msgid "Add new"
+msgstr "Skapa ny"
+
+#: includes/group-pages/class-group-pages.php:48
+msgid "Add new group page"
+msgstr "Skapa ny föreningssida"
+
+#: includes/group-pages/class-group-pages.php:49
+msgid "Edit group page"
+msgstr "Redigera föreningssida"
+
+#: includes/group-pages/class-group-pages.php:50
+msgid "New group page"
+msgstr "Ny föreningssida"
+
+#: includes/group-pages/class-group-pages.php:51
+msgid "View group page"
+msgstr "Visa föreningssida"
+
+#: includes/group-pages/class-group-pages.php:52
+msgid "View group pages"
+msgstr "Visa föreningssidor"
+
+#: includes/group-pages/class-group-pages.php:53
+msgid "Search group pages"
+msgstr "Sök föreningssidor"
+
+#: includes/group-pages/class-group-pages.php:54
+msgid "No group pages found"
+msgstr "Inga föreningssidor hittades"
+
+#: includes/group-pages/class-group-pages.php:55
+msgid "No group pages found in Trash"
+msgstr "Inga föreningssidor hittades i papperskorgen"
+
+#: includes/group-pages/class-group-pages.php:56
+msgid "All group pages"
+msgstr "Alla föreningssidor"
+
+#: includes/group-pages/class-group-pages.php:57
+msgid "Group page Attributes"
+msgstr "Föreningssidoattribut"
+
+#: includes/group-pages/class-group-pages.php:58
+msgid "Insert into group page"
+msgstr "Infoga i föreningssida"
+
+#: includes/group-pages/class-group-pages.php:59
+msgid "Uploaded to this group page"
+msgstr "Uppladdad till denna föreningssida"
+
+#: includes/group-pages/class-group-pages.php:60
+msgid "Filter group page list"
+msgstr "Filtrera föreningssidolista"
+
+#: includes/group-pages/class-group-pages.php:61
+msgid "Group page list navigation"
+msgstr "Navigera föreningssidolista"
+
+#: includes/group-pages/class-group-pages.php:62
+msgid "Group page list"
+msgstr "Föreningssidolista"
+
+#: includes/group-pages/class-group-pages.php:63
+msgid "Group page published"
+msgstr "Föreningssida publicerad"
+
+#: includes/group-pages/class-group-pages.php:64
+msgid "Group page reverted to draft"
+msgstr "Föreningssida återställd från utkast"
+
+#: includes/group-pages/class-group-pages.php:65
+msgid "Group page scheduled"
+msgstr "Föreningssida schemalagd"
+
+#: includes/group-pages/class-group-pages.php:66
+msgid "Group page updated"
+msgstr "Föreningssida uppdaterad"
+
+#: includes/group-pages/class-group-pages.php:67
+msgid "Group page link"
+msgstr "Länk till föreningssida"
+
+#: includes/group-pages/class-group-pages.php:68
+msgid "A link to a group page"
+msgstr "En länk till en föreningssida"
+
+#: includes/group-pages/class-group-pages.php:70
+msgid "Information about a group"
+msgstr "Information om en förening"
+
+#. translators: %1$s Name of group.
+#: includes/group-pages/class-group-pages.php:156
+msgid "Posts related to %1$s"
+msgstr "Inlägg relaterade till %1$s"
 
 #: includes/login/class-login.php:31 includes/login/class-login.php:84
 msgid "OAuth login was not possible since required settings are unset"
@@ -232,7 +339,7 @@ msgstr "Årskurs %1$s"
 #: build/blocks/course-page/editor.js:3
 msgctxt "study period"
 msgid "SP%1$s"
-msgstr ""
+msgstr "LP%1$s"
 
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
 #: build/blocks/course-page/editor.js:3
@@ -241,22 +348,22 @@ msgid "SP"
 msgstr "LP"
 
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
-#: build/blocks/course-page/editor.js:3
+#: build/blocks/course-page/editor.js:1
 msgid "Course homepage"
 msgstr "Kurshemsida"
 
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
-#: build/blocks/course-page/editor.js:3
+#: build/blocks/course-page/editor.js:1
 msgid "General info"
 msgstr "Allmän information"
 
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
-#: build/blocks/course-page/editor.js:3
+#: build/blocks/course-page/editor.js:1
 msgid "Latest survey"
 msgstr "Senaste kursnämndsprotokoll"
 
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
-#: build/blocks/course-page/editor.js:3
+#: build/blocks/course-page/editor.js:1
 msgid "Exam statistics"
 msgstr "Tentastatistik"
 
@@ -436,15 +543,13 @@ msgstr "Saknas något?"
 msgid "Contact <a %1$s>SNF</a>."
 msgstr "Kontakta <a %1$s>SNF</a>."
 
-#: build/blocks/course-page/editor.js:6
-msgid "Course Page"
-msgstr "Kurssida"
-
-#: build/blocks/course-page/editor.js:6
+#: build/blocks/course-page/editor.js:6 build/blocks/group-page/editor.js:1
+#: build/blocks/group-page/script.js:1
 msgid "Description"
 msgstr "Beskrivning"
 
-#: build/blocks/course-page/editor.js:6
+#: build/blocks/course-page/editor.js:6 build/blocks/group-page/editor.js:1
+#: build/blocks/group-page/script.js:1
 msgid "Description goes here."
 msgstr "Skriv beskrivning här."
 
@@ -490,6 +595,38 @@ msgstr "Ladda ned filer"
 #: build/blocks/drive-list/editor.js:1
 msgid "Download files or open in browser"
 msgstr "Ladda ned filer eller öppna dem i webbläsaren"
+
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+msgid "Loading…"
+msgstr "Laddar…"
+
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+msgid "More…"
+msgstr "Fler…"
+
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+msgid "Related pages"
+msgstr "Relaterade sidor"
+
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+msgid "Latest posts"
+msgstr "Senaste inlägg"
+
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+msgid "Logo"
+msgstr "Logga"
+
+#: build/blocks/group-page/editor.js:1
+msgid "Select logo"
+msgstr "Välj logga"
+
+#: build/blocks/group-page/editor.js:1
+msgid "Remove logo"
+msgstr "Ta bort logga"
+
+#: build/blocks/group-page/editor.js:1
+msgid "Group page"
+msgstr "Föreningssida"
 
 #: build/settings.tsx.js:1
 msgid ""
@@ -671,3 +808,8 @@ msgstr ""
 msgctxt "block keyword"
 msgid "file"
 msgstr "fil"
+
+#: build/blocks/group-page/block.json src/blocks/group-page/block.json
+msgctxt "block title"
+msgid "Group page"
+msgstr "Föreningssida"

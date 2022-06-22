@@ -4,11 +4,11 @@ import { addQueryArgs } from '@wordpress/url';
 
 const PAGE_SIZE = 100;
 
-export default function useFetchAll<T>(
+const useFetchAll = <T>(
 	options: Omit<APIFetchOptions, 'method' | 'parse'> &
 		Required<Pick<APIFetchOptions, 'path'>>,
 	deps?: React.DependencyList
-): [T[], boolean] {
+): [T[], boolean] => {
 	const [data, setData] = useState<T[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
 
@@ -35,4 +35,6 @@ export default function useFetchAll<T>(
 	}, [data, deps]);
 
 	return [data, loading];
-}
+};
+
+export default useFetchAll;

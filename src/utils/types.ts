@@ -33,6 +33,7 @@ export type Inline = {
 	oauthRedirectUri: string;
 	assets: {
 		openBook: string;
+		group: string;
 	};
 };
 
@@ -55,10 +56,25 @@ export type CoursePageMeta = {
 
 export type WPCoursePageMeta = { ftek_course_page_meta: CoursePageMeta };
 
-export type WPPost<T> = {
+export type GroupPageMeta = {
+	logo_url: string;
+	group_tag_id: number;
+};
+export type WPGroupPageMeta = { ftek_group_page_meta: GroupPageMeta };
+
+export type WPPost<T = unknown> = {
 	meta: T;
 	link: string;
 	title: {
 		rendered: string;
 	};
+};
+
+export type WPTag = {
+	id: number;
+	count: number;
+	description: string;
+	link: string;
+	name: string;
+	slug: string;
 };

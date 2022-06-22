@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from '@wordpress/element';
-import { CSSProperties } from 'react';
 
 const Menu = ({
 	Button,
@@ -9,7 +8,7 @@ const Menu = ({
 	children: React.ReactNode;
 }): JSX.Element => {
 	const [expanded, setExpanded] = useState(false);
-	const [position, setPosition] = useState<CSSProperties>({});
+	const [position, setPosition] = useState<React.CSSProperties>({});
 	const dropdownRef = useRef<HTMLDivElement>();
 	const spanRef = useRef<HTMLSpanElement>();
 

@@ -1,0 +1,19 @@
+{
+	"apiVersion": 2,
+	"name": "ftek/group-page",
+	"title": "Group page",
+	"category": "design",
+	"textdomain": "ftek",
+	"attributes": {
+		"logo_url": {
+			"type": "string",
+			"default": ""
+		},
+		"group_tag_id": {
+			"type": "number",
+			"default": -1
+		}
+	},
+	"editorScript": "file:editor.js",
+	"script": "file:script.js"
+}
