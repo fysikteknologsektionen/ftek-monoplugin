@@ -79,31 +79,32 @@ export const AsideDynamicArea = ({
 	const relatedPages = <h3>{__('Related pages', 'ftek')}</h3>;
 	const latestPosts = <h3>{__('Latest posts', 'ftek')}</h3>;
 
+	if (save) {
+		return (
+			<>
+				<LoadingPosts heading={relatedPages} />
+				<LoadingPosts heading={latestPosts} />
+			</>
+		);
+	}
+
 	if (attributes.group_tag_id <= 0) {
 		return <></>;
 	}
 
 	return (
 		<>
-			{save ? (
-				<LoadingPosts heading={relatedPages} />
-			) : (
-				<PostsByTag
-					heading={relatedPages}
-					postType="pages"
-					tagId={attributes.group_tag_id}
-				/>
-			)}
-			{save ? (
-				<LoadingPosts heading={latestPosts} />
-			) : (
-				<PostsByTag
-					heading={latestPosts}
-					postType="posts"
-					tagId={attributes.group_tag_id}
-					limit={4}
-				/>
-			)}
+			<PostsByTag
+				heading={relatedPages}
+				postType="pages"
+				tagId={attributes.group_tag_id}
+			/>
+			<PostsByTag
+				heading={latestPosts}
+				postType="posts"
+				tagId={attributes.group_tag_id}
+				limit={4}
+			/>
 		</>
 	);
 };

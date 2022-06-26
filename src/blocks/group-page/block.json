@@ -11,7 +11,7 @@
 		},
 		"group_tag_id": {
 			"type": "number",
-			"default": -1
+			"default": -2
 		}
 	},
 	"editorScript": "file:editor.js",

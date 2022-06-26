@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Monoplugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-06-22T19:20:08+00:00\n"
+"POT-Creation-Date: 2022-06-26T11:16:40+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -145,109 +145,110 @@ msgstr "En länk till en kurssida"
 msgid "Information about a course"
 msgstr "Information om en kurs"
 
-#: includes/group-pages/class-group-pages.php:45
+#: includes/group-pages/class-group-pages.php:55
 msgid "Group pages"
 msgstr "Föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:46
+#: includes/group-pages/class-group-pages.php:56
+#: build/blocks/group-page/editor.js:1
 msgid "Group page"
 msgstr "Föreningssida"
 
-#: includes/group-pages/class-group-pages.php:47
+#: includes/group-pages/class-group-pages.php:57
 msgctxt "group page"
 msgid "Add new"
 msgstr "Skapa ny"
 
-#: includes/group-pages/class-group-pages.php:48
+#: includes/group-pages/class-group-pages.php:58
 msgid "Add new group page"
 msgstr "Skapa ny föreningssida"
 
-#: includes/group-pages/class-group-pages.php:49
+#: includes/group-pages/class-group-pages.php:59
 msgid "Edit group page"
 msgstr "Redigera föreningssida"
 
-#: includes/group-pages/class-group-pages.php:50
+#: includes/group-pages/class-group-pages.php:60
 msgid "New group page"
 msgstr "Ny föreningssida"
 
-#: includes/group-pages/class-group-pages.php:51
+#: includes/group-pages/class-group-pages.php:61
 msgid "View group page"
 msgstr "Visa föreningssida"
 
-#: includes/group-pages/class-group-pages.php:52
+#: includes/group-pages/class-group-pages.php:62
 msgid "View group pages"
 msgstr "Visa föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:53
+#: includes/group-pages/class-group-pages.php:63
 msgid "Search group pages"
 msgstr "Sök föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:54
+#: includes/group-pages/class-group-pages.php:64
 msgid "No group pages found"
 msgstr "Inga föreningssidor hittades"
 
-#: includes/group-pages/class-group-pages.php:55
+#: includes/group-pages/class-group-pages.php:65
 msgid "No group pages found in Trash"
 msgstr "Inga föreningssidor hittades i papperskorgen"
 
-#: includes/group-pages/class-group-pages.php:56
+#: includes/group-pages/class-group-pages.php:66
 msgid "All group pages"
 msgstr "Alla föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:57
+#: includes/group-pages/class-group-pages.php:67
 msgid "Group page Attributes"
 msgstr "Föreningssidoattribut"
 
-#: includes/group-pages/class-group-pages.php:58
+#: includes/group-pages/class-group-pages.php:68
 msgid "Insert into group page"
 msgstr "Infoga i föreningssida"
 
-#: includes/group-pages/class-group-pages.php:59
+#: includes/group-pages/class-group-pages.php:69
 msgid "Uploaded to this group page"
 msgstr "Uppladdad till denna föreningssida"
 
-#: includes/group-pages/class-group-pages.php:60
+#: includes/group-pages/class-group-pages.php:70
 msgid "Filter group page list"
 msgstr "Filtrera föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:61
+#: includes/group-pages/class-group-pages.php:71
 msgid "Group page list navigation"
 msgstr "Navigera föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:62
+#: includes/group-pages/class-group-pages.php:72
 msgid "Group page list"
 msgstr "Föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:63
+#: includes/group-pages/class-group-pages.php:73
 msgid "Group page published"
 msgstr "Föreningssida publicerad"
 
-#: includes/group-pages/class-group-pages.php:64
+#: includes/group-pages/class-group-pages.php:74
 msgid "Group page reverted to draft"
 msgstr "Föreningssida återställd från utkast"
 
-#: includes/group-pages/class-group-pages.php:65
+#: includes/group-pages/class-group-pages.php:75
 msgid "Group page scheduled"
 msgstr "Föreningssida schemalagd"
 
-#: includes/group-pages/class-group-pages.php:66
+#: includes/group-pages/class-group-pages.php:76
 msgid "Group page updated"
 msgstr "Föreningssida uppdaterad"
 
-#: includes/group-pages/class-group-pages.php:67
+#: includes/group-pages/class-group-pages.php:77
 msgid "Group page link"
 msgstr "Länk till föreningssida"
 
-#: includes/group-pages/class-group-pages.php:68
+#: includes/group-pages/class-group-pages.php:78
 msgid "A link to a group page"
 msgstr "En länk till en föreningssida"
 
-#: includes/group-pages/class-group-pages.php:70
+#: includes/group-pages/class-group-pages.php:80
 msgid "Information about a group"
 msgstr "Information om en förening"
 
 #. translators: %1$s Name of group.
-#: includes/group-pages/class-group-pages.php:156
+#: includes/group-pages/class-group-pages.php:170
 msgid "Posts related to %1$s"
 msgstr "Inlägg relaterade till %1$s"
 
@@ -543,8 +544,8 @@ msgstr "Saknas något?"
 msgid "Contact <a %1$s>SNF</a>."
 msgstr "Kontakta <a %1$s>SNF</a>."
 
-#: build/blocks/course-page/editor.js:6 build/blocks/group-page/editor.js:1
-#: build/blocks/group-page/script.js:1
+#: build/blocks/course-page/editor.js:6 build/blocks/group-member/editor.js:1
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
 msgid "Description"
 msgstr "Beskrivning"
 
@@ -572,7 +573,7 @@ msgstr "Inga filer att visa"
 msgid "Loading files…"
 msgstr "Laddar filer…"
 
-#: build/blocks/drive-list/editor.js:1
+#: build/blocks/drive-list/editor.js:1 build/blocks/group-member/editor.js:1
 msgid "Basic settings"
 msgstr "Grundläggande inställningar"
 
@@ -595,6 +596,73 @@ msgstr "Ladda ned filer"
 #: build/blocks/drive-list/editor.js:1
 msgid "Download files or open in browser"
 msgstr "Ladda ned filer eller öppna dem i webbläsaren"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Profile picture"
+msgstr "Profilbild"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Firstname"
+msgstr "Förnamn"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Lastname"
+msgstr "Efternamn"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "User not found"
+msgstr "Användaren hittades inte"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "user@ftek.se"
+msgstr "post@ftek.se"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Post"
+msgstr "Post"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Nickname"
+msgstr "Smeknamn"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Loading member…"
+msgstr "Laddar medlem…"
+
+#: build/blocks/group-member/editor.js:1
+msgid "Connect to a WordPress user"
+msgstr "Anslut till en WordPress-användare"
+
+#: build/blocks/group-member/editor.js:1
+msgid ""
+"WordPress users may in turn be linked to e.g. Google accounts through OAuth."
+msgstr ""
+"WordPress-anvandare kan i sin tur vara kopplade till t.ex. Google-konton "
+"genom OAuth."
+
+#: build/blocks/group-member/editor.js:1
+msgid "Email"
+msgstr "E-mejl"
+
+#: build/blocks/group-member/editor.js:1
+msgid "First name"
+msgstr "Förnamn"
+
+#: build/blocks/group-member/editor.js:1
+msgid "Last name"
+msgstr "Efternamn"
+
+#: build/blocks/group-member/editor.js:1
+msgid "Nick name"
+msgstr "Smeknamn"
+
+#: build/blocks/group-member/editor.js:1
+msgid "Select picture"
+msgstr "Välj profilbild"
+
+#: build/blocks/group-member/editor.js:1
+msgid "Remove picture"
+msgstr "Ta bort profilbild"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
 msgid "Loading…"
@@ -623,10 +691,6 @@ msgstr "Välj logga"
 #: build/blocks/group-page/editor.js:1
 msgid "Remove logo"
 msgstr "Ta bort logga"
-
-#: build/blocks/group-page/editor.js:1
-msgid "Group page"
-msgstr "Föreningssida"
 
 #: build/settings.tsx.js:1
 msgid ""
@@ -808,6 +872,11 @@ msgstr ""
 msgctxt "block keyword"
 msgid "file"
 msgstr "fil"
+
+#: build/blocks/group-member/block.json src/blocks/group-member/block.json
+msgctxt "block title"
+msgid "Group member"
+msgstr "Föreningsmedlem"
 
 #: build/blocks/group-page/block.json src/blocks/group-page/block.json
 msgctxt "block title"

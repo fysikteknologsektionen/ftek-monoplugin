@@ -1,0 +1,43 @@
+{
+	"apiVersion": 2,
+	"name": "ftek/group-member",
+	"title": "Group member",
+	"category": "widget",
+	"textdomain": "ftek",
+	"attributes": {
+		"email": {
+			"type": "string",
+			"default": ""
+		},
+		"post": {
+			"type": "string",
+			"default": ""
+		},
+		"wordpress_user": {
+			"type": "boolean",
+			"default": true
+		},
+		"first_name": {
+			"type": "string",
+			"default": ""
+		},
+		"last_name": {
+			"type": "string",
+			"default": ""
+		},
+		"nick_name": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": ""
+		},
+		"picture": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:editor.js",
+	"script": "file:script.js"
+}

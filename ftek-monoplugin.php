@@ -107,6 +107,7 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 function activate() {
 	Options::activate();
 	Course_Pages::activate();
+	Group_Pages::activate();
 }
 
 /**

@@ -68,9 +68,7 @@ class Drive_List {
 						'required' => true,
 					),
 				),
-				'permission_callback' => function(): bool {
-					return current_user_can( 'edit_pages' ) || current_user_can( 'edit_posts' );
-				},
+				'permission_callback' => '__return_true',
 			)
 		);
 	}

@@ -16,7 +16,7 @@ class Profile {
 	 * Initialize resources
 	 */
 	public static function init() {
-		add_filter( 'get_avatar', array( self::class, 'get_avatar' ), 9, 5 );
+		add_filter( 'get_avatar_url', array( self::class, 'get_avatar_url' ), 9, 2 );
 		add_filter( 'show_password_fields', array( self::class, 'show_password_fields' ), 2, 10 );
 		add_filter( 'allow_password_reset', array( self::class, 'allow_password_reset' ), 2, 10 );
 		add_filter( 'user_profile_picture_description', array( self::class, 'user_profile_picture_description' ), 2, 10 );
@@ -24,15 +24,12 @@ class Profile {
 	}
 
 	/**
-	 * Filter for the get_avatar hook
+	 * Filter for the get_avatar_url hook
 	 *
-	 * @param string $avatar HTML for the user's avatar.
+	 * @param string $url         The URL of the avatar.
 	 * @param mixed  $id_or_email The avatar to retrieve.
-	 * @param int    $size Square avatar width and height in pixels to retrieve.
-	 * @param string $default URL for the default image or a default type.
-	 * @param string $alt Alternative text to use in the avatar image tag.
 	 */
-	public static function get_avatar( string $avatar, $id_or_email, int $size, string $default, string $alt ): string {
+	public static function get_avatar_url( string $url, $id_or_email ): string {
 		if ( is_numeric( $id_or_email ) ) {
 			$user_id = (int) $id_or_email;
 		} elseif ( is_object( $id_or_email ) ) {
@@ -43,26 +40,22 @@ class Profile {
 			} elseif ( ! empty( $id_or_email->post_author ) ) {
 				$user_id = (int) $id_or_email->post_author;
 			} else {
-				return $avatar;
+				return $url;
 			}
 		} else {
 			$user = get_user_by( 'email', $id_or_email );
 			if ( ! $user ) {
-				return $avatar;
+				return $url;
 			}
 			$user_id = $user->ID;
 		}
 
 		$picture = User_Meta::get( $user_id, 'picture' );
 		if ( empty( $picture ) ) {
-			return $avatar;
+			return $url;
 		}
 
-		ob_start();
-		?>
-		<img class="avatar avatar-<?php echo esc_attr( $size ); ?> photo" loading="lazy" src="<?php echo esc_attr( $picture ); ?>" width="<?php echo esc_attr( $size ); ?>" height="<?php echo esc_attr( $size ); ?>" alt="<?php echo esc_attr( $alt ); ?>" />
-		<?php
-		return ob_get_clean();
+		return $picture;
 	}
 
 	/**

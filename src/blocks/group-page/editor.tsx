@@ -41,7 +41,9 @@ const Controls = ({
 				onSelect={(media) => updateMeta({ logo_url: media.url })}
 				allowedTypes={['image']}
 				render={({ open }) => (
-					<Button onClick={open}>{__('Select logo', 'ftek')}</Button>
+					<Button variant="secondary" onClick={open}>
+						{__('Select logo', 'ftek')}
+					</Button>
 				)}
 			/>
 			{meta.logo_url && (

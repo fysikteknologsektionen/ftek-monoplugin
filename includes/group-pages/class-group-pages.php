@@ -24,6 +24,16 @@ class Group_Pages {
 		add_action( 'init', array( self::class, 'register_post_type' ) );
 		add_action( 'init', array( self::class, 'add_tag_to_pages' ) );
 		add_action( 'wp_insert_post_data', array( self::class, 'update_tag' ), 10, 2 );
+
+		Group_Blocks::init();
+	}
+
+	/**
+	 * Updates the rewrite rules used to assign nicer urls to group pages
+	 */
+	public static function activate(): void {
+		self::register_post_type();
+		flush_rewrite_rules();
 	}
 
 	/**
@@ -80,6 +90,10 @@ class Group_Pages {
 				'capability_type'     => 'page',
 				'delete_with_user'    => false,
 				'supports'            => array( 'editor', 'custom-fields', 'title' ),
+				'rewrite'             => array(
+					'slug'       => '/',
+					'with_front' => false,
+				),
 				'template'            => array(
 					array(
 						'ftek/group-page',
@@ -146,7 +160,7 @@ class Group_Pages {
 		$meta         = get_post_meta( $postarr['ID'], 'ftek_group_page_meta', true );
 		$group_tag_id = $meta['group_tag_id'] ?? -1;
 
-		if ( ! $data['post_title'] || ! $data['post_name'] ) {
+		if ( ! $data['post_title'] ) {
 			return $data;
 		}
 
@@ -154,7 +168,7 @@ class Group_Pages {
 			'name'        => $data['post_title'],
 			// translators: %1$s Name of group.
 			'description' => sprintf( __( 'Posts related to %1$s', 'ftek' ), $data['post_title'] ),
-			'slug'        => $data['post_name'],
+			'slug'        => sanitize_title_with_dashes( $data['post_title'] ),
 		);
 
 		if ( $group_tag_id >= 0 ) {
@@ -173,6 +187,11 @@ class Group_Pages {
 		$data['post_content'] = str_replace(
 			'&quot;group_tag_id&quot;:-1,&quot;',
 			sprintf( '&quot;group_tag_id&quot;:%d,&quot;', $group_tag_id ),
+			$data['post_content']
+		);
+		$data['post_content'] = str_replace(
+			'\\"group_tag_id\\":-1',
+			sprintf( '"group_tag_id":%d', $group_tag_id ),
 			$data['post_content']
 		);
 
