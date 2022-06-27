@@ -80,7 +80,7 @@ class Options {
 	 */
 	public static function activate(): void {
 		self::add_option();
-		self::set( 'ftek_option', array_intersect_key( self::get(), self::DEFAULTS ) );
+		update_option( 'ftek_option', array_intersect_key( self::get(), self::DEFAULTS ) );
 	}
 
 	/**

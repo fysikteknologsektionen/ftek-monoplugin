@@ -26,10 +26,10 @@ define( __NAMESPACE__ . '\PLUGIN_ROOT', dirname( PLUGIN_FILE ) );
  */
 function _get_available_roles(): array {
 	$roles = array();
-	foreach ( wp_roles()->role_objects as $key => $role ) {
+	foreach ( wp_roles()->roles as $key => $role ) {
 		$roles[] = array(
 			'key'  => $key,
-			'name' => translate_user_role( ucfirst( $role->name ) ),
+			'name' => translate_user_role( $role['name'] ),
 		);
 	}
 	return $roles;
@@ -106,6 +106,7 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
  */
 function activate() {
 	Options::activate();
+	Roles::activate();
 	Course_Pages::activate();
 	Group_Pages::activate();
 }
@@ -116,6 +117,7 @@ function activate() {
 function uninstall(): void {
 	Options::purge();
 	User_Meta::purge();
+	Course_Pages::purge();
 }
 
 
@@ -130,17 +132,9 @@ add_action(
 register_activation_hook( PLUGIN_FILE, __NAMESPACE__ . '\activate' );
 register_uninstall_hook( PLUGIN_FILE, __NAMESPACE__ . '\uninstall' );
 
-// Enable settings page.
 Options::init();
-
-// Enable OAuth login.
+Roles::init();
 Login::init();
-
-// Enable Drive List block.
 Drive_List::init();
-
-// Enable course pages.
 Course_Pages::init();
-
-// Enable group/society pages.
 Group_Pages::init();

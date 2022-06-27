@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Monoplugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-06-26T11:16:40+00:00\n"
+"POT-Creation-Date: 2022-06-27T15:09:43+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,108 +42,118 @@ msgstr ""
 msgid "Settings"
 msgstr "Inställningar"
 
-#: includes/course-pages/class-course-pages.php:86
+#: includes/class-roles.php:96
+msgctxt "User role"
+msgid "Division active"
+msgstr "Sektionsaktiv"
+
+#: includes/course-pages/class-course-pages.php:120
 msgid "Course pages"
 msgstr "Kurssidor"
 
-#: includes/course-pages/class-course-pages.php:87
+#: includes/course-pages/class-course-pages.php:121
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
 #: build/blocks/course-page/editor.js:6
 msgid "Course page"
 msgstr "Kurssida"
 
-#: includes/course-pages/class-course-pages.php:88
+#: includes/course-pages/class-course-pages.php:122
 msgctxt "course page"
 msgid "Add new"
 msgstr "Skapa ny"
 
-#: includes/course-pages/class-course-pages.php:89
+#: includes/course-pages/class-course-pages.php:123
 msgid "Add new course page"
 msgstr "Skapa ny kurssida"
 
-#: includes/course-pages/class-course-pages.php:90
+#: includes/course-pages/class-course-pages.php:124
 msgid "Edit course page"
 msgstr "Redigera kurssida"
 
-#: includes/course-pages/class-course-pages.php:91
+#: includes/course-pages/class-course-pages.php:125
 msgid "New course page"
 msgstr "Ny kurssida"
 
-#: includes/course-pages/class-course-pages.php:92
+#: includes/course-pages/class-course-pages.php:126
 msgid "View course page"
 msgstr "Visa kurssida"
 
-#: includes/course-pages/class-course-pages.php:93
+#: includes/course-pages/class-course-pages.php:127
 msgid "View course pages"
 msgstr "Visa kurssidor"
 
-#: includes/course-pages/class-course-pages.php:94
+#: includes/course-pages/class-course-pages.php:128
 msgid "Search course pages"
 msgstr "Sök kurssidor"
 
-#: includes/course-pages/class-course-pages.php:95
+#: includes/course-pages/class-course-pages.php:129
 msgid "No course pages found"
 msgstr "Inga kurssidor hittades"
 
-#: includes/course-pages/class-course-pages.php:96
+#: includes/course-pages/class-course-pages.php:130
 msgid "No course pages found in Trash"
 msgstr "Inga kurssidor hittades i papperskorgen"
 
-#: includes/course-pages/class-course-pages.php:97
+#: includes/course-pages/class-course-pages.php:131
 msgid "All course pages"
 msgstr "Alla kurssidor"
 
-#: includes/course-pages/class-course-pages.php:98
+#: includes/course-pages/class-course-pages.php:132
 msgid "Course page Attributes"
 msgstr "Kurssidoattribut"
 
-#: includes/course-pages/class-course-pages.php:99
+#: includes/course-pages/class-course-pages.php:133
 msgid "Insert into course page"
 msgstr "Infoga i kurssida"
 
-#: includes/course-pages/class-course-pages.php:100
+#: includes/course-pages/class-course-pages.php:134
 msgid "Uploaded to this course page"
 msgstr "Uppladdad till denna kurssida"
 
-#: includes/course-pages/class-course-pages.php:101
+#: includes/course-pages/class-course-pages.php:135
 msgid "Filter course page list"
 msgstr "Filtrera kurssidolista"
 
-#: includes/course-pages/class-course-pages.php:102
+#: includes/course-pages/class-course-pages.php:136
 msgid "Course page list navigation"
 msgstr "Navigera kurssidolista"
 
-#: includes/course-pages/class-course-pages.php:103
+#: includes/course-pages/class-course-pages.php:137
 msgid "Course page list"
 msgstr "Kurssidolista"
 
-#: includes/course-pages/class-course-pages.php:104
+#: includes/course-pages/class-course-pages.php:138
 msgid "Course page published"
 msgstr "Kurssida publicerad"
 
-#: includes/course-pages/class-course-pages.php:105
+#: includes/course-pages/class-course-pages.php:139
 msgid "Course page reverted to draft"
 msgstr "Kurssida återställd från utkast"
 
-#: includes/course-pages/class-course-pages.php:106
+#: includes/course-pages/class-course-pages.php:140
 msgid "Course page scheduled"
 msgstr "Kurssida schemalagd"
 
-#: includes/course-pages/class-course-pages.php:107
+#: includes/course-pages/class-course-pages.php:141
 msgid "Course page updated"
 msgstr "Kurssida uppdaterad"
 
-#: includes/course-pages/class-course-pages.php:108
+#: includes/course-pages/class-course-pages.php:142
 msgid "Course page link"
 msgstr "Länk till kurssida"
 
-#: includes/course-pages/class-course-pages.php:109
+#: includes/course-pages/class-course-pages.php:143
 msgid "A link to a course page"
 msgstr "En länk till en kurssida"
 
-#: includes/course-pages/class-course-pages.php:111
+#: includes/course-pages/class-course-pages.php:145
 msgid "Information about a course"
 msgstr "Information om en kurs"
+
+#: includes/course-pages/class-course-pages.php:280
+msgctxt "User role"
+msgid "Course page editor"
+msgstr "Kurssidoredaktör"
 
 #: includes/group-pages/class-group-pages.php:55
 msgid "Group pages"

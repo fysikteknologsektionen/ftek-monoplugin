@@ -33,6 +33,7 @@ class Course_Pages {
 	public static function init(): void {
 		add_action( 'init', array( self::class, 'register_post_type' ) );
 		add_action( 'update_post_metadata', array( self::class, 'update_post_slug' ), 10, 4 );
+		add_filter( 'gettext_with_context', array( self::class, 'translate_role' ), 10, 4 );
 
 		Course_Blocks::init();
 	}
@@ -60,11 +61,44 @@ class Course_Pages {
 	}
 
 	/**
-	 * Updates the rewrite rules used to assign nicer urls to posts
+	 * Called on plugin activation
 	 */
 	public static function activate(): void {
+		// Update rewrite rules used to assign nicer urls to posts.
 		self::register_post_type();
 		flush_rewrite_rules();
+
+		$capabilities = array(
+			'edit_course_page',
+			'edit_course_page',
+			'read_course_page',
+			'delete_course_page',
+			'edit_course_pages',
+			'edit_others_course_pages',
+			'publish_course_pages',
+			'read_private_course_pages',
+			'create_course_pages',
+		);
+
+		add_role(
+			'course-page-editor',
+			'Course page editor',
+			$capabilities
+		);
+
+		$admin = get_role( 'administrator' );
+		if ( $admin ) {
+			foreach ( $capabilities as $cap ) {
+				$admin->add_cap( $cap );
+			}
+		}
+	}
+
+	/**
+	 * Purge all persistant changes
+	 */
+	public static function purge(): void {
+		remove_role( 'course-page-editor' );
 	}
 
 	/**
@@ -118,7 +152,7 @@ class Course_Pages {
 				'menu_position'       => 20,
 				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents, WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
 				'menu_icon'           => 'data:image/svg+xml;base64,' . base64_encode( file_get_contents( PLUGIN_ROOT . '/assets/open-book.svg' ) ),
-				'capability_type'     => 'page',
+				'capability_type'     => 'course_page',
 				'delete_with_user'    => false,
 				'supports'            => array( 'editor', 'custom-fields', 'title' ),
 				'rewrite'             => array(
@@ -228,5 +262,23 @@ class Course_Pages {
 				),
 			)
 		);
+	}
+
+	/**
+	 * Callback for the gettext_with_context filter hook
+	 *
+	 * Adds translations with translate_user_role() for custom user roles
+	 *
+	 * @param string $translation Translated text.
+	 * @param string $text        Text to translate.
+	 * @param string $context     Context information for the translators.
+	 * @param string $domain      Text domain. Unique identifier for retrieving
+	 *                            translated strings.
+	 */
+	public static function translate_role( string $translation, string $text, string $context, string $domain ): string {
+		if ( 'Course page editor' === $text && 'User role' === $context && 'default' === $domain ) {
+			return _x( 'Course page editor', 'User role', 'ftek' );
+		}
+		return $translation;
 	}
 }
