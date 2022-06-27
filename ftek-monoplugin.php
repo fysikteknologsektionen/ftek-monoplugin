@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Ftek Monoplugin
  * Plugin URI:      https://github.com/fysikteknologsektionen/ftek-monoplugin
- * Description:     WordPress monoplugin for ftek
+ * Description:     WordPress monoplugin for ftek.se
  * Author:          Ossian Eriksson
  * Author URI:      https://github.com/OssianEriksson
  * Text Domain:     ftek

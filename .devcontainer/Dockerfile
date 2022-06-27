@@ -1,4 +1,4 @@
-FROM 'wordpress:5.9.2-php7.4'
+FROM 'wordpress:6.0.0-php7.4'
 
 RUN set -e; \
     curl -fsSL https://deb.nodesource.com/setup_16.x | bash -; \

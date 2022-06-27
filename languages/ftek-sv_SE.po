@@ -23,8 +23,8 @@ msgid "https://github.com/fysikteknologsektionen/ftek-monoplugin"
 msgstr ""
 
 #. Description of the plugin
-msgid "WordPress monoplugin for ftek"
-msgstr "WordPress monoplugin för ftek"
+msgid "WordPress monoplugin for ftek.se"
+msgstr "WordPress monoplugin för ftek.se"
 
 #. Author of the plugin
 msgid "Ossian Eriksson"

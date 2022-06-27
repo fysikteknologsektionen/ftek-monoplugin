@@ -1,11 +1,11 @@
 # ftek-monoplugin
 
-WordPress monoplugin for ftek.
+WordPress monoplugin for ftek.se.
 
 ## Dependencies
 
 -   PHP (^7.4.x)
--   WordPress (>=5.9.x)
+-   WordPress (^6.0.0)
 
 ## Contributing
 
