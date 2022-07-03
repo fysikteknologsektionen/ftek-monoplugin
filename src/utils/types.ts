@@ -26,7 +26,7 @@ export type Option = {
 	schedules: { [y in Exclude<Year, 'master'>]: { [p in Program]: string } };
 };
 
-export type WPOption = { ftek_plugin__option: Option };
+export type WPOption = { ftek_plugin_option: Option };
 
 export type Inline = {
 	roles: Role[];

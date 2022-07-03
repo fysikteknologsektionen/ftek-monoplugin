@@ -365,7 +365,7 @@ const Settings = (): JSX.Element => {
 	useEffect(() => {
 		apiFetch<WPOption>({ path: '/wp/v2/settings' })
 			.then((response) => {
-				setOption(response?.ftek_plugin__option);
+				setOption(response?.ftek_plugin_option);
 			})
 			.catch(setError);
 	}, []);
@@ -375,7 +375,7 @@ const Settings = (): JSX.Element => {
 		apiFetch({
 			path: '/wp/v2/settings',
 			method: 'POST',
-			data: { ftek_plugin__option: option },
+			data: { ftek_plugin_option: option },
 		})
 			.then(() => setSaveState('saved'))
 			.catch(setError);

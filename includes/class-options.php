@@ -68,7 +68,7 @@ class Options {
 	 *                     option array.
 	 */
 	public static function get( ?string $key = null ) {
-		$option = get_option( 'ftek_plugin__option' );
+		$option = get_option( 'ftek_plugin_option' );
 		$option = array_merge( self::DEFAULTS, $option ? $option : array() );
 		return null === $key ? $option : $option[ $key ];
 	}
@@ -80,14 +80,14 @@ class Options {
 	 */
 	public static function activate(): void {
 		self::add_option();
-		update_option( 'ftek_plugin__option', array_intersect_key( self::get(), self::DEFAULTS ) );
+		update_option( 'ftek_plugin_option', array_intersect_key( self::get(), self::DEFAULTS ) );
 	}
 
 	/**
 	 * Should be called on uninstall
 	 */
 	public static function purge(): void {
-		delete_option( 'ftek_plugin__option' );
+		delete_option( 'ftek_plugin_option' );
 	}
 
 	/**
@@ -125,8 +125,8 @@ class Options {
 		);
 
 		register_setting(
-			'ftek_plugin__option_group',
-			'ftek_plugin__option',
+			'ftek_plugin_option_group',
+			'ftek_plugin_option',
 			array(
 				'single'       => true,
 				'show_in_rest' => array(

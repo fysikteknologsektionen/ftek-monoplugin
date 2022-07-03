@@ -98,12 +98,12 @@ export const CurrentCourses = (): JSX.Element => {
 
 	useEffect(() => {
 		apiFetch<WPOption>({ path: '/wp/v2/settings' }).then((response) => {
-			setOption(response.ftek_plugin__option);
+			setOption(response.ftek_plugin_option);
 
 			const currentDate = new Date();
 			const sps = (
 				Object.entries(
-					response.ftek_plugin__option.study_period_ends
+					response.ftek_plugin_option.study_period_ends
 				) as [StudyPeriod, StudyPeriodEnd][]
 			)
 				.map(([sp, ends]) => ({
