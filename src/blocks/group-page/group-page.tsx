@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { useEffect, useState } from '@wordpress/element';
 
+import { Attributes as GroupMemberAttributes } from '../group-member/group-member';
 import { GroupPageMeta, WPBlock, WPPost, WPTag } from '../../utils/types';
 
 import SectionedPage from '../../components/sectioned-page';
@@ -127,6 +128,8 @@ export const GroupPage = ({
 				placeholder: __('Description goes here.', 'ftek-plugin'),
 			},
 		],
+		['core/heading', { content: __('Members', 'ftek-plugin'), level: 3 }],
+		['ftek-plugin/group-member', {} as Partial<GroupMemberAttributes>],
 	];
 
 	return (

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-07-03T09:36:57+00:00\n"
+"POT-Creation-Date: 2022-07-03T09:47:44+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -690,6 +690,10 @@ msgstr "Relaterade sidor"
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
 msgid "Latest posts"
 msgstr "Senaste inlägg"
+
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+msgid "Members"
+msgstr "Medlemmar"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
 msgid "Logo"

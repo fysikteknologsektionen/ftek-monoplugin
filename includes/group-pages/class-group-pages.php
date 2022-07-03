@@ -166,7 +166,7 @@ class Group_Pages {
 		$meta         = get_post_meta( $postarr['ID'], 'ftek_plugin_group_page_meta', true );
 		$group_tag_id = $meta['group_tag_id'] ?? -1;
 
-		if ( ! $data['post_title'] ) {
+		if ( ! $data['post_title'] || ! $data['post_name'] ) {
 			return $data;
 		}
 

@@ -19,6 +19,8 @@ import { __, _x } from '@wordpress/i18n';
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 
+import { Attributes as DriveListAttributes } from '../drive-list/drive-list';
+
 import SVGImage from '../../components/svg-image';
 import SectionedPage from '../../components/sectioned-page';
 import CourseLinks from '../../components/course-links';
@@ -403,7 +405,7 @@ const Edit = ({
 						{
 							depth: 2,
 							download: true,
-						},
+						} as Partial<DriveListAttributes>,
 					],
 			  ] as WPBlock[])
 			: []),
