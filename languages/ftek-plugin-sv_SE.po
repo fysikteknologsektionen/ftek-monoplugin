@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-07-03T08:30:07+00:00\n"
+"POT-Creation-Date: 2022-07-03T09:36:57+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,110 +156,110 @@ msgctxt "User role"
 msgid "Course page editor"
 msgstr "Kurssidoredaktör"
 
-#: includes/group-pages/class-group-pages.php:55
+#: includes/group-pages/class-group-pages.php:61
 msgid "Group pages"
 msgstr "Föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:56
+#: includes/group-pages/class-group-pages.php:62
 #: build/blocks/group-page/editor.js:1
 msgid "Group page"
 msgstr "Föreningssida"
 
-#: includes/group-pages/class-group-pages.php:57
+#: includes/group-pages/class-group-pages.php:63
 msgctxt "group page"
 msgid "Add new"
 msgstr "Skapa ny"
 
-#: includes/group-pages/class-group-pages.php:58
+#: includes/group-pages/class-group-pages.php:64
 msgid "Add new group page"
 msgstr "Skapa ny föreningssida"
 
-#: includes/group-pages/class-group-pages.php:59
+#: includes/group-pages/class-group-pages.php:65
 msgid "Edit group page"
 msgstr "Redigera föreningssida"
 
-#: includes/group-pages/class-group-pages.php:60
+#: includes/group-pages/class-group-pages.php:66
 msgid "New group page"
 msgstr "Ny föreningssida"
 
-#: includes/group-pages/class-group-pages.php:61
+#: includes/group-pages/class-group-pages.php:67
 msgid "View group page"
 msgstr "Visa föreningssida"
 
-#: includes/group-pages/class-group-pages.php:62
+#: includes/group-pages/class-group-pages.php:68
 msgid "View group pages"
 msgstr "Visa föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:63
+#: includes/group-pages/class-group-pages.php:69
 msgid "Search group pages"
 msgstr "Sök föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:64
+#: includes/group-pages/class-group-pages.php:70
 msgid "No group pages found"
 msgstr "Inga föreningssidor hittades"
 
-#: includes/group-pages/class-group-pages.php:65
+#: includes/group-pages/class-group-pages.php:71
 msgid "No group pages found in Trash"
 msgstr "Inga föreningssidor hittades i papperskorgen"
 
-#: includes/group-pages/class-group-pages.php:66
+#: includes/group-pages/class-group-pages.php:72
 msgid "All group pages"
 msgstr "Alla föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:67
+#: includes/group-pages/class-group-pages.php:73
 msgid "Group page Attributes"
 msgstr "Föreningssidoattribut"
 
-#: includes/group-pages/class-group-pages.php:68
+#: includes/group-pages/class-group-pages.php:74
 msgid "Insert into group page"
 msgstr "Infoga i föreningssida"
 
-#: includes/group-pages/class-group-pages.php:69
+#: includes/group-pages/class-group-pages.php:75
 msgid "Uploaded to this group page"
 msgstr "Uppladdad till denna föreningssida"
 
-#: includes/group-pages/class-group-pages.php:70
+#: includes/group-pages/class-group-pages.php:76
 msgid "Filter group page list"
 msgstr "Filtrera föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:71
+#: includes/group-pages/class-group-pages.php:77
 msgid "Group page list navigation"
 msgstr "Navigera föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:72
+#: includes/group-pages/class-group-pages.php:78
 msgid "Group page list"
 msgstr "Föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:73
+#: includes/group-pages/class-group-pages.php:79
 msgid "Group page published"
 msgstr "Föreningssida publicerad"
 
-#: includes/group-pages/class-group-pages.php:74
+#: includes/group-pages/class-group-pages.php:80
 msgid "Group page reverted to draft"
 msgstr "Föreningssida återställd från utkast"
 
-#: includes/group-pages/class-group-pages.php:75
+#: includes/group-pages/class-group-pages.php:81
 msgid "Group page scheduled"
 msgstr "Föreningssida schemalagd"
 
-#: includes/group-pages/class-group-pages.php:76
+#: includes/group-pages/class-group-pages.php:82
 msgid "Group page updated"
 msgstr "Föreningssida uppdaterad"
 
-#: includes/group-pages/class-group-pages.php:77
+#: includes/group-pages/class-group-pages.php:83
 msgid "Group page link"
 msgstr "Länk till föreningssida"
 
-#: includes/group-pages/class-group-pages.php:78
+#: includes/group-pages/class-group-pages.php:84
 msgid "A link to a group page"
 msgstr "En länk till en föreningssida"
 
-#: includes/group-pages/class-group-pages.php:80
+#: includes/group-pages/class-group-pages.php:86
 msgid "Information about a group"
 msgstr "Information om en förening"
 
 #. translators: %1$s Name of group.
-#: includes/group-pages/class-group-pages.php:170
+#: includes/group-pages/class-group-pages.php:176
 msgid "Posts related to %1$s"
 msgstr "Inlägg relaterade till %1$s"
 

@@ -38,6 +38,18 @@
 			"default": ""
 		}
 	},
+	"example": {
+		"attributes": {
+			"email": "user@ftek.se",
+			"post": "President",
+			"wordpress_user": false,
+			"first_name": "Firstname",
+			"last_name": "Lastname",
+			"nick_name": "Nickname",
+			"description": "Description of me and my position in the group.",
+			"picture": "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg"
+		}
+	},
 	"editorScript": "file:editor.js",
 	"script": "file:script.js"
 }

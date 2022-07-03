@@ -4,6 +4,9 @@
 	"title": "Course overview",
 	"category": "widgets",
 	"textdomain": "ftek-plugin",
+	"example": {
+		"attributes": {}
+	},
 	"editorScript": "file:editor.js",
 	"script": "file:script.js"
 }
