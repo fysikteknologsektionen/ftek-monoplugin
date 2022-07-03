@@ -2,10 +2,10 @@
 /**
  * Course_Pages class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Course_Pages page state.
@@ -49,7 +49,7 @@ class Course_Pages {
 	 * @param mixed  $meta_value Metadata value.
 	 */
 	public static function update_post_slug( ?bool $check, int $object_id, string $meta_key, $meta_value ): ?bool {
-		if ( 'ftek_course_page_meta' === $meta_key && $meta_value ) {
+		if ( 'ftek_plugin_course_page_meta' === $meta_key && $meta_value ) {
 			wp_update_post(
 				array(
 					'ID'        => $object_id,
@@ -106,10 +106,10 @@ class Course_Pages {
 	 */
 	public static function register_post_type(): void {
 		register_block_type( PLUGIN_ROOT . '/build/blocks/course-page' );
-		add_global_js_variable( 'ftek-course-page-editor-script' );
+		add_global_js_variable( 'ftek-plugin-course-page-editor-script' );
 		wp_set_script_translations(
-			'ftek-course-page-editor-script',
-			'ftek',
+			'ftek-plugin-course-page-editor-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 
@@ -117,32 +117,32 @@ class Course_Pages {
 			'course-page',
 			array(
 				'labels'              => array(
-					'name'                   => __( 'Course pages', 'ftek' ),
-					'singular_name'          => __( 'Course page', 'ftek' ),
-					'add_new'                => _x( 'Add new', 'course page', 'ftek' ),
-					'add_new_item'           => __( 'Add new course page', 'ftek' ),
-					'edit_item'              => __( 'Edit course page', 'ftek' ),
-					'new_item'               => __( 'New course page', 'ftek' ),
-					'view_item'              => __( 'View course page', 'ftek' ),
-					'view_items'             => __( 'View course pages', 'ftek' ),
-					'search_items'           => __( 'Search course pages', 'ftek' ),
-					'not_found'              => __( 'No course pages found', 'ftek' ),
-					'not_found_in_trash'     => __( 'No course pages found in Trash', 'ftek' ),
-					'all_items'              => __( 'All course pages', 'ftek' ),
-					'attributes'             => __( 'Course page Attributes', 'ftek' ),
-					'insert_into_item'       => __( 'Insert into course page', 'ftek' ),
-					'uploaded_to_this_item'  => __( 'Uploaded to this course page', 'ftek' ),
-					'filter_items_list'      => __( 'Filter course page list', 'ftek' ),
-					'items_list_navigation'  => __( 'Course page list navigation', 'ftek' ),
-					'items_list'             => __( 'Course page list', 'ftek' ),
-					'item_published'         => __( 'Course page published', 'ftek' ),
-					'item_reverted_to_draft' => __( 'Course page reverted to draft', 'ftek' ),
-					'item_scheduled'         => __( 'Course page scheduled', 'ftek' ),
-					'item_updated'           => __( 'Course page updated', 'ftek' ),
-					'item_link'              => __( 'Course page link', 'ftek' ),
-					'item_link_description'  => __( 'A link to a course page', 'ftek' ),
+					'name'                   => __( 'Course pages', 'ftek-plugin' ),
+					'singular_name'          => __( 'Course page', 'ftek-plugin' ),
+					'add_new'                => _x( 'Add new', 'course page', 'ftek-plugin' ),
+					'add_new_item'           => __( 'Add new course page', 'ftek-plugin' ),
+					'edit_item'              => __( 'Edit course page', 'ftek-plugin' ),
+					'new_item'               => __( 'New course page', 'ftek-plugin' ),
+					'view_item'              => __( 'View course page', 'ftek-plugin' ),
+					'view_items'             => __( 'View course pages', 'ftek-plugin' ),
+					'search_items'           => __( 'Search course pages', 'ftek-plugin' ),
+					'not_found'              => __( 'No course pages found', 'ftek-plugin' ),
+					'not_found_in_trash'     => __( 'No course pages found in Trash', 'ftek-plugin' ),
+					'all_items'              => __( 'All course pages', 'ftek-plugin' ),
+					'attributes'             => __( 'Course page Attributes', 'ftek-plugin' ),
+					'insert_into_item'       => __( 'Insert into course page', 'ftek-plugin' ),
+					'uploaded_to_this_item'  => __( 'Uploaded to this course page', 'ftek-plugin' ),
+					'filter_items_list'      => __( 'Filter course page list', 'ftek-plugin' ),
+					'items_list_navigation'  => __( 'Course page list navigation', 'ftek-plugin' ),
+					'items_list'             => __( 'Course page list', 'ftek-plugin' ),
+					'item_published'         => __( 'Course page published', 'ftek-plugin' ),
+					'item_reverted_to_draft' => __( 'Course page reverted to draft', 'ftek-plugin' ),
+					'item_scheduled'         => __( 'Course page scheduled', 'ftek-plugin' ),
+					'item_updated'           => __( 'Course page updated', 'ftek-plugin' ),
+					'item_link'              => __( 'Course page link', 'ftek-plugin' ),
+					'item_link_description'  => __( 'A link to a course page', 'ftek-plugin' ),
 				),
-				'description'         => __( 'Information about a course', 'ftek' ),
+				'description'         => __( 'Information about a course', 'ftek-plugin' ),
 				'public'              => false,
 				'exclude_from_search' => false,
 				'publicly_queryable'  => true,
@@ -161,7 +161,7 @@ class Course_Pages {
 				),
 				'template'            => array(
 					array(
-						'ftek/course-page',
+						'ftek-plugin/course-page',
 						array(
 							'lock' => array(
 								'move'   => true,
@@ -176,7 +176,7 @@ class Course_Pages {
 
 		register_post_meta(
 			'course-page',
-			'ftek_course_page_meta',
+			'ftek_plugin_course_page_meta',
 			array(
 				'type'         => 'object',
 				'single'       => true,
@@ -277,7 +277,7 @@ class Course_Pages {
 	 */
 	public static function translate_role( string $translation, string $text, string $context, string $domain ): string {
 		if ( 'Course page editor' === $text && 'User role' === $context && 'default' === $domain ) {
-			return _x( 'Course page editor', 'User role', 'ftek' );
+			return _x( 'Course page editor', 'User role', 'ftek-plugin' );
 		}
 		return $translation;
 	}

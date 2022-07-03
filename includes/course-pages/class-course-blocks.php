@@ -2,10 +2,10 @@
 /**
  * Course_Blocks class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Course_Blocks page state.
@@ -25,37 +25,37 @@ class Course_Blocks {
 	public static function register_blocks(): void {
 		register_block_type( PLUGIN_ROOT . '/build/blocks/course-overview' );
 		wp_set_script_translations(
-			'ftek-course-overview-script',
-			'ftek',
+			'ftek-plugin-course-overview-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 		wp_set_script_translations(
-			'ftek-course-overview-editor-script',
-			'ftek',
+			'ftek-plugin-course-overview-editor-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 
 		register_block_type( PLUGIN_ROOT . '/build/blocks/current-courses' );
 		wp_set_script_translations(
-			'ftek-current-courses-script',
-			'ftek',
+			'ftek-plugin-current-courses-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 		wp_set_script_translations(
-			'ftek-current-courses-editor-script',
-			'ftek',
+			'ftek-plugin-current-courses-editor-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 
 		register_block_type( PLUGIN_ROOT . '/build/blocks/all-courses' );
 		wp_set_script_translations(
-			'ftek-all-courses-script',
-			'ftek',
+			'ftek-plugin-all-courses-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 		wp_set_script_translations(
-			'ftek-all-courses-editor-script',
-			'ftek',
+			'ftek-plugin-all-courses-editor-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 	}

@@ -68,14 +68,14 @@ const Controls = ({
 		<>
 			<PanelRow>
 				<TextControl
-					label={__('Course code', 'ftek')}
+					label={__('Course code', 'ftek-plugin')}
 					value={meta.code}
 					onChange={(value) => updateMeta({ code: value })}
 				/>
 			</PanelRow>
 			<PanelRow>
 				<TextControl
-					label={__('Credits', 'ftek')}
+					label={__('Credits', 'ftek-plugin')}
 					value={creditsText !== null ? creditsText : meta.credits}
 					onChange={(value: string) => {
 						setCreditsText(value);
@@ -89,21 +89,21 @@ const Controls = ({
 			<hr />
 			<PanelRow>
 				<TextControl
-					label={__('Course homepage URL', 'ftek')}
+					label={__('Course homepage URL', 'ftek-plugin')}
 					value={meta.homepage_url}
 					onChange={(value) => updateMeta({ homepage_url: value })}
 				/>
 			</PanelRow>
 			<PanelRow>
 				<TextControl
-					label={__('Course info URL', 'ftek')}
+					label={__('Course info URL', 'ftek-plugin')}
 					value={meta.info_url}
 					onChange={(value) => updateMeta({ info_url: value })}
 				/>
 			</PanelRow>
 			<PanelRow>
 				<TextControl
-					label={__('Latest course survey URL', 'ftek')}
+					label={__('Latest course survey URL', 'ftek-plugin')}
 					value={meta.survey_url}
 					onChange={(value) => updateMeta({ survey_url: value })}
 				/>
@@ -111,7 +111,7 @@ const Controls = ({
 			<hr />
 			<PanelRow>
 				<div>
-					<p>{__('Student representatives', 'ftek')}</p>
+					<p>{__('Student representatives', 'ftek-plugin')}</p>
 					{meta.student_representatives.map((representative, i) => (
 						<div
 							key={i}
@@ -135,7 +135,7 @@ const Controls = ({
 							/>
 							<div style={{ padding: '0.5rem' }}>
 								<TextControl
-									label={__('Full Name', 'ftek')}
+									label={__('Full Name', 'ftek-plugin')}
 									value={representative.name}
 									onChange={(value) => {
 										const repr = [
@@ -151,7 +151,11 @@ const Controls = ({
 									}}
 								/>
 								<TextControl
-									label={_x('CID', 'Chalmers ID', 'ftek')}
+									label={_x(
+										'CID',
+										'Chalmers ID',
+										'ftek-plugin'
+									)}
 									value={representative.cid}
 									onChange={(value) => {
 										const repr = [
@@ -180,14 +184,14 @@ const Controls = ({
 						}
 						variant="secondary"
 					>
-						{_x('Add', 'student representative', 'ftek')}
+						{_x('Add', 'student representative', 'ftek-plugin')}
 					</Button>
 				</div>
 			</PanelRow>
 			<hr />
 			<PanelRow>
 				<div>
-					<p>{__('Study period', 'ftek')}</p>
+					<p>{__('Study period', 'ftek-plugin')}</p>
 					{STUDY_PERIODS.map((sp, i) => (
 						<CheckboxControl
 							key={i}
@@ -212,7 +216,7 @@ const Controls = ({
 			<hr />
 			<PanelRow>
 				<RadioControl
-					label={_x('Year', 'grade', 'ftek')}
+					label={_x('Year', 'grade', 'ftek-plugin')}
 					selected={meta.year}
 					options={YEARS.map((year) => ({
 						label: fmtYear(year),
@@ -224,7 +228,7 @@ const Controls = ({
 			<hr />
 			<PanelRow>
 				<div>
-					<p>{__('Progammes', 'ftek')}</p>
+					<p>{__('Progammes', 'ftek-plugin')}</p>
 					{PROGRAMS.map((program, i) => (
 						<CheckboxControl
 							key={i}
@@ -247,8 +251,11 @@ const Controls = ({
 			<hr />
 			<PanelRow>
 				<TextControl
-					label={__('Approximate number of participants', 'ftek')}
-					help={__('Used for sorting courses', 'ftek')}
+					label={__(
+						'Approximate number of participants',
+						'ftek-plugin'
+					)}
+					help={__('Used for sorting courses', 'ftek-plugin')}
 					value={
 						participantCountText !== null
 							? participantCountText
@@ -265,15 +272,18 @@ const Controls = ({
 			</PanelRow>
 			<PanelRow>
 				<CheckboxControl
-					label={__('Elective course', 'ftek')}
+					label={__('Elective course', 'ftek-plugin')}
 					checked={meta.elective}
 					onChange={(checked) => updateMeta({ elective: checked })}
 				/>
 			</PanelRow>
 			<PanelRow>
 				<TextControl
-					label={__('Comment', 'ftek')}
-					help={__('Shown as footnote in course table', 'ftek')}
+					label={__('Comment', 'ftek-plugin')}
+					help={__(
+						'Shown as footnote in course table',
+						'ftek-plugin'
+					)}
 					value={meta.comment}
 					onChange={(value) => updateMeta({ comment: value })}
 				/>
@@ -304,12 +314,14 @@ const CoursePage = ({
 				<SectionedPage.Main>{children}</SectionedPage.Main>
 				<SectionedPage.Aside>
 					<CourseLinks
-						header={<h3>{__('Links', 'ftek')}</h3>}
+						header={<h3>{__('Links', 'ftek-plugin')}</h3>}
 						meta={meta}
 					/>
 					{studentRepresentatives.length > 0 && (
 						<>
-							<h3>{__('Student Representatives', 'ftek')}</h3>
+							<h3>
+								{__('Student Representatives', 'ftek-plugin')}
+							</h3>
 							<ul>
 								{studentRepresentatives.map((repr, i) => {
 									const name = repr.name || repr.cid;
@@ -330,13 +342,13 @@ const CoursePage = ({
 							</ul>
 						</>
 					)}
-					<h3>{__('Is Anything Missing?', 'ftek')}</h3>
+					<h3>{__('Is Anything Missing?', 'ftek-plugin')}</h3>
 					<span
 						dangerouslySetInnerHTML={{
 							// translators: %1$s Anchor attributes
 							__html: __(
 								'Contact <a %1$s>SNF</a>.',
-								'ftek'
+								'ftek-plugin'
 							).replace('%1$s', 'href="mailto:snf@ftek.se"'),
 						}}
 					/>
@@ -358,15 +370,19 @@ const Edit = ({
 	useDispatch('core/block-editor').setTemplateValidity(true);
 
 	const hasDriveList = !!useSelect(
-		(select) => select('core/blocks').getBlockType('ftek/drive-list'),
+		(select) =>
+			select('core/blocks').getBlockType('ftek-plugin/drive-list'),
 		[]
 	);
 	const innerBlocksTemplate: WPBlock[] = [
-		['core/heading', { content: __('Description', 'ftek'), level: 3 }],
+		[
+			'core/heading',
+			{ content: __('Description', 'ftek-plugin'), level: 3 },
+		],
 		[
 			'core/paragraph',
 			{
-				placeholder: __('Description goes here.', 'ftek'),
+				placeholder: __('Description goes here.', 'ftek-plugin'),
 			},
 		],
 		...(hasDriveList
@@ -377,13 +393,13 @@ const Edit = ({
 							content: _x(
 								'Documents',
 								'drive list heading',
-								'ftek'
+								'ftek-plugin'
 							),
 							level: 3,
 						},
 					],
 					[
-						'ftek/drive-list',
+						'ftek-plugin/drive-list',
 						{
 							depth: 2,
 							download: true,
@@ -397,7 +413,7 @@ const Edit = ({
 		setAttributes({ ...meta, ...m });
 
 	const maybeMeta = usePostMeta<CoursePageMeta, WPCoursePageMeta>(
-		'ftek_course_page_meta',
+		'ftek_plugin_course_page_meta',
 		'course-page'
 	);
 	const [meta, updateMeta] = maybeMeta
@@ -412,7 +428,7 @@ const Edit = ({
 		<div {...useBlockProps()}>
 			<InspectorControls>
 				<PanelBody
-					title={__('Course page', 'ftek')}
+					title={__('Course page', 'ftek-plugin')}
 					initialOpen={true}
 					icon={icon}
 				>
@@ -439,7 +455,7 @@ const Save = ({ attributes }: { attributes: CoursePageMeta }): JSX.Element => (
 
 const DocumentSettings = () => {
 	const maybeMeta = usePostMeta<CoursePageMeta, WPCoursePageMeta>(
-		'ftek_course_page_meta',
+		'ftek_plugin_course_page_meta',
 		'course-page'
 	);
 	if (!maybeMeta) {
@@ -449,7 +465,7 @@ const DocumentSettings = () => {
 
 	return (
 		<PluginDocumentSettingPanel
-			title={__('Course page', 'ftek')}
+			title={__('Course page', 'ftek-plugin')}
 			opened={true}
 			icon={icon}
 		>

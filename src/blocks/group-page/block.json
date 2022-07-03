@@ -1,9 +1,9 @@
 {
 	"apiVersion": 2,
-	"name": "ftek/group-page",
+	"name": "ftek-plugin/group-page",
 	"title": "Group page",
 	"category": "design",
-	"textdomain": "ftek",
+	"textdomain": "ftek-plugin",
 	"attributes": {
 		"logo_url": {
 			"type": "string",

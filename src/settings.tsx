@@ -43,7 +43,7 @@ const OAuthSettings = ({
 		<p>
 			{__(
 				'When creating your OAuth client, add the below URL as an authorized redirect URIs:',
-				'ftek'
+				'ftek-plugin'
 			)}
 		</p>
 		<p>
@@ -54,7 +54,7 @@ const OAuthSettings = ({
 				// translators: %1$s: Anchor attributes.
 				__html: __(
 					'For example, to log in with Google, create a Google OAuth client as a Google Workspace admin following the instructions <a %1$s>here</a>.',
-					'ftek'
+					'ftek-plugin'
 				).replace(
 					'%1$s',
 					'href="https://support.google.com/cloud/answer/6158849" target="_blank" rel="noopener noreferrer"'
@@ -62,20 +62,20 @@ const OAuthSettings = ({
 			}}
 		/>
 		<TextControl
-			label={__('OAuth discovery document URL', 'ftek')}
+			label={__('OAuth discovery document URL', 'ftek-plugin')}
 			value={option.oauth_discovery_doc_url}
 			onChange={(value: string) =>
 				onChange({ oauth_discovery_doc_url: value })
 			}
 		/>
 		<TextControl
-			label={__('OAuth client ID', 'ftek')}
+			label={__('OAuth client ID', 'ftek-plugin')}
 			value={option.oauth_client_id}
 			type="password"
 			onChange={(value: string) => onChange({ oauth_client_id: value })}
 		/>
 		<TextControl
-			label={__('OAuth client secret', 'ftek')}
+			label={__('OAuth client secret', 'ftek-plugin')}
 			value={option.oauth_client_secret}
 			type="password"
 			onChange={(value: string) =>
@@ -136,7 +136,7 @@ const UsersSettings = ({
 					}}
 				>
 					<TextControl
-						label={__('Email regex pattern', 'ftek')}
+						label={__('Email regex pattern', 'ftek-plugin')}
 						onChange={(value: string) =>
 							onUserChange({ email_pattern: value })
 						}
@@ -152,7 +152,7 @@ const UsersSettings = ({
 				>
 					<DropdownMenu
 						icon={menu}
-						label={__('Select roles', 'ftek')}
+						label={__('Select roles', 'ftek-plugin')}
 					>
 						{() =>
 							ftekInline.roles.map((role, i) => (
@@ -178,7 +178,7 @@ const UsersSettings = ({
 			<p>
 				{__(
 					'Here you can enter regex pattern to be matched against user emails. For every match, you can select which roles should be applied to the user.',
-					'ftek'
+					'ftek-plugin'
 				)}
 			</p>
 			{option.oauth_users.map((user, i) => (
@@ -209,7 +209,7 @@ const UsersSettings = ({
 				}}
 				variant="secondary"
 			>
-				{__('Add pattern', 'ftek')}
+				{__('Add pattern', 'ftek-plugin')}
 			</Button>
 		</>
 	);
@@ -225,7 +225,7 @@ const GoogleApiSettings = ({
 				// translators: %1$s, %2$s and %3$s are replaced with anchor attributes.
 				__html: __(
 					"Instructions for creating an API key as a Google Workspace admin are available in <a %1$s>Google's documentation</a>. Also read about <a %2$s>securing your API key</a>. Then make sure to <a %3$s>enable the Google Drive API</a> for your project.",
-					'ftek'
+					'ftek-plugin'
 				)
 					.replace(
 						'%1$s',
@@ -242,7 +242,7 @@ const GoogleApiSettings = ({
 			}}
 		/>
 		<TextControl
-			label={__('Google API key', 'ftek')}
+			label={__('Google API key', 'ftek-plugin')}
 			value={option.google_api_key}
 			type="password"
 			onChange={(value: string) => onChange({ google_api_key: value })}
@@ -255,7 +255,7 @@ const StudyPeriodsSettings = ({
 	onChange,
 }: SettingsSectionParams): JSX.Element => (
 	<>
-		<p>{__('Enter the final date of each study period.', 'ftek')}</p>
+		<p>{__('Enter the final date of each study period.', 'ftek-plugin')}</p>
 		{STUDY_PERIODS.map((sp) => (
 			<div
 				key={sp}
@@ -268,14 +268,14 @@ const StudyPeriodsSettings = ({
 				<span>
 					{
 						// translators: %1$s Number of the study period
-						__('Last day of study period %1$s', 'ftek').replace(
-							'%1$s',
-							sp
-						)
+						__(
+							'Last day of study period %1$s',
+							'ftek-plugin'
+						).replace('%1$s', sp)
 					}
 				</span>
 				<SelectControl
-					label={__('Month', 'ftek')}
+					label={__('Month', 'ftek-plugin')}
 					value={option.study_period_ends[sp].month}
 					options={[...Array(12).keys()].map((i) => ({
 						label: `${i + 1}`,
@@ -288,7 +288,7 @@ const StudyPeriodsSettings = ({
 					}}
 				/>
 				<SelectControl
-					label={__('Day', 'ftek')}
+					label={__('Day', 'ftek-plugin')}
 					value={option.study_period_ends[sp].day}
 					options={[...Array(31).keys()].map((i) => ({
 						label: `${i + 1}`,
@@ -313,7 +313,7 @@ const SchedulesSettings = ({
 		<p>
 			{__(
 				'Enter the URL to the schedule for each class. The schedule should begin at the current week and end one year later.',
-				'ftek'
+				'ftek-plugin'
 			)}
 		</p>
 		{BACHELOR_YEARS.map((year, i) => {
@@ -325,7 +325,10 @@ const SchedulesSettings = ({
 							key={j}
 							label={
 								// translators: %1$s Name of program
-								__('URL to schedule for %1$s', 'ftek').replace(
+								__(
+									'URL to schedule for %1$s',
+									'ftek-plugin'
+								).replace(
 									'%1$s',
 									fmtProgramsYear([program], year)
 								)
@@ -362,7 +365,7 @@ const Settings = (): JSX.Element => {
 	useEffect(() => {
 		apiFetch<WPOption>({ path: '/wp/v2/settings' })
 			.then((response) => {
-				setOption(response?.ftek_option);
+				setOption(response?.ftek_plugin__option);
 			})
 			.catch(setError);
 	}, []);
@@ -372,7 +375,7 @@ const Settings = (): JSX.Element => {
 		apiFetch({
 			path: '/wp/v2/settings',
 			method: 'POST',
-			data: { ftek_option: option },
+			data: { ftek_plugin__option: option },
 		})
 			.then(() => setSaveState('saved'))
 			.catch(setError);
@@ -395,25 +398,27 @@ const Settings = (): JSX.Element => {
 
 	return (
 		<div>
-			<h2>{__('Ftek Settings', 'ftek')}</h2>
+			<h2>{__('Ftek Settings', 'ftek-plugin')}</h2>
 			{error ? (
 				<>
-					<h3>{__('The following error has occurred:', 'ftek')}</h3>
+					<h3>
+						{__('The following error has occurred:', 'ftek-plugin')}
+					</h3>
 					<pre style={{ color: '#f00' }}>
 						{JSON.stringify(error, null, 4)}
 					</pre>
 				</>
 			) : (
 				<>
-					<h3>{__('OAuth', 'ftek')}</h3>
+					<h3>{__('OAuth', 'ftek-plugin')}</h3>
 					<SettingsSection section={OAuthSettings} />
-					<h3>{__('Users', 'ftek')}</h3>
+					<h3>{__('Users', 'ftek-plugin')}</h3>
 					<SettingsSection section={UsersSettings} />
-					<h3>{__('Google API', 'ftek')}</h3>
+					<h3>{__('Google API', 'ftek-plugin')}</h3>
 					<SettingsSection section={GoogleApiSettings} />
-					<h3>{__('Study Periods', 'ftek')}</h3>
+					<h3>{__('Study Periods', 'ftek-plugin')}</h3>
 					<SettingsSection section={StudyPeriodsSettings} />
-					<h3>{__('Schedules', 'ftek')}</h3>
+					<h3>{__('Schedules', 'ftek-plugin')}</h3>
 					<SettingsSection section={SchedulesSettings} />
 					<p>
 						<Button
@@ -422,8 +427,8 @@ const Settings = (): JSX.Element => {
 							variant="primary"
 						>
 							{saveState === 'saved'
-								? __('Settings saved!', 'ftek')
-								: __('Save changes', 'ftek')}
+								? __('Settings saved!', 'ftek-plugin')
+								: __('Save changes', 'ftek-plugin')}
 						</Button>
 						{saveState === 'saving' && <Spinner />}
 						{saveState === 'saved' && (
@@ -437,6 +442,6 @@ const Settings = (): JSX.Element => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-	const root = document.getElementById('ftek-settings');
+	const root = document.getElementById('ftek-plugin-settings');
 	render(<Settings />, root);
 });

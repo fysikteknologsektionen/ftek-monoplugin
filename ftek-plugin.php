@@ -1,18 +1,18 @@
 <?php
 /**
- * Plugin Name:     Ftek Monoplugin
- * Plugin URI:      https://github.com/fysikteknologsektionen/ftek-monoplugin
+ * Plugin Name:     Ftek Plugin
+ * Plugin URI:      https://github.com/fysikteknologsektionen/ftek-plugin
  * Description:     WordPress monoplugin for ftek.se
  * Author:          Ossian Eriksson
  * Author URI:      https://github.com/OssianEriksson
- * Text Domain:     ftek
+ * Text Domain:     ftek-plugin
  * Domain Path:     /languages
  * Version:         0.1.0
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -94,7 +94,7 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 
 	wp_set_script_translations(
 		$handle,
-		'ftek',
+		'ftek-plugin',
 		PLUGIN_ROOT . '/languages'
 	);
 
@@ -125,7 +125,7 @@ add_action(
 	'init',
 	function(): void {
 		$plugin_rel_path = plugin_basename( dirname( PLUGIN_FILE ) ) . '/languages';
-		load_plugin_textdomain( 'ftek', false, $plugin_rel_path );
+		load_plugin_textdomain( 'ftek-plugin', false, $plugin_rel_path );
 	}
 );
 

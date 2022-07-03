@@ -4,7 +4,7 @@ import { GroupPageMeta } from '../../utils/types';
 
 document.addEventListener('DOMContentLoaded', () => {
 	Array.from(
-		document.getElementsByClassName('wp-block-ftek-group-page')
+		document.getElementsByClassName('wp-block-ftek-plugin-group-page')
 	).forEach((root) => {
 		const data: string | undefined =
 			root.attributes.getNamedItem('data')?.value;

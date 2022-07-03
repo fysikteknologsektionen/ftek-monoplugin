@@ -42,7 +42,7 @@ const Controls = ({
 				allowedTypes={['image']}
 				render={({ open }) => (
 					<Button variant="secondary" onClick={open}>
-						{__('Select logo', 'ftek')}
+						{__('Select logo', 'ftek-plugin')}
 					</Button>
 				)}
 			/>
@@ -51,7 +51,7 @@ const Controls = ({
 					variant="secondary"
 					onClick={() => updateMeta({ logo_url: '' })}
 				>
-					{__('Remove logo', 'ftek')}
+					{__('Remove logo', 'ftek-plugin')}
 				</Button>
 			)}
 		</MediaUploadCheck>
@@ -73,7 +73,7 @@ const Edit = ({
 		setAttributes({ ...meta, ...m });
 
 	const maybeMeta = usePostMeta<GroupPageMeta, WPGroupPageMeta>(
-		'ftek_group_page_meta',
+		'ftek_plugin_group_page_meta',
 		'group-page'
 	);
 	const [meta, updateMeta] = maybeMeta
@@ -88,7 +88,7 @@ const Edit = ({
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={__('Group page', 'ftek')}
+					title={__('Group page', 'ftek-plugin')}
 					initialOpen={true}
 					icon={icon}
 				>
@@ -108,7 +108,7 @@ const Save = ({ attributes }: { attributes: GroupPageMeta }): JSX.Element => (
 
 const Plugin = (): JSX.Element => {
 	const maybeMeta = usePostMeta<GroupPageMeta, WPGroupPageMeta>(
-		'ftek_group_page_meta',
+		'ftek_plugin_group_page_meta',
 		'group-page'
 	);
 	if (!maybeMeta) {
@@ -118,7 +118,7 @@ const Plugin = (): JSX.Element => {
 
 	return (
 		<PluginDocumentSettingPanel
-			title={__('Group page', 'ftek')}
+			title={__('Group page', 'ftek-plugin')}
 			opened={true}
 			icon={icon}
 		>

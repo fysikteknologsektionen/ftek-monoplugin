@@ -2,10 +2,10 @@
 /**
  * Profile class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Profile class

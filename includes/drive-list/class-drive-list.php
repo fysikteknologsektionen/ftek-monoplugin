@@ -2,10 +2,10 @@
 /**
  * Drive_List class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Drive_List page state.
@@ -31,13 +31,13 @@ class Drive_List {
 	public static function register_block(): void {
 		register_block_type( PLUGIN_ROOT . '/build/blocks/drive-list' );
 		wp_set_script_translations(
-			'ftek-drive-list-script',
-			'ftek',
+			'ftek-plugin-drive-list-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 		wp_set_script_translations(
-			'ftek-drive-list-editor-script',
-			'ftek',
+			'ftek-plugin-drive-list-editor-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 	}
@@ -47,7 +47,7 @@ class Drive_List {
 	 */
 	public static function add_drive_rest_route(): void {
 		register_rest_route(
-			'ftek/v1',
+			'ftek-plugin/v1',
 			'/drive/tree',
 			array(
 				'methods'             => 'GET',

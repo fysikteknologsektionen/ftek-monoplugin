@@ -31,15 +31,18 @@ const Edit = ({
 		<div {...useBlockProps()}>
 			<InspectorControls>
 				<PanelBody
-					title={__('Basic settings', 'ftek')}
+					title={__('Basic settings', 'ftek-plugin')}
 					initialOpen={true}
 				>
 					<PanelRow>
 						<CheckboxControl
-							label={__('Connect to a WordPress user', 'ftek')}
+							label={__(
+								'Connect to a WordPress user',
+								'ftek-plugin'
+							)}
 							help={__(
 								'WordPress users may in turn be linked to e.g. Google accounts through OAuth.',
-								'ftek'
+								'ftek-plugin'
 							)}
 							checked={attributes.wordpress_user}
 							onChange={(value: boolean) =>
@@ -49,7 +52,7 @@ const Edit = ({
 					</PanelRow>
 					<PanelRow>
 						<TextControl
-							label={__('Email', 'ftek')}
+							label={__('Email', 'ftek-plugin')}
 							value={attributes.email}
 							onChange={(value: string) =>
 								updateAttributes({ email: value })
@@ -58,7 +61,7 @@ const Edit = ({
 					</PanelRow>
 					<PanelRow>
 						<TextControl
-							label={__('Post', 'ftek')}
+							label={__('Post', 'ftek-plugin')}
 							value={attributes.post}
 							onChange={(value: string) =>
 								updateAttributes({ post: value })
@@ -69,7 +72,7 @@ const Edit = ({
 						<>
 							<PanelRow>
 								<TextControl
-									label={__('First name', 'ftek')}
+									label={__('First name', 'ftek-plugin')}
 									value={attributes.first_name}
 									onChange={(value: string) =>
 										updateAttributes({ first_name: value })
@@ -78,7 +81,7 @@ const Edit = ({
 							</PanelRow>
 							<PanelRow>
 								<TextControl
-									label={__('Last name', 'ftek')}
+									label={__('Last name', 'ftek-plugin')}
 									value={attributes.last_name}
 									onChange={(value: string) =>
 										updateAttributes({ last_name: value })
@@ -89,7 +92,7 @@ const Edit = ({
 					)}
 					<PanelRow>
 						<TextControl
-							label={__('Nick name', 'ftek')}
+							label={__('Nick name', 'ftek-plugin')}
 							value={attributes.nick_name}
 							onChange={(value: string) =>
 								updateAttributes({ nick_name: value })
@@ -111,7 +114,10 @@ const Edit = ({
 											variant="secondary"
 											onClick={open}
 										>
-											{__('Select picture', 'ftek')}
+											{__(
+												'Select picture',
+												'ftek-plugin'
+											)}
 										</Button>
 									)}
 								/>
@@ -124,7 +130,7 @@ const Edit = ({
 											})
 										}
 									>
-										{__('Remove picture', 'ftek')}
+										{__('Remove picture', 'ftek-plugin')}
 									</Button>
 								)}
 							</PanelRow>
@@ -132,7 +138,7 @@ const Edit = ({
 					)}
 					<PanelRow>
 						<TextControl
-							label={__('Description', 'ftek')}
+							label={__('Description', 'ftek-plugin')}
 							value={attributes.description}
 							onChange={(value: string) =>
 								updateAttributes({ description: value })

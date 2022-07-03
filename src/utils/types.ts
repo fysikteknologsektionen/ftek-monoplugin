@@ -26,7 +26,7 @@ export type Option = {
 	schedules: { [y in Exclude<Year, 'master'>]: { [p in Program]: string } };
 };
 
-export type WPOption = { ftek_option: Option };
+export type WPOption = { ftek_plugin__option: Option };
 
 export type Inline = {
 	roles: Role[];
@@ -54,13 +54,17 @@ export type CoursePageMeta = {
 	comment: string;
 };
 
-export type WPCoursePageMeta = { ftek_course_page_meta: CoursePageMeta };
+export type WPCoursePageMeta = {
+	ftek_plugin_course_page_meta: CoursePageMeta;
+};
 
 export type GroupPageMeta = {
 	logo_url: string;
 	group_tag_id: number;
 };
-export type WPGroupPageMeta = { ftek_group_page_meta: GroupPageMeta };
+export type WPGroupPageMeta = {
+	ftek_plugin_group_page_meta: GroupPageMeta;
+};
 
 export type WPPost<T = unknown> = {
 	meta: T;

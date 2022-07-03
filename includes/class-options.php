@@ -2,10 +2,10 @@
 /**
  * Options class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Options class
@@ -58,7 +58,7 @@ class Options {
 	public static function init(): void {
 		add_action( 'init', array( self::class, 'add_option' ) );
 		add_action( 'admin_menu', array( self::class, 'add_settings_page' ) );
-		add_filter( 'plugin_action_links_ftek-monoplugin/ftek-monoplugin.php', array( self::class, 'add_settings_action_link' ) );
+		add_filter( 'plugin_action_links_ftek-plugin/ftek-plugin.php', array( self::class, 'add_settings_action_link' ) );
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Options {
 	 *                     option array.
 	 */
 	public static function get( ?string $key = null ) {
-		$option = get_option( 'ftek_option' );
+		$option = get_option( 'ftek_plugin__option' );
 		$option = array_merge( self::DEFAULTS, $option ? $option : array() );
 		return null === $key ? $option : $option[ $key ];
 	}
@@ -80,14 +80,14 @@ class Options {
 	 */
 	public static function activate(): void {
 		self::add_option();
-		update_option( 'ftek_option', array_intersect_key( self::get(), self::DEFAULTS ) );
+		update_option( 'ftek_plugin__option', array_intersect_key( self::get(), self::DEFAULTS ) );
 	}
 
 	/**
 	 * Should be called on uninstall
 	 */
 	public static function purge(): void {
-		delete_option( 'ftek_option' );
+		delete_option( 'ftek_plugin__option' );
 	}
 
 	/**
@@ -125,8 +125,8 @@ class Options {
 		);
 
 		register_setting(
-			'ftek_option_group',
-			'ftek_option',
+			'ftek_plugin__option_group',
+			'ftek_plugin__option',
 			array(
 				'single'       => true,
 				'show_in_rest' => array(
@@ -202,13 +202,13 @@ class Options {
 	 */
 	public static function add_settings_page(): void {
 		$settings_page = add_options_page(
-			__( 'Ftek', 'ftek' ),
-			__( 'Ftek', 'ftek' ),
+			__( 'Ftek', 'ftek-plugin' ),
+			__( 'Ftek', 'ftek-plugin' ),
 			'manage_options',
-			'ftek-settings',
+			'ftek-plugin-settings',
 			function(): void {
 				?>
-				<div id="ftek-settings" class="wrap"></div>
+				<div id="ftek-plugin-settings" class="wrap"></div>
 				<?php
 			}
 		);
@@ -217,7 +217,7 @@ class Options {
 			add_action(
 				'load-' . $settings_page,
 				function(): void {
-					enqueue_entrypoint_script( 'ftek-settings', 'settings.tsx' );
+					enqueue_entrypoint_script( 'ftek-plugin-settings', 'settings.tsx' );
 				}
 			);
 		}
@@ -231,14 +231,14 @@ class Options {
 	public static function add_settings_action_link( array $actions ): array {
 		$url = add_query_arg(
 			'page',
-			'ftek-settings',
+			'ftek-plugin-settings',
 			get_admin_url() . 'options-general.php'
 		);
 
 		ob_start();
 		?>
 		<a href="<?php echo esc_attr( $url ); ?>">
-			<?php esc_html_e( 'Settings', 'ftek' ); ?>
+			<?php esc_html_e( 'Settings', 'ftek-plugin' ); ?>
 		</a>
 		<?php
 		$actions[] = ob_get_clean();

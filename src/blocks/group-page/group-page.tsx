@@ -14,7 +14,7 @@ const LoadingPosts = ({
 }): JSX.Element => (
 	<>
 		{heading}
-		<p>{__('Loading…', 'ftek')}</p>
+		<p>{__('Loading…', 'ftek-plugin')}</p>
 	</>
 );
 
@@ -62,7 +62,7 @@ const PostsByTag = ({
 			</ul>
 			{tag && tag.count > limit && (
 				<p>
-					<a href={tag.link}>{__('More…', 'ftek')}</a>
+					<a href={tag.link}>{__('More…', 'ftek-plugin')}</a>
 				</p>
 			)}
 		</>
@@ -76,8 +76,8 @@ export const AsideDynamicArea = ({
 	attributes: GroupPageMeta;
 	save?: boolean;
 }): JSX.Element => {
-	const relatedPages = <h3>{__('Related pages', 'ftek')}</h3>;
-	const latestPosts = <h3>{__('Latest posts', 'ftek')}</h3>;
+	const relatedPages = <h3>{__('Related pages', 'ftek-plugin')}</h3>;
+	const latestPosts = <h3>{__('Latest posts', 'ftek-plugin')}</h3>;
 
 	if (save) {
 		return (
@@ -117,11 +117,14 @@ export const GroupPage = ({
 	save?: boolean;
 }): JSX.Element => {
 	const innerBlocksTemplate: WPBlock[] = [
-		['core/heading', { content: __('Description', 'ftek'), level: 3 }],
+		[
+			'core/heading',
+			{ content: __('Description', 'ftek-plugin'), level: 3 },
+		],
 		[
 			'core/paragraph',
 			{
-				placeholder: __('Description goes here.', 'ftek'),
+				placeholder: __('Description goes here.', 'ftek-plugin'),
 			},
 		],
 	];
@@ -143,7 +146,7 @@ export const GroupPage = ({
 					<div>
 						<img
 							style={{ width: '100%' }}
-							alt={__('Logo', 'ftek')}
+							alt={__('Logo', 'ftek-plugin')}
 							src={attributes.logo_url}
 						/>
 					</div>

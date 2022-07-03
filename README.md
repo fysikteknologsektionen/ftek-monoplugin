@@ -1,4 +1,4 @@
-# ftek-monoplugin
+# ftek-plugin
 
 WordPress monoplugin for ftek.se.
 
@@ -63,7 +63,7 @@ Create a production build by running
 npm run build
 ```
 
-For simplicity when installing the plugin, we keep built files under version control. Lint, format and build your code before commiting any changes.
+Lint and format your code before commiting any changes.
 
 ### Generate autoload files
 

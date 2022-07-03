@@ -25,12 +25,12 @@ const Edit = ({
 		<div {...useBlockProps()}>
 			<InspectorControls>
 				<PanelBody
-					title={__('Basic settings', 'ftek')}
+					title={__('Basic settings', 'ftek-plugin')}
 					initialOpen={true}
 				>
 					<PanelRow>
 						<TextControl
-							label={__('Shared folder URL', 'ftek')}
+							label={__('Shared folder URL', 'ftek-plugin')}
 							value={url}
 							placeholder="https://drive.google.com/drive/folders/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 							onChange={(value: string) => {
@@ -43,8 +43,11 @@ const Edit = ({
 					</PanelRow>
 					<PanelRow>
 						<TextControl
-							label={__('Scan depth', 'ftek')}
-							help={__('Number of subfolders to scan', 'ftek')}
+							label={__('Scan depth', 'ftek-plugin')}
+							help={__(
+								'Number of subfolders to scan',
+								'ftek-plugin'
+							)}
 							value={depth}
 							type="number"
 							min="1"
@@ -58,10 +61,10 @@ const Edit = ({
 					</PanelRow>
 					<PanelRow>
 						<CheckboxControl
-							label={__('Download files', 'ftek')}
+							label={__('Download files', 'ftek-plugin')}
 							help={__(
 								'Download files or open in browser',
-								'ftek'
+								'ftek-plugin'
 							)}
 							checked={download}
 							onChange={(value: boolean) => {

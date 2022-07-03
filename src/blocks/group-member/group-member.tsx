@@ -40,7 +40,7 @@ const GroupMemberDisplay = ({
 		<div style={{ marginRight: '0.5em', flexShrink: 0 }}>
 			<img
 				src={picture}
-				alt={__('Profile picture', 'ftek')}
+				alt={__('Profile picture', 'ftek-plugin')}
 				style={{ width: '5em' }}
 			/>
 		</div>
@@ -82,7 +82,7 @@ export const GroupMember = ({
 	const [user, setUser] = useState<User>(null);
 	useEffect(() => {
 		apiFetch({
-			path: `/ftek/v1/group/user?email=${attributes.email}`,
+			path: `/ftek-plugin/v1/group/user?email=${attributes.email}`,
 		}).then(setUser);
 	}, [attributes.wordpress_user && attributes.email]);
 
@@ -97,9 +97,9 @@ export const GroupMember = ({
 					email={__('user@ftek.se', 'ftek.se')}
 					mailto={false}
 					post={attributes.post}
-					firstName={__('Firstname', 'ftek')}
-					lastName={__('Lastname', 'ftek')}
-					description={__('User not found', 'ftek')}
+					firstName={__('Firstname', 'ftek-plugin')}
+					lastName={__('Lastname', 'ftek-plugin')}
+					description={__('User not found', 'ftek-plugin')}
 				/>
 			);
 		}
@@ -132,12 +132,12 @@ export const GroupMember = ({
 
 GroupMember.Loading = (): JSX.Element => (
 	<GroupMemberDisplay
-		email={__('user@ftek.se', 'ftek')}
+		email={__('user@ftek.se', 'ftek-plugin')}
 		mailto={false}
-		post={__('Post', 'ftek')}
-		firstName={__('Firstname', 'ftek')}
-		lastName={__('Lastname', 'ftek')}
-		nickName={__('Nickname', 'ftek')}
-		description={__('Loading member…', 'ftek')}
+		post={__('Post', 'ftek-plugin')}
+		firstName={__('Firstname', 'ftek-plugin')}
+		lastName={__('Lastname', 'ftek-plugin')}
+		nickName={__('Nickname', 'ftek-plugin')}
+		description={__('Loading member…', 'ftek-plugin')}
 	/>
 );

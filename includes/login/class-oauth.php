@@ -2,10 +2,10 @@
 /**
  * OAuth class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * OAuth class
@@ -111,7 +111,7 @@ class OAuth {
 		$response_code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== $response_code ) {
 			// translators: %1$s: HTTP status code.
-			throw new \Exception( sprintf( __( 'Unexpected status (%1$s) when fetching OAuth token', 'ftek' ), $response_code ) );
+			throw new \Exception( sprintf( __( 'Unexpected status (%1$s) when fetching OAuth token', 'ftek-plugin' ), $response_code ) );
 		}
 
 		$this->auth_token = json_decode( wp_remote_retrieve_body( $response ), true );
@@ -141,7 +141,7 @@ class OAuth {
 		$response_code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== $response_code ) {
 			// translators: %1$s: HTTP status code.
-			throw new \Exception( sprintf( __( 'Unexpected status (%1$s) when fetching user info', 'ftek' ), $response_code ) );
+			throw new \Exception( sprintf( __( 'Unexpected status (%1$s) when fetching user info', 'ftek-plugin' ), $response_code ) );
 		}
 
 		return json_decode( wp_remote_retrieve_body( $response ), true );
@@ -160,7 +160,7 @@ class OAuth {
 	 * Returns a valid redirect URI for the OAuth client
 	 */
 	public static function get_redirect_uri(): string {
-		return site_url( '?ftek_openid' );
+		return site_url( '?ftek_plugin_openid' );
 	}
 
 	/**
@@ -174,11 +174,11 @@ class OAuth {
 	 * Gets or generates the OAuth state parameter
 	 */
 	private function get_state(): string {
-		if ( isset( $_COOKIE['ftek_oauth_state'] ) ) {
-			$state = sanitize_key( $_COOKIE['ftek_oauth_state'] );
+		if ( isset( $_COOKIE['ftek_plugin_oauth_state'] ) ) {
+			$state = sanitize_key( $_COOKIE['ftek_plugin_oauth_state'] );
 		} else {
 			$state = $this->generate_random_key();
-			Cookies::set( 'ftek_oauth_state', $state );
+			Cookies::set( 'ftek_plugin_oauth_state', $state );
 		}
 		return $state;
 	}
@@ -194,18 +194,18 @@ class OAuth {
 			$response_code = wp_remote_retrieve_response_code( $response );
 			if ( 200 !== $response_code ) {
 				// translators: %1$s: HTTP status code.
-				throw new \Exception( sprintf( __( 'Unexpected status (%1$s) when fetching discovery document', 'ftek' ), $response_code ) );
+				throw new \Exception( sprintf( __( 'Unexpected status (%1$s) when fetching discovery document', 'ftek-plugin' ), $response_code ) );
 			}
 
 			$document = json_decode( wp_remote_retrieve_body( $response ), true );
 			if ( ! $document ) {
-				throw new \Exception( __( 'Error while parsing discovery document', 'ftek' ) );
+				throw new \Exception( __( 'Error while parsing discovery document', 'ftek-plugin' ) );
 			}
 
 			$endpoints = array_intersect_key( $document, array_flip( self::ENDPOINT_KEYS ) );
 			if ( count( self::ENDPOINT_KEYS ) !== count( $endpoints ) ) {
 				// translators: %1$s: Array keys.
-				throw new \Exception( sprintf( __( 'Missing one of (%1$s) in discovery document', 'ftek' ), implode( ', ', self::ENDPOINT_KEYS ) ) );
+				throw new \Exception( sprintf( __( 'Missing one of (%1$s) in discovery document', 'ftek-plugin' ), implode( ', ', self::ENDPOINT_KEYS ) ) );
 			}
 		}
 

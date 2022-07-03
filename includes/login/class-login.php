@@ -2,10 +2,10 @@
 /**
  * Login class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Login page state.
@@ -28,7 +28,7 @@ class Login {
 	 */
 	public static function perform_redirects(): void {
 		if ( ! self::is_required_options_set() ) {
-			Cookies::set( 'ftek_login_error', __( 'OAuth login was not possible since required settings are unset', 'ftek' ) );
+			Cookies::set( 'ftek_plugin_login_error', __( 'OAuth login was not possible since required settings are unset', 'ftek-plugin' ) );
 			return;
 		}
 
@@ -54,14 +54,14 @@ class Login {
 		$redirect_to = isset( $_REQUEST['redirect_to'] ) ? wp_sanitize_redirect( wp_unslash( $_REQUEST['redirect_to'] ) ) : null;
 
 		if ( $redirect_to ) {
-			Cookies::set( 'ftek_redirect_to', $redirect_to );
+			Cookies::set( 'ftek_plugin_redirect_to', $redirect_to );
 		}
 
 		$oauth = self::create_oauth();
 		try {
 			$authorization_url = $oauth->get_authorization_url();
 		} catch ( \Exception $e ) {
-			Cookies::set( 'ftek_login_error', $e->getMessage() );
+			Cookies::set( 'ftek_plugin_login_error', $e->getMessage() );
 			return;
 		}
 
@@ -76,12 +76,12 @@ class Login {
 	 */
 	public static function perform_login(): void {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( ! isset( $_GET['ftek_openid'] ) ) {
+		if ( ! isset( $_GET['ftek_plugin_openid'] ) ) {
 			return;
 		}
 
 		if ( ! self::is_required_options_set() ) {
-			Cookies::set( 'ftek_login_error', __( 'OAuth login was not possible since required settings are unset', 'ftek' ) );
+			Cookies::set( 'ftek_plugin_login_error', __( 'OAuth login was not possible since required settings are unset', 'ftek-plugin' ) );
 			return;
 		}
 
@@ -91,7 +91,7 @@ class Login {
 		 * @param string $error Error key of message to display on login page.
 		 */
 		function redirect_to_login_with_error( string $error ): void {
-			Cookies::set( 'ftek_login_error', $error );
+			Cookies::set( 'ftek_plugin_login_error', $error );
 			if ( wp_safe_redirect( add_query_arg( array( 'noopenid' => '' ), wp_login_url() ) ) ) {
 				exit;
 			}
@@ -99,7 +99,7 @@ class Login {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ! isset( $_GET['code'], $_GET['state'] ) ) {
-			redirect_to_login_with_error( __( 'Malformatted response to OpenID authentication request', 'ftek' ) );
+			redirect_to_login_with_error( __( 'Malformatted response to OpenID authentication request', 'ftek-plugin' ) );
 			return;
 		}
 
@@ -111,18 +111,18 @@ class Login {
 		$oauth = self::create_oauth();
 		try {
 			if ( ! $oauth->validate_state( $state ) ) {
-				redirect_to_login_with_error( __( 'Anti-forgery state token mismatch', 'ftek' ) );
+				redirect_to_login_with_error( __( 'Anti-forgery state token mismatch', 'ftek-plugin' ) );
 				return;
 			}
 
 			if ( ! $oauth->fetch_auth_token( $code ) ) {
-				redirect_to_login_with_error( __( 'There was an error recieving the OAuth access token', 'ftek' ) );
+				redirect_to_login_with_error( __( 'There was an error recieving the OAuth access token', 'ftek-plugin' ) );
 				return;
 			}
 
 			$user_info = $oauth->fetch_user_info();
 			if ( ! isset( $user_info['email'] ) ) {
-				redirect_to_login_with_error( __( 'There was an error fetching user info from the OAuth provider', 'ftek' ) );
+				redirect_to_login_with_error( __( 'There was an error fetching user info from the OAuth provider', 'ftek-plugin' ) );
 				return;
 			}
 		} catch ( \Exception $e ) {
@@ -140,7 +140,7 @@ class Login {
 			}
 		}
 		if ( ! $matches_any ) {
-			redirect_to_login_with_error( __( 'Sorry, your account cannot login to this site', 'ftek' ) );
+			redirect_to_login_with_error( __( 'Sorry, your account cannot login to this site', 'ftek-plugin' ) );
 			return;
 		}
 
@@ -154,7 +154,7 @@ class Login {
 		wp_set_auth_cookie( $user->ID );
 		do_action( 'wp_login', $user->user_login, $user );
 
-		$redirect = wp_sanitize_redirect( wp_unslash( $_COOKIE['ftek_redirect_to'] ?? '' ) );
+		$redirect = wp_sanitize_redirect( wp_unslash( $_COOKIE['ftek_plugin_redirect_to'] ?? '' ) );
 		$redirect = apply_filters(
 			'login_redirect',
 			empty( $redirect ) ? admin_url() : $redirect,
@@ -163,7 +163,7 @@ class Login {
 		);
 		$redirect = basename( $redirect ) === 'profile.php' ? admin_url() : $redirect;
 
-		Cookies::delete( 'ftek_redirect_to' );
+		Cookies::delete( 'ftek_plugin_redirect_to' );
 
 		if ( wp_safe_redirect( $redirect ) ) {
 			exit;
@@ -237,22 +237,22 @@ class Login {
 	/**
 	 * Callback for wp_login_errors filter hook
 	 *
-	 * Adds errors based on the ftek_login_error cookie
+	 * Adds errors based on the ftek_plugin_login_error cookie
 	 *
 	 * @param \WP_Error $error WP Error object.
 	 */
 	public static function wp_login_errors( \WP_Error $error ): \WP_Error {
 		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput
-		$message = isset( $_COOKIE['ftek_login_error'] ) ? $_COOKIE['ftek_login_error'] : null;
-		Cookies::delete( 'ftek_login_error' );
+		$message = isset( $_COOKIE['ftek_plugin_login_error'] ) ? $_COOKIE['ftek_plugin_login_error'] : null;
+		Cookies::delete( 'ftek_plugin_login_error' );
 
 		if ( $message ) {
-			$error->add( 'ftek_login_error', esc_html( $message ) );
+			$error->add( 'ftek_plugin_login_error', esc_html( $message ) );
 
 			$error->add(
-				'ftek_noopenid_notice',
+				'ftek_plugin_noopenid_notice',
 				// translators: %1$s: Anchor attributes.
-				sprintf( __( 'Since the OpenID login failed, you were taken to the default WordPress login page. If you want to attempt another sign in with OpenID, click <a %1$s>here</a>.', 'ftek' ), 'href="' . wp_login_url() . '"' ),
+				sprintf( __( 'Since the OpenID login failed, you were taken to the default WordPress login page. If you want to attempt another sign in with OpenID, click <a %1$s>here</a>.', 'ftek-plugin' ), 'href="' . wp_login_url() . '"' ),
 				'message'
 			);
 		}

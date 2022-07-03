@@ -1,10 +1,10 @@
 # Copyright (C) 2022 Ossian Eriksson
-# This file is distributed under the same license as the Ftek Monoplugin package.
+# This file is distributed under the same license as the Ftek Plugin package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Ftek Monoplugin 0.1.0\n"
+"Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-06-27T15:09:43+00:00\n"
+"POT-Creation-Date: 2022-07-03T08:30:07+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,14 +15,15 @@ msgstr ""
 "X-Generator: node-wp-i18n 1.2.6\n"
 
 #. Plugin Name of the plugin
-msgid "Ftek Monoplugin"
-msgstr "Ftek Monoplugin"
+msgid "Ftek Plugin"
+msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://github.com/fysikteknologsektionen/ftek-monoplugin"
+msgid "https://github.com/fysikteknologsektionen/ftek-plugin"
 msgstr ""
 
 #. Description of the plugin
+#, fuzzy
 msgid "WordPress monoplugin for ftek.se"
 msgstr "WordPress monoplugin för ftek.se"
 

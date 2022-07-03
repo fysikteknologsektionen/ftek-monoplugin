@@ -27,11 +27,14 @@ const CurrentCoursesList = ({
 	<>
 		{YEARS.map((year) => {
 			const currentPosts = posts
-				.filter((post) => post.meta.ftek_course_page_meta.year === year)
+				.filter(
+					(post) =>
+						post.meta.ftek_plugin_course_page_meta.year === year
+				)
 				.sort(
 					(a, b) =>
-						b.meta.ftek_course_page_meta.participant_count -
-						a.meta.ftek_course_page_meta.participant_count
+						b.meta.ftek_plugin_course_page_meta.participant_count -
+						a.meta.ftek_plugin_course_page_meta.participant_count
 				);
 
 			const scheduleLinks = PROGRAMS.filter(
@@ -48,16 +51,16 @@ const CurrentCoursesList = ({
 				(scheduleLinks
 					? ' ' +
 					  // translators: %1$s Hyperlink to a schedule
-					  __('(Schedule %1$s)', 'ftek').replace(
+					  __('(Schedule %1$s)', 'ftek-plugin').replace(
 							'%1$s',
 							scheduleLinks
 					  )
 					: '');
 
 			const noCoursesMessage = loading ? (
-				<p>{__('Loading courses…', 'ftek')}</p>
+				<p>{__('Loading courses…', 'ftek-plugin')}</p>
 			) : (
-				<p>{__('No courses found', 'ftek')}</p>
+				<p>{__('No courses found', 'ftek-plugin')}</p>
 			);
 
 			return (
@@ -76,7 +79,7 @@ const CurrentCoursesList = ({
 							</ul>
 							{loading && (
 								<span>
-									{__('Loading more courses…', 'ftek')}
+									{__('Loading more courses…', 'ftek-plugin')}
 								</span>
 							)}
 						</>
@@ -95,14 +98,13 @@ export const CurrentCourses = (): JSX.Element => {
 
 	useEffect(() => {
 		apiFetch<WPOption>({ path: '/wp/v2/settings' }).then((response) => {
-			setOption(response.ftek_option);
+			setOption(response.ftek_plugin__option);
 
 			const currentDate = new Date();
 			const sps = (
-				Object.entries(response.ftek_option.study_period_ends) as [
-					StudyPeriod,
-					StudyPeriodEnd
-				][]
+				Object.entries(
+					response.ftek_plugin__option.study_period_ends
+				) as [StudyPeriod, StudyPeriodEnd][]
 			)
 				.map(([sp, ends]) => ({
 					end: new Date(
@@ -129,7 +131,9 @@ export const CurrentCourses = (): JSX.Element => {
 	});
 
 	const posts = allPosts.filter((post) =>
-		post.meta.ftek_course_page_meta.study_perionds.includes(currentSp)
+		post.meta.ftek_plugin_course_page_meta.study_perionds.includes(
+			currentSp
+		)
 	);
 
 	return (

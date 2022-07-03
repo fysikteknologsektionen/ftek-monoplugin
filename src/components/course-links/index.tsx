@@ -10,21 +10,21 @@ const CourseLinks = ({
 }): JSX.Element => {
 	const linkItems: { text: string; url: string }[] = [
 		{
-			text: __('Course homepage', 'ftek'),
+			text: __('Course homepage', 'ftek-plugin'),
 			url: meta.homepage_url,
 		},
 		{
-			text: __('General info', 'ftek'),
+			text: __('General info', 'ftek-plugin'),
 			url: meta.info_url,
 		},
 		{
-			text: __('Latest survey', 'ftek'),
+			text: __('Latest survey', 'ftek-plugin'),
 			url: meta.survey_url,
 		},
 		...(meta.code
 			? [
 					{
-						text: __('Exam statistics', 'ftek'),
+						text: __('Exam statistics', 'ftek-plugin'),
 						url: `https://stats.ftek.se/${meta.code}`,
 					},
 			  ]

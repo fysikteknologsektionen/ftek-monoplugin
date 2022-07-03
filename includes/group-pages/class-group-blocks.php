@@ -2,10 +2,10 @@
 /**
  * Group_Blocks class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Group_Blocks page state.
@@ -26,18 +26,13 @@ class Group_Blocks {
 	public static function register_blocks(): void {
 		register_block_type( PLUGIN_ROOT . '/build/blocks/group-member' );
 		wp_set_script_translations(
-			'ftek-group-member-script',
-			'ftek',
+			'ftek-plugin-group-member-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 		wp_set_script_translations(
-			'ftek-group-member-script',
-			'ftek',
-			PLUGIN_ROOT . '/languages'
-		);
-		wp_set_script_translations(
-			'ftek-group-member-editor-script',
-			'ftek',
+			'ftek-plugin-group-member-editor-script',
+			'ftek-plugin',
 			PLUGIN_ROOT . '/languages'
 		);
 	}
@@ -47,7 +42,7 @@ class Group_Blocks {
 	 */
 	public static function add_user_rest_route(): void {
 		register_rest_route(
-			'ftek/v1',
+			'ftek-plugin/v1',
 			'/group/user',
 			array(
 				'methods'             => 'GET',

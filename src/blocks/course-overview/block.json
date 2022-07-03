@@ -1,9 +1,9 @@
 {
 	"apiVersion": 2,
-	"name": "ftek/course-overview",
+	"name": "ftek-plugin/course-overview",
 	"title": "Course overview",
 	"category": "widgets",
-	"textdomain": "ftek",
+	"textdomain": "ftek-plugin",
 	"editorScript": "file:editor.js",
 	"script": "file:script.js"
 }

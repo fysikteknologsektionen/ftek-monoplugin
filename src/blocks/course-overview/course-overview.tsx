@@ -47,7 +47,7 @@ const organizePosts = (
 	) as AllBachelorsCourses;
 
 	let footnotesIndex = 1;
-	const electiveCourseComment = __('Elective course', 'ftek');
+	const electiveCourseComment = __('Elective course', 'ftek-plugin');
 	const footnotes: Footnotes = {};
 
 	allPosts.forEach((post) => {
@@ -57,7 +57,7 @@ const organizePosts = (
 			study_perionds: studyPerionds,
 			comment,
 			elective,
-		} = post.meta.ftek_course_page_meta;
+		} = post.meta.ftek_plugin_course_page_meta;
 
 		if (prog.length <= 0 || !year) {
 			return;
@@ -107,9 +107,9 @@ const YearOverview = ({
 
 	if (Math.max(...Object.values(maxCourses)) <= 0) {
 		return loading ? (
-			<p>{__('Loading courses…', 'ftek')}</p>
+			<p>{__('Loading courses…', 'ftek-plugin')}</p>
 		) : (
-			<p>{__('No courses found', 'ftek')}</p>
+			<p>{__('No courses found', 'ftek-plugin')}</p>
 		);
 	}
 
@@ -120,7 +120,10 @@ const YearOverview = ({
 				<th key={i}>
 					{
 						// translators: %1$s Number of the study period
-						__('Study period %1$s', 'ftek').replace('%1$s', sp)
+						__('Study period %1$s', 'ftek-plugin').replace(
+							'%1$s',
+							sp
+						)
 					}
 				</th>
 			))}
@@ -136,7 +139,10 @@ const YearOverview = ({
 					<th rowSpan={rows}>
 						{program === 'multiple'
 							? // translators: %1$s Number of the year
-							  _x('Y%1$s', 'grade', 'ftek').replace('%1$s', year)
+							  _x('Y%1$s', 'grade', 'ftek-plugin').replace(
+									'%1$s',
+									year
+							  )
 							: fmtProgramsYear([program], year)}
 					</th>
 				)}
@@ -175,7 +181,9 @@ const YearOverview = ({
 				<thead>{head}</thead>
 				<tbody>{body}</tbody>
 			</table>
-			{loading && <span>{__('Loading more courses…', 'ftek')}</span>}
+			{loading && (
+				<span>{__('Loading more courses…', 'ftek-plugin')}</span>
+			)}
 		</>
 	);
 };

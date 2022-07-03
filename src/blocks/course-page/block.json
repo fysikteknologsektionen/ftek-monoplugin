@@ -1,9 +1,9 @@
 {
 	"apiVersion": 2,
-	"name": "ftek/course-page",
+	"name": "ftek-plugin/course-page",
 	"title": "Course page",
 	"category": "design",
-	"textdomain": "ftek",
+	"textdomain": "ftek-plugin",
 	"attributes": {
 		"code": {
 			"type": "string",

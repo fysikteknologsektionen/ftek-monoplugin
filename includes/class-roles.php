@@ -2,10 +2,10 @@
 /**
  * Roles class
  *
- * @package ftek\monoplugin
+ * @package ftek\plugin
  */
 
-namespace Ftek\Monoplugin;
+namespace Ftek\Plugin;
 
 /**
  * Roles class
@@ -93,7 +93,7 @@ class Roles {
 		if ( 'User role' === $context && 'default' === $domain ) {
 			switch ( $text ) {
 				case 'Division active':
-					return _x( 'Division active', 'User role', 'ftek' );
+					return _x( 'Division active', 'User role', 'ftek-plugin' );
 			}
 		}
 		return $translation;

@@ -1,12 +1,12 @@
 {
 	"apiVersion": 2,
-	"name": "ftek/drive-list",
+	"name": "ftek-plugin/drive-list",
 	"title": "Drive List",
 	"category": "media",
 	"description": "Lists files in a shared Google Drive folder",
 	"keywords": ["drive", "google", "file"],
 	"icon": "list-view",
-	"textdomain": "ftek",
+	"textdomain": "ftek-plugin",
 	"attributes": {
 		"url": {
 			"type": "string"

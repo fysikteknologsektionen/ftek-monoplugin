@@ -138,7 +138,7 @@ function CourseList({
 	const lcSearch = filter.search.toLowerCase();
 	const filteredPosts = posts
 		.filter((post) => {
-			const meta: CoursePageMeta = post.meta.ftek_course_page_meta;
+			const meta: CoursePageMeta = post.meta.ftek_plugin_course_page_meta;
 			return (
 				(post.title.rendered.toLowerCase().includes(lcSearch) ||
 					meta.code.toLocaleLowerCase().includes(lcSearch)) &&
@@ -152,8 +152,8 @@ function CourseList({
 		})
 		.sort(
 			(a, b) =>
-				b.meta.ftek_course_page_meta.participant_count -
-				a.meta.ftek_course_page_meta.participant_count
+				b.meta.ftek_plugin_course_page_meta.participant_count -
+				a.meta.ftek_plugin_course_page_meta.participant_count
 		);
 
 	return (
@@ -161,7 +161,7 @@ function CourseList({
 			<div style={{ display: 'flex', flexWrap: 'wrap-reverse' }}>
 				<div style={{ flexGrow: 1 }}>
 					<Select
-						label={__('Entries to display: ', 'ftek')}
+						label={__('Entries to display: ', 'ftek-plugin')}
 						value={filter.perPage}
 						onChange={(e) =>
 							updateFilter({
@@ -185,13 +185,13 @@ function CourseList({
 							})
 						}
 					>
-						{__('Clear filters', 'ftek')}
+						{__('Clear filters', 'ftek-plugin')}
 					</button>
 				</div>
 				<div style={{ marginBottom: '0.5em' }}>
 					<Input
 						type="text"
-						label={_x('Search: ', 'course page', 'ftek')}
+						label={_x('Search: ', 'course page', 'ftek-plugin')}
 						defaultValue={filter.search}
 						onChange={(e) =>
 							updateFilter({ search: e.target.value })
@@ -203,12 +203,12 @@ function CourseList({
 				<table style={{ width: '100%' }}>
 					<thead>
 						<tr>
-							<th>{__('Course page', 'ftek')}</th>
-							<th>{__('Course code', 'ftek')}</th>
-							<th>{__('Credits', 'ftek')}</th>
+							<th>{__('Course page', 'ftek-plugin')}</th>
+							<th>{__('Course code', 'ftek-plugin')}</th>
+							<th>{__('Credits', 'ftek-plugin')}</th>
 							<th>
 								<div>
-									{_x('Year', 'grade', 'ftek')}
+									{_x('Year', 'grade', 'ftek-plugin')}
 									&nbsp;
 									<Dropdown
 										disabled={loading}
@@ -243,7 +243,7 @@ function CourseList({
 							</th>
 							<th>
 								<div>
-									{__('Study period', 'ftek')}
+									{__('Study period', 'ftek-plugin')}
 									&nbsp;
 									<Dropdown
 										disabled={loading}
@@ -264,7 +264,7 @@ function CourseList({
 									</Dropdown>
 								</div>
 							</th>
-							<th>{__('Links', 'ftek')}</th>
+							<th>{__('Links', 'ftek-plugin')}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -274,7 +274,8 @@ function CourseList({
 								(filter.pageIndex + 1) * filter.perPage
 							)
 							.map((item, i) => {
-								const meta = item.meta.ftek_course_page_meta;
+								const meta =
+									item.meta.ftek_plugin_course_page_meta;
 
 								return (
 									<tr key={i}>
@@ -304,15 +305,15 @@ function CourseList({
 							<tr>
 								<td colSpan={6}>
 									{loading
-										? __('Loading courses…', 'ftek')
-										: __('No courses found', 'ftek')}
+										? __('Loading courses…', 'ftek-plugin')
+										: __('No courses found', 'ftek-plugin')}
 								</td>
 							</tr>
 						)}
 						{filteredPosts.length > 0 && loading && (
 							<tr>
 								<td colSpan={6}>
-									{__('Loading more courses…', 'ftek')}
+									{__('Loading more courses…', 'ftek-plugin')}
 								</td>
 							</tr>
 						)}
@@ -323,7 +324,10 @@ function CourseList({
 				<small style={{ flexGrow: 1 }}>
 					{
 						// translators: %1$s %2$s %3$s Numbers
-						__('Showing %1$s to %2$s of %3$s entries', 'ftek')
+						__(
+							'Showing %1$s to %2$s of %3$s entries',
+							'ftek-plugin'
+						)
 							.replace(
 								'%1$s',
 								Math.min(
@@ -348,7 +352,7 @@ function CourseList({
 							updateFilter({ pageIndex: filter.pageIndex - 1 })
 						}
 					>
-						{_x('Previous', 'course page', 'ftek')}
+						{_x('Previous', 'course page', 'ftek-plugin')}
 					</button>
 					&nbsp;
 					<button
@@ -360,7 +364,7 @@ function CourseList({
 							updateFilter({ pageIndex: filter.pageIndex + 1 })
 						}
 					>
-						{_x('Next', 'course page', 'ftek')}
+						{_x('Next', 'course page', 'ftek-plugin')}
 					</button>
 				</div>
 			</div>
