@@ -83,9 +83,9 @@ npm run i18n
 
 to scan the source code for translatable strings (which are stored in a POT file inside the `languages` folder) and update existing translations (PO files also stored inside `languages`) from the POT file. To edit an existing localization, edit the corresponding PO file. To create a new localization, copy the POT file to a new PO file inside `languages`. Assuming the POT file is named `my-text-domain.pot`, name the PO file `my-text-domain-{locale}.po`, for example `my-text-domain-en_US.po`. Lists of locale codes available in WordPress can be found [online](https://wpastra.com/docs/complete-list-wordpress-locale-codes/).
 
-### CSS modules
+### Note on CSS modules
 
-If using CSS/SASS modules (`*.module.scss`) be careful to make sure that updating the plugin doesn't break your styles. If you for example use a CSS module to style a block and later update the plugin so that the module hashes changes old block styles will break. This is because Gutenberg saves the CSS class along with the fully rendered block to the WordPress database, so when the block is shown to the user it will expect CSS classes with the same names as when the block was saved to still exist.
+If you decide to use CSS/SASS modules (`*.module.scss`) be careful to make sure that updating the plugin doesn't break your styles. If you for example use a CSS module to style a block and later update the plugin so that the module hashes changes old block styles will break. This is because Gutenberg saves the CSS class along with the fully rendered block to the WordPress database, so when the block is shown to the user it will expect CSS classes with the same names as when the block was saved to still exist.
 
 CSS modules can safetly be used in cases where the CSS class names are always kept up to date, like the settings page.
 
