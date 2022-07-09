@@ -20,7 +20,6 @@ const getAllEntryPoints = () => {
 	const entry = getWebpackEntryPoints();
 	process.env.WP_ENTRY = wpEntry;
 
-	// Return
 	return {
 		...entry,
 		// As WP_ENTRY has now been reinstaded, this function call yields
@@ -29,9 +28,7 @@ const getAllEntryPoints = () => {
 	};
 };
 
-/* eslint-disable */
 /** @type {import('webpack').Configuration} */
-/* eslint-enable */
 module.exports = {
 	...defaultConfig,
 	entry: getAllEntryPoints(),

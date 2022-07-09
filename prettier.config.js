@@ -1,6 +1,4 @@
-/* eslint-disable */
 /** @type {import('prettier').Config} */
-/* eslint-enable */
 module.exports = {
 	...require('@wordpress/prettier-config'),
 	overrides: [
