@@ -37,11 +37,11 @@ const GroupMemberDisplay = ({
 	picture?: string;
 }): JSX.Element => (
 	<div style={{ display: 'flex' }}>
-		<div style={{ marginRight: '0.5em', flexShrink: 0 }}>
+		<div style={{ marginRight: '0.5rem', flexShrink: 0 }}>
 			<img
 				src={picture}
 				alt={__('Profile picture', 'ftek-plugin')}
-				style={{ width: '5em' }}
+				style={{ width: '5rem' }}
 			/>
 		</div>
 		<div>

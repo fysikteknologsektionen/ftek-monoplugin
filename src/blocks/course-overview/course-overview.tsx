@@ -177,10 +177,12 @@ const YearOverview = ({
 
 	return (
 		<>
-			<table>
-				<thead>{head}</thead>
-				<tbody>{body}</tbody>
-			</table>
+			<div style={{ overflowX: 'auto' }}>
+				<table style={{ width: '100%' }}>
+					<thead>{head}</thead>
+					<tbody>{body}</tbody>
+				</table>
+			</div>
 			{loading && (
 				<span>{__('Loading more courses…', 'ftek-plugin')}</span>
 			)}

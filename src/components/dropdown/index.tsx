@@ -1,16 +1,21 @@
 import { useState, useRef, useEffect } from '@wordpress/element';
 
+type ButtonProps = {
+	toggleExpanded?: () => void;
+	active?: boolean;
+};
+
 const Menu = ({
 	Button,
 	children,
 }: {
-	Button: (props: { toggleExpanded?: () => void }) => JSX.Element;
-	children: React.ReactNode;
+	Button: (props: ButtonProps) => JSX.Element;
+	children: React.ReactNode | ((close: () => void) => React.ReactNode);
 }): JSX.Element => {
 	const [expanded, setExpanded] = useState(false);
 	const [position, setPosition] = useState<React.CSSProperties>({});
 	const dropdownRef = useRef<HTMLDivElement>();
-	const spanRef = useRef<HTMLSpanElement>();
+	const spanRef = useRef<HTMLDivElement>();
 
 	useEffect(() => {
 		if (dropdownRef.current) {
@@ -32,6 +37,9 @@ const Menu = ({
 		const docRect = document.documentElement.getBoundingClientRect();
 		const dropdownRect = dropdownRef.current.getBoundingClientRect();
 
+		console.info(spanRect);
+		console.info(dropdownRect);
+
 		setPosition({
 			left:
 				spanRect.left + dropdownRect.width > docRect.right
@@ -45,7 +53,7 @@ const Menu = ({
 	};
 
 	useEffect(() => {
-		if (dropdownRef.current && spanRef.current && expanded) {
+		if (dropdownRef.current && spanRef.current) {
 			updatePosition();
 
 			window.addEventListener('scroll', updatePosition, true);
@@ -59,14 +67,24 @@ const Menu = ({
 	}, [dropdownRef.current, spanRef.current]);
 
 	return (
-		<span ref={spanRef} style={{ position: 'relative' }}>
-			<Button toggleExpanded={() => setExpanded(!expanded)} />
+		<div
+			ref={spanRef}
+			style={{
+				position: 'relative',
+				display: 'inline-block',
+			}}
+		>
+			<Button
+				active={expanded}
+				toggleExpanded={() => setExpanded(!expanded)}
+			/>
 
 			<div
 				ref={dropdownRef}
 				style={{
+					display: 'inline-block',
 					backgroundColor: 'white',
-					padding: '0.5em',
+					padding: '0.5rem',
 					position: 'fixed',
 					width: 'max-content',
 					zIndex: 100,
@@ -75,23 +93,26 @@ const Menu = ({
 					pointerEvents: expanded ? 'initial' : 'none',
 				}}
 			>
-				{children}
+				{typeof children === 'function'
+					? children(() => setExpanded(false))
+					: children}
 			</div>
-		</span>
+		</div>
 	);
 };
 
 const Dropdown = ({
 	content,
 	children,
-	disabled,
+	disabled = false,
 }: {
 	content: React.ReactNode;
-	children: React.ReactNode;
-	disabled: boolean;
+	children: React.ReactNode | ((close: () => void) => React.ReactNode);
+	disabled?: boolean;
 }): JSX.Element => {
-	const Button = (props: { toggleExpanded?: () => void }): JSX.Element => (
+	const Button = (props: ButtonProps): JSX.Element => (
 		<button
+			{...(props.active ? { active: '' } : {})}
 			disabled={disabled}
 			onClick={(e) => {
 				e.stopPropagation();

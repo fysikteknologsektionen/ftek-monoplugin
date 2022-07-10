@@ -160,21 +160,36 @@ function CourseList({
 		<div>
 			<div style={{ display: 'flex', flexWrap: 'wrap-reverse' }}>
 				<div style={{ flexGrow: 1 }}>
-					<Select
-						label={__('Entries to display: ', 'ftek-plugin')}
-						value={filter.perPage}
-						onChange={(e) =>
-							updateFilter({
-								perPage: parseInt(e.target.value),
-							})
+					<Dropdown
+						content={
+							<span>
+								{filter.perPage}
+								<span
+									style={{
+										marginLeft: '0.5rem',
+										display: 'inline-block',
+										transform: 'rotate(90deg)',
+									}}
+								>
+									❯
+								</span>
+							</span>
 						}
 					>
-						{[10, 20, 50, 100].map((value) => (
-							<option key={value} value={value}>
-								{value}
-							</option>
-						))}
-					</Select>
+						{(close) =>
+							[10, 20, 50, 100].map((value) => (
+								<a
+									style={{ display: 'block' }}
+									onClick={() => {
+										close();
+										updateFilter({ perPage: value });
+									}}
+								>
+									{value}
+								</a>
+							))
+						}
+					</Dropdown>
 					&nbsp;
 					<button
 						onClick={() =>
@@ -188,7 +203,7 @@ function CourseList({
 						{__('Clear filters', 'ftek-plugin')}
 					</button>
 				</div>
-				<div style={{ marginBottom: '0.5em' }}>
+				<div style={{ marginBottom: '0.5rem' }}>
 					<Input
 						type="text"
 						label={_x('Search: ', 'course page', 'ftek-plugin')}
@@ -320,7 +335,7 @@ function CourseList({
 					</tbody>
 				</table>
 			</div>
-			<div style={{ display: 'flex' }}>
+			<div style={{ display: 'flex', marginTop: '0.5rem' }}>
 				<small style={{ flexGrow: 1 }}>
 					{
 						// translators: %1$s %2$s %3$s Numbers

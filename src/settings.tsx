@@ -114,14 +114,14 @@ const UsersSettings = ({
 				style={{
 					display: 'flex',
 					flexDirection: 'row',
-					marginBottom: '1em',
+					marginBottom: '1rem',
 				}}
 			>
 				<div
 					style={{
 						display: 'flex',
 						alignItems: 'flex-end',
-						paddingBottom: '0.4em',
+						paddingBottom: '0.4rem',
 					}}
 				>
 					<Button onClick={onDelete} variant="secondary">
@@ -131,8 +131,8 @@ const UsersSettings = ({
 				<div
 					style={{
 						flex: 1,
-						marginLeft: '1em',
-						marginRight: '1em',
+						marginLeft: '1rem',
+						marginRight: '1rem',
 					}}
 				>
 					<TextControl
@@ -147,7 +147,7 @@ const UsersSettings = ({
 					style={{
 						display: 'flex',
 						alignItems: 'flex-end',
-						paddingBottom: '0.4em',
+						paddingBottom: '0.4rem',
 					}}
 				>
 					<DropdownMenu
