@@ -81,6 +81,7 @@ const Menu = ({
 
 			<div
 				ref={dropdownRef}
+				className="ftek-plugin-dropdown-area"
 				style={{
 					display: 'inline-block',
 					backgroundColor: 'white',
@@ -112,6 +113,7 @@ const Dropdown = ({
 }): JSX.Element => {
 	const Button = (props: ButtonProps): JSX.Element => (
 		<button
+			className="ftek-plugin-dropdown-button"
 			{...(props.active ? { active: '' } : {})}
 			disabled={disabled}
 			onClick={(e) => {
