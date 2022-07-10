@@ -179,7 +179,10 @@ function CourseList({
 						{(close) =>
 							[10, 20, 50, 100].map((value) => (
 								<a
-									style={{ display: 'block' }}
+									style={{
+										display: 'block',
+										cursor: 'pointer',
+									}}
 									onClick={() => {
 										close();
 										updateFilter({ perPage: value });
