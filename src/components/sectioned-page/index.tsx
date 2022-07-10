@@ -1,9 +1,9 @@
 const Main = ({ children }: { children: React.ReactNode }) => (
-	<div>{children}</div>
+	<div className="ftek-plugin-sectioned-page-main">{children}</div>
 );
 
 const Aside = ({ children }: { children: React.ReactNode }) => (
-	<aside>{children}</aside>
+	<aside className="ftek-plugin-sectioned-page-aside">{children}</aside>
 );
 
 const SectionedPage = ({
@@ -13,7 +13,7 @@ const SectionedPage = ({
 		React.ReactElement<typeof Main>,
 		React.ReactElement<typeof Aside>
 	];
-}): JSX.Element => <div>{children}</div>;
+}): JSX.Element => <div className="ftek-plugin-sectioned-page">{children}</div>;
 
 SectionedPage.Main = Main;
 SectionedPage.Aside = Aside;
