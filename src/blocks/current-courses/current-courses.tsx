@@ -9,7 +9,7 @@ import {
 	StudyPeriod,
 	WPOption,
 	StudyPeriodEnd,
-	YEARS,
+	BACHELOR_YEARS,
 	PROGRAMS,
 } from '../../utils/types';
 import useFetchAll from '../../hooks/useFetchAll';
@@ -25,7 +25,7 @@ const CurrentCoursesList = ({
 	loading: boolean;
 }): JSX.Element => (
 	<>
-		{YEARS.map((year) => {
+		{BACHELOR_YEARS.map((year) => {
 			const currentPosts = posts
 				.filter(
 					(post) =>
