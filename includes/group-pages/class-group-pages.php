@@ -180,10 +180,17 @@ class Group_Pages {
 		if ( $group_tag_id >= 0 ) {
 			wp_update_term( $group_tag_id, 'post_tag', $taxonomy );
 		} else {
-			$term                 = wp_insert_term( $data['post_title'], 'post_tag', $taxonomy );
-			$group_tag_id         = $term['term_id'];
-			$meta['group_tag_id'] = $group_tag_id;
-			update_post_meta( $postarr['ID'], 'ftek_plugin_group_page_meta', $meta );
+			$term_id = term_exists( $data['post_title'], 'post_tag' );
+			if ( is_int( $term_id ) ) {
+				$group_tag_id = $term_id;
+			} elseif ( is_array( $term_id ) ) {
+				$group_tag_id = $term_id['term_id'];
+			} else {
+				$term                 = wp_insert_term( $data['post_title'], 'post_tag', $taxonomy );
+				$group_tag_id         = $term['term_id'];
+				$meta['group_tag_id'] = $group_tag_id;
+				update_post_meta( $postarr['ID'], 'ftek_plugin_group_page_meta', $meta );
+			}
 		}
 
 		if ( $group_tag_id < 0 ) {
