@@ -95,7 +95,7 @@ class Group_Pages {
 				'menu_icon'           => 'data:image/svg+xml;base64,' . base64_encode( file_get_contents( PLUGIN_ROOT . '/assets/group.svg' ) ),
 				'capability_type'     => 'page',
 				'delete_with_user'    => false,
-				'supports'            => array( 'editor', 'custom-fields', 'title' ),
+				'supports'            => array( 'editor', 'custom-fields', 'title', 'thumbnail' ),
 				'rewrite'             => array(
 					'slug'       => '/',
 					'with_front' => false,
