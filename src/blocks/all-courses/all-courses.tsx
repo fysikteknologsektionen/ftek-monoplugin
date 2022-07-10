@@ -225,58 +225,70 @@ function CourseList({
 								<div>
 									{_x('Year', 'grade', 'ftek-plugin')}
 									&nbsp;
-									<Dropdown
-										disabled={loading}
-										content={
-											<Icon icon={filterIcon} size={20} />
-										}
-									>
-										<CheckboxGroup
-											values={filter.years}
-											boxes={YEARS.map((year) => ({
-												value: year,
-												label: fmtYear(year),
-											}))}
-											onChange={(years) =>
-												updateFilter({ years })
+									<span style={{ fontWeight: 'normal' }}>
+										<Dropdown
+											disabled={loading}
+											content={
+												<Icon
+													icon={filterIcon}
+													size={20}
+												/>
 											}
-										/>
-										<CheckboxGroup
-											values={filter.programs}
-											boxes={PROGRAMS.map((prog) => ({
-												value: prog,
-												label: prog,
-											}))}
-											onChange={(programs) =>
-												updateFilter({
-													programs,
-												})
-											}
-										/>
-									</Dropdown>
+										>
+											<CheckboxGroup
+												values={filter.years}
+												boxes={YEARS.map((year) => ({
+													value: year,
+													label: fmtYear(year),
+												}))}
+												onChange={(years) =>
+													updateFilter({ years })
+												}
+											/>
+											<CheckboxGroup
+												values={filter.programs}
+												boxes={PROGRAMS.map((prog) => ({
+													value: prog,
+													label: prog,
+												}))}
+												onChange={(programs) =>
+													updateFilter({
+														programs,
+													})
+												}
+											/>
+										</Dropdown>
+									</span>
 								</div>
 							</th>
 							<th>
 								<div>
 									{__('Study period', 'ftek-plugin')}
 									&nbsp;
-									<Dropdown
-										disabled={loading}
-										content={
-											<Icon icon={filterIcon} size={20} />
-										}
-									>
-										<CheckboxGroup
-											values={filter.sps}
-											boxes={STUDY_PERIODS.map((sp) => ({
-												value: sp,
-												label: fmtSPs([sp]),
-											}))}
-											onChange={(sps) =>
-												updateFilter({ sps })
+									<span style={{ fontWeight: 'normal' }}>
+										<Dropdown
+											disabled={loading}
+											content={
+												<Icon
+													icon={filterIcon}
+													size={20}
+												/>
 											}
-										/>
-									</Dropdown>
+										>
+											<CheckboxGroup
+												values={filter.sps}
+												boxes={STUDY_PERIODS.map(
+													(sp) => ({
+														value: sp,
+														label: fmtSPs([sp]),
+													})
+												)}
+												onChange={(sps) =>
+													updateFilter({ sps })
+												}
+											/>
+										</Dropdown>
+									</span>
 								</div>
 							</th>
 							<th>{__('Links', 'ftek-plugin')}</th>
