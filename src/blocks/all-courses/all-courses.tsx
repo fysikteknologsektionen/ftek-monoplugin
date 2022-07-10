@@ -215,7 +215,7 @@ function CourseList({
 				</div>
 			</div>
 			<div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
-				<table style={{ width: '100%' }}>
+				<table style={{ width: '100%', overflow: 'hidden' }}>
 					<thead>
 						<tr>
 							<th>{__('Course page', 'ftek-plugin')}</th>
