@@ -178,7 +178,8 @@ function CourseList({
 					>
 						{(close) =>
 							[10, 20, 50, 100].map((value) => (
-								<a
+								<button
+									key={value}
 									style={{
 										display: 'block',
 										cursor: 'pointer',
@@ -189,7 +190,7 @@ function CourseList({
 									}}
 								>
 									{value}
-								</a>
+								</button>
 							))
 						}
 					</Dropdown>
@@ -225,7 +226,12 @@ function CourseList({
 							<th>{__('Course code', 'ftek-plugin')}</th>
 							<th>{__('Credits', 'ftek-plugin')}</th>
 							<th>
-								<div>
+								<div
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+									}}
+								>
 									{_x('Year', 'grade', 'ftek-plugin')}
 									&nbsp;
 									<span style={{ fontWeight: 'normal' }}>
@@ -265,7 +271,12 @@ function CourseList({
 								</div>
 							</th>
 							<th>
-								<div>
+								<div
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+									}}
+								>
 									{__('Study period', 'ftek-plugin')}
 									&nbsp;
 									<span style={{ fontWeight: 'normal' }}>

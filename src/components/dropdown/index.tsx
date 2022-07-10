@@ -37,9 +37,6 @@ const Menu = ({
 		const docRect = document.documentElement.getBoundingClientRect();
 		const dropdownRect = dropdownRef.current.getBoundingClientRect();
 
-		console.info(spanRect);
-		console.info(dropdownRect);
-
 		setPosition({
 			left:
 				spanRect.left + dropdownRect.width > docRect.right

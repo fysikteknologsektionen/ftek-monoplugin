@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-monoplugin\n"
-"POT-Creation-Date: 2022-07-03T09:47:44+00:00\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-plugin\n"
+"POT-Creation-Date: 2022-07-10T11:02:18+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -378,10 +378,6 @@ msgstr "Senaste kursnämndsprotokoll"
 #: build/blocks/course-page/editor.js:1
 msgid "Exam statistics"
 msgstr "Tentastatistik"
-
-#: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
-msgid "Entries to display: "
-msgstr "Poster att visa: "
 
 #: build/blocks/all-courses/editor.js:3 build/blocks/all-courses/script.js:3
 msgid "Clear filters"
@@ -897,3 +893,6 @@ msgstr "Föreningsmedlem"
 msgctxt "block title"
 msgid "Group page"
 msgstr "Föreningssida"
+
+#~ msgid "Entries to display: "
+#~ msgstr "Poster att visa: "
