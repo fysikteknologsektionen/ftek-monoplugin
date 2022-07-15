@@ -48,8 +48,12 @@ function add_global_js_variable( string $handle ): void {
 				'roles'            => _get_available_roles(),
 				'oauthRedirectUri' => OAuth::get_redirect_uri(),
 				'assets'           => array(
-					'openBook' => plugins_url( '/assets/open-book.svg', PLUGIN_FILE ),
-					'group'    => plugins_url( '/assets/group.svg', PLUGIN_FILE ),
+					'openBook'  => plugins_url( '/assets/open-book.svg', PLUGIN_FILE ),
+					'group'     => plugins_url( '/assets/group.svg', PLUGIN_FILE ),
+					'facebook'  => plugins_url( '/assets/facebook.svg', PLUGIN_FILE ),
+					'instagram' => plugins_url( '/assets/instagram.svg', PLUGIN_FILE ),
+					'snapchat'  => plugins_url( '/assets/snapchat.svg', PLUGIN_FILE ),
+					'youtube'   => plugins_url( '/assets/youtube.svg', PLUGIN_FILE ),
 				),
 			)
 		),

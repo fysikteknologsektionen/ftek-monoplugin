@@ -9,6 +9,8 @@ import {
 } from '@wordpress/components';
 import { DriveList, Attributes, attrsOrDefault } from './drive-list';
 
+import { serialize } from '../../utils/dataAttribute';
+
 import metadata from './block.json';
 
 const Edit = ({
@@ -83,7 +85,7 @@ const Edit = ({
 };
 
 const Save = ({ attributes }: { attributes: Attributes }): JSX.Element => (
-	<div {...useBlockProps.save()} data={JSON.stringify(attributes)}>
+	<div {...useBlockProps.save()} data={serialize(attributes)}>
 		<DriveList.Loading />
 	</div>
 );

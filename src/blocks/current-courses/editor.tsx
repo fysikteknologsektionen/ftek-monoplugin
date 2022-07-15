@@ -2,6 +2,8 @@ import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
 import { CurrentCourses } from './current-courses';
 
+import { serialize } from '../../utils/dataAttribute';
+
 import metadata from './block.json';
 
 const Edit = (): JSX.Element => (
@@ -11,7 +13,7 @@ const Edit = (): JSX.Element => (
 );
 
 const Save = (): JSX.Element => (
-	<div {...useBlockProps.save()} data="{}">
+	<div {...useBlockProps.save()} data={serialize({})}>
 		<CurrentCourses.Loading />
 	</div>
 );

@@ -15,6 +15,11 @@ class Group_Pages {
 	const DEFAULTS = array(
 		'logo_url'     => '',
 		'group_tag_id' => -1,
+		'email'        => '',
+		'facebook'     => '',
+		'instagram'    => '',
+		'snapchat'     => '',
+		'youtube'      => '',
 	);
 
 	/**
@@ -35,6 +40,21 @@ class Group_Pages {
 	public static function activate(): void {
 		self::register_post_type();
 		flush_rewrite_rules();
+
+		$posts = get_posts(
+			array(
+				'post_type'   => 'group-page',
+				'numberposts' => -1,
+			)
+		);
+
+		foreach ( $posts as $post ) {
+			update_post_meta(
+				$post->ID,
+				'ftek_plugin_group_page_meta',
+				array_merge( get_post_meta( $post->ID, 'ftek_plugin_group_page_meta', true ), self::DEFAULTS )
+			);
+		}
 	}
 
 	/**
@@ -43,6 +63,7 @@ class Group_Pages {
 	public static function register_post_type(): void {
 		register_block_type( PLUGIN_ROOT . '/build/blocks/group-page' );
 		add_global_js_variable( 'ftek-plugin-group-page-editor-script' );
+		add_global_js_variable( 'ftek-plugin-group-page-script' );
 		wp_set_script_translations(
 			'ftek-plugin-group-page-editor-script',
 			'ftek-plugin',
@@ -133,6 +154,26 @@ class Group_Pages {
 							),
 							'group_tag_id' => array(
 								'type'     => 'number',
+								'required' => true,
+							),
+							'email'        => array(
+								'type'     => 'string',
+								'required' => true,
+							),
+							'facebook'     => array(
+								'type'     => 'string',
+								'required' => true,
+							),
+							'instagram'    => array(
+								'type'     => 'string',
+								'required' => true,
+							),
+							'snapchat'     => array(
+								'type'     => 'string',
+								'required' => true,
+							),
+							'youtube'      => array(
+								'type'     => 'string',
 								'required' => true,
 							),
 						),

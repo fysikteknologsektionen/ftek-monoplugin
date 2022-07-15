@@ -4,7 +4,12 @@ import {
 	InspectorControls,
 	useBlockProps,
 } from '@wordpress/block-editor';
-import { PanelBody, PanelRow, Button } from '@wordpress/components';
+import {
+	PanelBody,
+	PanelRow,
+	Button,
+	TextControl,
+} from '@wordpress/components';
 import { useDispatch } from '@wordpress/data';
 import { registerBlockType } from '@wordpress/blocks';
 import { registerPlugin } from '@wordpress/plugins';
@@ -14,6 +19,7 @@ import { __ } from '@wordpress/i18n';
 
 import { GroupPageMeta, Inline, WPGroupPageMeta } from '../../utils/types';
 import usePostMeta from '../../hooks/usePostMeta';
+import { serialize } from '../../utils/dataAttribute';
 
 import SVGImage from '../../components/svg-image';
 
@@ -35,27 +41,64 @@ const Controls = ({
 	meta: GroupPageMeta;
 	updateMeta: (m: Partial<GroupPageMeta>) => void;
 }) => (
-	<PanelRow>
-		<MediaUploadCheck>
-			<MediaUpload
-				onSelect={(media) => updateMeta({ logo_url: media.url })}
-				allowedTypes={['image']}
-				render={({ open }) => (
-					<Button variant="secondary" onClick={open}>
-						{__('Select logo', 'ftek-plugin')}
+	<>
+		<PanelRow>
+			<MediaUploadCheck>
+				<MediaUpload
+					onSelect={(media) => updateMeta({ logo_url: media.url })}
+					allowedTypes={['image']}
+					render={({ open }) => (
+						<Button variant="secondary" onClick={open}>
+							{__('Select logo', 'ftek-plugin')}
+						</Button>
+					)}
+				/>
+				{meta.logo_url && (
+					<Button
+						variant="secondary"
+						onClick={() => updateMeta({ logo_url: '' })}
+					>
+						{__('Remove logo', 'ftek-plugin')}
 					</Button>
 				)}
+			</MediaUploadCheck>
+		</PanelRow>
+		<PanelRow>
+			<TextControl
+				label={__('Email', 'ftek-plugin')}
+				value={meta.email}
+				onChange={(value: string) => updateMeta({ email: value })}
 			/>
-			{meta.logo_url && (
-				<Button
-					variant="secondary"
-					onClick={() => updateMeta({ logo_url: '' })}
-				>
-					{__('Remove logo', 'ftek-plugin')}
-				</Button>
-			)}
-		</MediaUploadCheck>
-	</PanelRow>
+		</PanelRow>
+		<PanelRow>
+			<TextControl
+				label={__('Facebook url', 'ftek-plugin')}
+				value={meta.facebook}
+				onChange={(value: string) => updateMeta({ facebook: value })}
+			/>
+		</PanelRow>
+		<PanelRow>
+			<TextControl
+				label={__('Instagram url', 'ftek-plugin')}
+				value={meta.instagram}
+				onChange={(value: string) => updateMeta({ instagram: value })}
+			/>
+		</PanelRow>
+		<PanelRow>
+			<TextControl
+				label={__('Snapchat url', 'ftek-plugin')}
+				value={meta.snapchat}
+				onChange={(value: string) => updateMeta({ snapchat: value })}
+			/>
+		</PanelRow>
+		<PanelRow>
+			<TextControl
+				label={__('YouTube url', 'ftek-plugin')}
+				value={meta.youtube}
+				onChange={(value: string) => updateMeta({ youtube: value })}
+			/>
+		</PanelRow>
+	</>
 );
 
 const Edit = ({
@@ -101,7 +144,7 @@ const Edit = ({
 };
 
 const Save = ({ attributes }: { attributes: GroupPageMeta }): JSX.Element => (
-	<div {...useBlockProps.save()} data={JSON.stringify(attributes)}>
+	<div {...useBlockProps.save()} data={serialize(attributes)}>
 		<GroupPage.Loading attributes={attributes} />
 	</div>
 );

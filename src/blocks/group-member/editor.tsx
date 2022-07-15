@@ -15,6 +15,8 @@ import {
 } from '@wordpress/components';
 import { GroupMember, Attributes } from './group-member';
 
+import { serialize } from '../../utils/dataAttribute';
+
 import metadata from './block.json';
 
 const Edit = ({
@@ -172,7 +174,7 @@ const Edit = ({
 };
 
 const Save = ({ attributes }: { attributes: Attributes }): JSX.Element => (
-	<div {...useBlockProps.save()} data={JSON.stringify(attributes)}>
+	<div {...useBlockProps.save()} data={serialize(attributes)}>
 		<GroupMember.Loading />
 	</div>
 );

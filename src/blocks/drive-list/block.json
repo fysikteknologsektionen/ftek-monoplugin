@@ -9,13 +9,16 @@
 	"textdomain": "ftek-plugin",
 	"attributes": {
 		"url": {
-			"type": "string"
+			"type": "string",
+			"default": ""
 		},
 		"depth": {
-			"type": "integer"
+			"type": "integer",
+			"default": 2
 		},
 		"download": {
-			"type": "boolean"
+			"type": "boolean",
+			"default": true
 		}
 	},
 	"example": {

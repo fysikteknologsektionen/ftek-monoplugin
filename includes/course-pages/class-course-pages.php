@@ -92,6 +92,21 @@ class Course_Pages {
 				$admin->add_cap( $cap );
 			}
 		}
+
+		$posts = get_posts(
+			array(
+				'post_type'   => 'course-page',
+				'numberposts' => -1,
+			)
+		);
+
+		foreach ( $posts as $post ) {
+			update_post_meta(
+				$post->ID,
+				'ftek_plugin_course_page_meta',
+				array_merge( get_post_meta( $post->ID, 'ftek_plugin_course_page_meta', true ), self::DEFAULTS )
+			);
+		}
 	}
 
 	/**

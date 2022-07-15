@@ -4,9 +4,18 @@ import apiFetch from '@wordpress/api-fetch';
 import { useEffect, useState } from '@wordpress/element';
 
 import { Attributes as GroupMemberAttributes } from '../group-member/group-member';
-import { GroupPageMeta, WPBlock, WPPost, WPTag } from '../../utils/types';
+import {
+	GroupPageMeta,
+	Inline,
+	WPBlock,
+	WPPost,
+	WPTag,
+} from '../../utils/types';
 
+import SVGImage from '../../components/svg-image';
 import SectionedPage from '../../components/sectioned-page';
+
+declare const ftekInline: Inline;
 
 const LoadingPosts = ({
 	heading,
@@ -89,23 +98,81 @@ export const AsideDynamicArea = ({
 		);
 	}
 
-	if (attributes.group_tag_id <= 0) {
-		return <></>;
-	}
+	const socials: { url: string; icon: string }[] = [
+		{
+			url: attributes.facebook,
+			icon: ftekInline.assets.facebook,
+		},
+		{
+			url: attributes.instagram,
+			icon: ftekInline.assets.instagram,
+		},
+		{
+			url: attributes.snapchat,
+			icon: ftekInline.assets.snapchat,
+		},
+		{
+			url: attributes.youtube,
+			icon: ftekInline.assets.youtube,
+		},
+	];
 
+	const hasSocials = socials.some((elem) => elem.url);
 	return (
 		<>
-			<PostsByTag
-				heading={relatedPages}
-				postType="pages"
-				tagId={attributes.group_tag_id}
-			/>
-			<PostsByTag
-				heading={latestPosts}
-				postType="posts"
-				tagId={attributes.group_tag_id}
-				limit={4}
-			/>
+			{attributes.group_tag_id > 0 && (
+				<>
+					<PostsByTag
+						heading={relatedPages}
+						postType="pages"
+						tagId={attributes.group_tag_id}
+					/>
+					<PostsByTag
+						heading={latestPosts}
+						postType="posts"
+						tagId={attributes.group_tag_id}
+						limit={4}
+					/>
+				</>
+			)}
+			{(attributes.email || hasSocials) && (
+				<>
+					<h3>{__('Contact', 'ftek-plugin')}</h3>
+					{attributes.email && (
+						<p>
+							<a href={`mailto:${attributes.email}`}>
+								{attributes.email}
+							</a>
+						</p>
+					)}
+					{hasSocials && (
+						<div>
+							{socials.map(
+								(social, i) =>
+									social.url && (
+										<a
+											key={i}
+											href={social.url}
+											style={{
+												display: 'inline-block',
+												margin: '0.5rem',
+											}}
+										>
+											<SVGImage
+												url={social.icon}
+												style={{
+													width: '2rem',
+													height: '2rem',
+													marginRight: '0.5rem',
+												}}
+											/>
+										</a>
+									)
+							)}
+						</div>
+					)}
+				</>
+			)}
 		</>
 	);
 };

@@ -34,6 +34,10 @@ export type Inline = {
 	assets: {
 		openBook: string;
 		group: string;
+		facebook: string;
+		instagram: string;
+		snapchat: string;
+		youtube: string;
 	};
 };
 
@@ -61,6 +65,11 @@ export type WPCoursePageMeta = {
 export type GroupPageMeta = {
 	logo_url: string;
 	group_tag_id: number;
+	email: string;
+	facebook: string;
+	instagram: string;
+	snapchat: string;
+	youtube: string;
 };
 export type WPGroupPageMeta = {
 	ftek_plugin_group_page_meta: GroupPageMeta;
@@ -81,4 +90,12 @@ export type WPTag = {
 	link: string;
 	name: string;
 	slug: string;
+};
+
+export type BlockJson<T extends {}> = {
+	attributes: {
+		[K in keyof T]: {
+			default: T[K];
+		};
+	};
 };

@@ -12,6 +12,26 @@
 		"group_tag_id": {
 			"type": "number",
 			"default": -2
+		},
+		"email": {
+			"type": "string",
+			"default": ""
+		},
+		"facebook": {
+			"type": "string",
+			"default": ""
+		},
+		"instagram": {
+			"type": "string",
+			"default": ""
+		},
+		"snapchat": {
+			"type": "string",
+			"default": ""
+		},
+		"youtube": {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"editorScript": "file:editor.js",

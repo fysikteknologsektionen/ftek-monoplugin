@@ -1,5 +1,8 @@
 import { GroupMember } from './group-member';
 import { render } from '@wordpress/element';
+import { parse } from '../../utils/dataAttribute';
+
+import metadata from './block.json';
 
 document.addEventListener('DOMContentLoaded', () => {
 	Array.from(
@@ -8,8 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const data: string | undefined =
 			root.attributes.getNamedItem('data')?.value;
 		if (data) {
-			const attributes = JSON.parse(data);
-			render(<GroupMember attributes={attributes} />, root);
+			render(<GroupMember attributes={parse(data, metadata)} />, root);
 		}
 	});
 });

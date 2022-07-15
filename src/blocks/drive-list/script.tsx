@@ -1,5 +1,8 @@
-import { DriveList, attrsOrDefault } from './drive-list';
+import { DriveList } from './drive-list';
 import { render } from '@wordpress/element';
+import { parse } from '../../utils/dataAttribute';
+
+import metadata from './block.json';
 
 document.addEventListener('DOMContentLoaded', () => {
 	Array.from(
@@ -8,8 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const data: string | undefined =
 			root.attributes.getNamedItem('data')?.value;
 		if (data) {
-			const attributes = attrsOrDefault(JSON.parse(data));
-			render(<DriveList attributes={attributes} />, root);
+			render(<DriveList attributes={parse(data, metadata)} />, root);
 		}
 	});
 });
