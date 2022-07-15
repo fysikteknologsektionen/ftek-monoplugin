@@ -39,7 +39,9 @@ const GroupMemberDisplay = ({
 	description: string;
 	picture?: string;
 }): JSX.Element => (
-	<div style={{ display: 'flex' }}>
+	<div
+		style={{ display: 'flex', marginTop: '0.5rem', marginBottom: '0.5rem' }}
+	>
 		<div style={{ marginRight: '0.5rem', flexShrink: 0 }}>
 			<img
 				src={
