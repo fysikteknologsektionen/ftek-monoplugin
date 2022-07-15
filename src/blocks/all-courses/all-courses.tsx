@@ -161,6 +161,7 @@ function CourseList({
 			<div style={{ display: 'flex', flexWrap: 'wrap-reverse' }}>
 				<div style={{ flexGrow: 1 }}>
 					<Dropdown
+						disabled={loading}
 						content={
 							<span>
 								{filter.perPage}
@@ -429,13 +430,11 @@ export const AllCourses = (): JSX.Element => {
 	);
 };
 
-AllCourses.Loading = (): JSX.Element => {
-	return (
-		<CourseList
-			filter={initialFilter}
-			setFilter={(f) => {}}
-			posts={[]}
-			loading={true}
-		/>
-	);
-};
+AllCourses.Loading = (): JSX.Element => (
+	<CourseList
+		filter={initialFilter}
+		setFilter={(f) => {}}
+		posts={[]}
+		loading={true}
+	/>
+);
