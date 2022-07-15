@@ -10,6 +10,7 @@ export type Attributes = {
 	email: string;
 	post: string;
 	wordpress_user: boolean;
+	name_override: boolean;
 	first_name: string;
 	last_name: string;
 	nick_name: string;
@@ -25,7 +26,7 @@ const GroupMemberDisplay = ({
 	lastName,
 	nickName = null,
 	description,
-	picture = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg',
+	picture,
 }: {
 	email: string;
 	mailto?: boolean;
@@ -39,7 +40,10 @@ const GroupMemberDisplay = ({
 	<div style={{ display: 'flex' }}>
 		<div style={{ marginRight: '0.5rem', flexShrink: 0 }}>
 			<img
-				src={picture}
+				src={
+					picture ||
+					'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg'
+				}
 				alt={__('Profile picture', 'ftek-plugin')}
 				style={{ width: '5rem' }}
 			/>
@@ -97,9 +101,17 @@ export const GroupMember = ({
 					email={__('user@ftek.se', 'ftek.se')}
 					mailto={false}
 					post={attributes.post}
-					firstName={__('Firstname', 'ftek-plugin')}
-					lastName={__('Lastname', 'ftek-plugin')}
-					description={__('User not found', 'ftek-plugin')}
+					firstName={
+						attributes.name_override
+							? attributes.first_name
+							: __('Firstname', 'ftek-plugin')
+					}
+					lastName={
+						attributes.name_override
+							? attributes.last_name
+							: __('Lastname', 'ftek-plugin')
+					}
+					description={attributes.description}
 				/>
 			);
 		}
@@ -108,8 +120,16 @@ export const GroupMember = ({
 			<GroupMemberDisplay
 				email={attributes.email}
 				post={attributes.post}
-				firstName={user.first_name}
-				lastName={user.last_name}
+				firstName={
+					attributes.name_override
+						? attributes.first_name
+						: user.first_name
+				}
+				lastName={
+					attributes.name_override
+						? attributes.last_name
+						: user.last_name
+				}
 				nickName={attributes.nick_name}
 				description={attributes.description}
 				picture={user.picture}

@@ -17,6 +17,10 @@
 			"type": "boolean",
 			"default": true
 		},
+		"name_override": {
+			"type": "boolean",
+			"default": false
+		},
 		"first_name": {
 			"type": "string",
 			"default": ""

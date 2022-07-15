@@ -50,6 +50,24 @@ const Edit = ({
 							}
 						/>
 					</PanelRow>
+					{attributes.wordpress_user && (
+						<PanelRow>
+							<CheckboxControl
+								label={__(
+									'Enable name override',
+									'ftek-plugin'
+								)}
+								help={__(
+									'The first and last names you set in the fields below will take priority over names found in WordPress/Google.',
+									'ftek-plugin'
+								)}
+								checked={attributes.name_override}
+								onChange={(value: boolean) =>
+									updateAttributes({ name_override: value })
+								}
+							/>
+						</PanelRow>
+					)}
 					<PanelRow>
 						<TextControl
 							label={__('Email', 'ftek-plugin')}
@@ -68,7 +86,8 @@ const Edit = ({
 							}
 						/>
 					</PanelRow>
-					{!attributes.wordpress_user && (
+					{(!attributes.wordpress_user ||
+						attributes.name_override) && (
 						<>
 							<PanelRow>
 								<TextControl

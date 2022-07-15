@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-plugin\n"
-"POT-Creation-Date: 2022-07-10T11:02:18+00:00\n"
+"POT-Creation-Date: 2022-07-15T13:43:20+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -617,10 +617,6 @@ msgid "Lastname"
 msgstr "Efternamn"
 
 #: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
-msgid "User not found"
-msgstr "Användaren hittades inte"
-
-#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
 msgid "user@ftek.se"
 msgstr "post@ftek.se"
 
@@ -646,6 +642,18 @@ msgid ""
 msgstr ""
 "WordPress-anvandare kan i sin tur vara kopplade till t.ex. Google-konton "
 "genom OAuth."
+
+#: build/blocks/group-member/editor.js:1
+msgid "Enable name override"
+msgstr "Aktivera namnredigering"
+
+#: build/blocks/group-member/editor.js:1
+msgid ""
+"The first and last names you set in the fields below will take priority over "
+"names found in WordPress/Google."
+msgstr ""
+"För- och efternamnen du väljer i fälten nedan kommer ersätta namn hittade i "
+"WordPress/Google"
 
 #: build/blocks/group-member/editor.js:1
 msgid "Email"
@@ -893,6 +901,3 @@ msgstr "Föreningsmedlem"
 msgctxt "block title"
 msgid "Group page"
 msgstr "Föreningssida"
-
-#~ msgid "Entries to display: "
-#~ msgstr "Poster att visa: "
