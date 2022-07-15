@@ -25,6 +25,7 @@ const GroupMemberDisplay = ({
 	firstName,
 	lastName,
 	nickName = null,
+	found = true,
 	description,
 	picture,
 }: {
@@ -34,6 +35,7 @@ const GroupMemberDisplay = ({
 	firstName: string;
 	lastName: string;
 	nickName?: string;
+	found?: boolean;
 	description: string;
 	picture?: string;
 }): JSX.Element => (
@@ -73,6 +75,11 @@ const GroupMemberDisplay = ({
 					</>
 				)}
 			</div>
+			{!found && (
+				<div style={{ color: 'red' }}>
+					{__('User not found', 'ftek-plugin')}
+				</div>
+			)}
 			<div>{description}</div>
 		</div>
 	</div>
@@ -80,8 +87,10 @@ const GroupMemberDisplay = ({
 
 export const GroupMember = ({
 	attributes,
+	showNotFound = false,
 }: {
 	attributes: Attributes;
+	showNotFound?: boolean;
 }): JSX.Element => {
 	const [user, setUser] = useState<User>(null);
 	useEffect(() => {
@@ -95,46 +104,27 @@ export const GroupMember = ({
 			return <GroupMember.Loading />;
 		}
 
-		if (!user.found) {
+		if (user.found) {
 			return (
 				<GroupMemberDisplay
-					email={__('user@ftek.se', 'ftek.se')}
-					mailto={false}
+					email={attributes.email}
 					post={attributes.post}
 					firstName={
 						attributes.name_override
 							? attributes.first_name
-							: __('Firstname', 'ftek-plugin')
+							: user.first_name
 					}
 					lastName={
 						attributes.name_override
 							? attributes.last_name
-							: __('Lastname', 'ftek-plugin')
+							: user.last_name
 					}
+					nickName={attributes.nick_name}
 					description={attributes.description}
+					picture={user.picture}
 				/>
 			);
 		}
-
-		return (
-			<GroupMemberDisplay
-				email={attributes.email}
-				post={attributes.post}
-				firstName={
-					attributes.name_override
-						? attributes.first_name
-						: user.first_name
-				}
-				lastName={
-					attributes.name_override
-						? attributes.last_name
-						: user.last_name
-				}
-				nickName={attributes.nick_name}
-				description={attributes.description}
-				picture={user.picture}
-			/>
-		);
 	}
 
 	return (
@@ -144,6 +134,7 @@ export const GroupMember = ({
 			firstName={attributes.first_name}
 			lastName={attributes.last_name}
 			nickName={attributes.nick_name}
+			found={!showNotFound || !user || user.found}
 			description={attributes.description}
 			picture={attributes.picture}
 		/>

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-plugin\n"
-"POT-Creation-Date: 2022-07-15T16:00:02+00:00\n"
+"POT-Creation-Date: 2022-07-15T16:23:35+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -609,12 +609,8 @@ msgid "Profile picture"
 msgstr "Profilbild"
 
 #: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
-msgid "Firstname"
-msgstr "Förnamn"
-
-#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
-msgid "Lastname"
-msgstr "Efternamn"
+msgid "User not found"
+msgstr "Användaren hittades inte"
 
 #: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
 msgid "user@ftek.se"
@@ -623,6 +619,14 @@ msgstr "post@ftek.se"
 #: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
 msgid "Post"
 msgstr "Post"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Firstname"
+msgstr "Förnamn"
+
+#: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
+msgid "Lastname"
+msgstr "Efternamn"
 
 #: build/blocks/group-member/editor.js:1 build/blocks/group-member/script.js:1
 msgid "Nickname"

@@ -168,7 +168,7 @@ const Edit = ({
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>
-			<GroupMember attributes={attributes} />
+			<GroupMember attributes={attributes} showNotFound={true} />
 		</div>
 	);
 };
