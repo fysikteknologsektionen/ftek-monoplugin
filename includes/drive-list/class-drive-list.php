@@ -109,8 +109,10 @@ class Drive_List {
 			for ( $j = 0; $j < $leave_count; $j++ ) {
 				$url = add_query_arg(
 					array(
-						'q'   => rawurlencode( sprintf( '\'%s\' in parents', $leaves[ $j ]['id'] ) ),
-						'key' => rawurlencode( Options::get( 'google_api_key' ) ),
+						'q'                         => rawurlencode( sprintf( '\'%s\' in parents', $leaves[ $j ]['id'] ) ),
+						'key'                       => rawurlencode( Options::get( 'google_api_key' ) ),
+						'supportsAllDrives'         => 'true',
+						'includeItemsFromAllDrives' => 'true',
 					),
 					self::APIS_URL . '/drive/v3/files'
 				);
