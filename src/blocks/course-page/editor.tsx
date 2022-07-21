@@ -405,6 +405,7 @@ const Edit = ({
 						{
 							depth: 2,
 							download: true,
+							collapsible: true,
 						} as Partial<DriveListAttributes>,
 					],
 			  ] as WPBlock[])

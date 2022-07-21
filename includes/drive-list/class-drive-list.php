@@ -113,6 +113,7 @@ class Drive_List {
 						'key'                       => rawurlencode( Options::get( 'google_api_key' ) ),
 						'supportsAllDrives'         => 'true',
 						'includeItemsFromAllDrives' => 'true',
+						'orderBy'                   => 'name',
 					),
 					self::APIS_URL . '/drive/v3/files'
 				);

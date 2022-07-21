@@ -19,6 +19,10 @@
 		"download": {
 			"type": "boolean",
 			"default": true
+		},
+		"collapsible": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"example": {

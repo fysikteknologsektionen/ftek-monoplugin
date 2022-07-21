@@ -2,10 +2,13 @@ import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
 import { useState, useEffect } from '@wordpress/element';
 
+import Collapsible from '../../components/collapsible';
+
 export type Attributes = {
 	url: string;
 	depth: number;
 	download: boolean;
+	collapsible: boolean;
 };
 
 export type Tree = (Folder | File)[];
@@ -23,27 +26,63 @@ export type File = {
 };
 
 export function attrsOrDefault(attributes: Partial<Attributes>): Attributes {
-	const { url = '', depth = 1, download = true } = attributes;
+	const {
+		url = '',
+		depth = 1,
+		download = true,
+		collapsible = false,
+	} = attributes;
 	return {
 		url,
 		depth: Number.isFinite(depth) && depth >= 1 ? depth : 1,
 		download,
+		collapsible,
 	};
 }
 
-const Folder = ({ tree }: { tree: Tree }): JSX.Element => (
+const Folder = ({
+	tree,
+	collapsible,
+}: {
+	tree: Tree;
+	collapsible: boolean;
+}): JSX.Element => (
 	<ul className="ftek-plugin-list">
 		{tree.map((file, i) => (
-			<li key={`${i}`}>
+			<li
+				key={`${i}`}
+				style={
+					file.type !== 'file' && collapsible
+						? { listStyleType: 'none' }
+						: {}
+				}
+			>
 				{file.type === 'file' ? (
 					<a href={file.url}>{file.name}</a>
 				) : (
-					<>
-						<span className="ftek-plugin-folder-name">
-							{file.name}
-						</span>
-						<Folder tree={file.children} />
-					</>
+					(() => {
+						const header = (
+							<span className="ftek-plugin-folder-name">
+								{file.name}
+							</span>
+						);
+						const children = (
+							<Folder
+								tree={file.children}
+								collapsible={collapsible}
+							/>
+						);
+						return collapsible ? (
+							<Collapsible header={header} initialOpen={false}>
+								{children}
+							</Collapsible>
+						) : (
+							<>
+								{header}
+								{children}
+							</>
+						);
+					})()
 				)}
 			</li>
 		))}
@@ -55,7 +94,7 @@ export const DriveList = ({
 }: {
 	attributes: Partial<Attributes>;
 }): JSX.Element => {
-	const { url, depth, download } = attrsOrDefault(attributes);
+	const { url, depth, download, collapsible } = attrsOrDefault(attributes);
 
 	const [loading, setLoading] = useState(true);
 	const [tree, setTree] = useState<Tree>([]);
@@ -72,7 +111,7 @@ export const DriveList = ({
 	}
 
 	return tree.length > 0 ? (
-		<Folder tree={tree} />
+		<Folder tree={tree} collapsible={collapsible} />
 	) : (
 		<p>{__('No files to display', 'ftek-plugin')}</p>
 	);

@@ -20,7 +20,12 @@ const Edit = ({
 	attributes: Attributes;
 	setAttributes: (attr: Attributes) => unknown;
 }): JSX.Element => {
-	const { url, depth: _depth, download } = attrsOrDefault(attributes);
+	const {
+		url,
+		depth: _depth,
+		download,
+		collapsible,
+	} = attrsOrDefault(attributes);
 	const depth = Number.isNaN(attributes.depth) ? NaN : _depth;
 
 	return (
@@ -73,6 +78,18 @@ const Edit = ({
 								setAttributes({
 									...attributes,
 									download: value,
+								});
+							}}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<CheckboxControl
+							label={__('Collapsible folders', 'ftek-plugin')}
+							checked={collapsible}
+							onChange={(value: boolean) => {
+								setAttributes({
+									...attributes,
+									collapsible: value,
 								});
 							}}
 						/>
