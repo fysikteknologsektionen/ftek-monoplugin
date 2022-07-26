@@ -28,6 +28,7 @@ class Group_Pages {
 	public static function init(): void {
 		add_action( 'init', array( self::class, 'register_post_type' ) );
 		add_action( 'init', array( self::class, 'add_tag_to_pages' ) );
+		add_action( 'init', array( self::class, 'support_group_as_parent_page' ) );
 		add_action( 'wp_insert_post_data', array( self::class, 'update_tag' ), 10, 2 );
 		add_action( 'pre_get_posts', array( self::class, 'work_around_empty_slug' ) );
 
@@ -263,8 +264,25 @@ class Group_Pages {
 	 * @param \WP_Query $query The WP_Query instance (passed by reference).
 	 */
 	public static function work_around_empty_slug( \WP_Query $query ): void {
-		if ( isset( $query->query['name'] ) && 'group-page' === $query->query['post_type'] ?? '' ) {
-			$query->set( 'post_type', array( 'group-page', 'page', 'post' ) );
+		if ( isset( $query->query['name'] ) && isset( $query->query['post_type'] ) && 'group-page' === $query->query['post_type'] ) {
+			$post_types = array( 'group-page', 'page', 'post' );
+			$post       = get_page_by_path( $query->query['name'], 'OBJECT', $post_types );
+			if ( $post ) {
+				$query->set( 'p', is_array( $post ) ? $post['ID'] : $post->ID );
+				$query->set( 'post_type', $post_types );
+				$query->set( 'name', '' );
+			}
 		}
+	}
+
+	/**
+	 * Callback for the init action hook
+	 *
+	 * Support for letting other post types set group pages as parent even
+	 * though group pages themselves are not hierarchical and cannot have
+	 * parents.
+	 */
+	public static function support_group_as_parent_page(): void {
+		add_rewrite_tag( '%group-page%', '(.+?)', 'post_type=group-page&name=' );
 	}
 }

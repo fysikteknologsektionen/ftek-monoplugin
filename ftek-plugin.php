@@ -137,6 +137,7 @@ register_activation_hook( PLUGIN_FILE, __NAMESPACE__ . '\activate' );
 register_uninstall_hook( PLUGIN_FILE, __NAMESPACE__ . '\uninstall' );
 
 Options::init();
+Scripts::init();
 Roles::init();
 Login::init();
 Drive_List::init();

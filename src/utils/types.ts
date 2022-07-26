@@ -76,6 +76,7 @@ export type WPGroupPageMeta = {
 };
 
 export type WPPost<T = unknown> = {
+	id: number;
 	meta: T;
 	link: string;
 	title: {
