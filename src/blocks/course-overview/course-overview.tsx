@@ -134,7 +134,10 @@ const YearOverview = ({
 		const p = posts[program];
 		const rows = maxCourses[program];
 		return [...Array(maxCourses[program]).keys()].map((j) => (
-			<tr key={`${i}.${j}`}>
+			<tr
+				key={`${i}.${j}`}
+				className={`ftek-plugin-row-${i % 2 === 0 ? 'even' : 'odd'}`}
+			>
 				{j === 0 && (
 					<th rowSpan={rows}>
 						{program === 'multiple'
