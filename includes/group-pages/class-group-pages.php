@@ -267,10 +267,14 @@ class Group_Pages {
 		if ( isset( $query->query['name'] ) && isset( $query->query['post_type'] ) && 'group-page' === $query->query['post_type'] ) {
 			$post_types = array( 'group-page', 'page', 'post' );
 			$post       = get_page_by_path( $query->query['name'], 'OBJECT', $post_types );
+
+			$query->set( 'post_type', $post_types );
 			if ( $post ) {
 				$query->set( 'p', is_array( $post ) ? $post['ID'] : $post->ID );
-				$query->set( 'post_type', $post_types );
 				$query->set( 'name', '' );
+			} else {
+				$name_parts = explode( '/', $query->query['name'] );
+				$query->set( 'name', end( $name_parts ) );
 			}
 		}
 	}

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-plugin\n"
-"POT-Creation-Date: 2022-07-26T19:40:48+00:00\n"
+"POT-Creation-Date: 2022-07-27T15:49:26+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -877,10 +877,6 @@ msgstr "Spara inställningar"
 #: build/sidebar.tsx.js:1
 msgid "no title"
 msgstr "ingen rubrik"
-
-#: build/sidebar.tsx.js:1
-msgid "Page attributes"
-msgstr "Sidattribut"
 
 #: build/sidebar.tsx.js:1
 msgid "Parent group"
