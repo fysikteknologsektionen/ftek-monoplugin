@@ -89,14 +89,15 @@ export const AsideDynamicArea = ({
 	const relatedPages = <h3>{__('Related pages', 'ftek-plugin')}</h3>;
 	const latestPosts = <h3>{__('Latest posts', 'ftek-plugin')}</h3>;
 
-	if (save) {
-		return (
-			<>
-				<LoadingPosts heading={relatedPages} />
-				<LoadingPosts heading={latestPosts} />
-			</>
-		);
-	}
+	const logo = attributes.logo_url && (
+		<div>
+			<img
+				style={{ width: '100%' }}
+				alt={__('Logo', 'ftek-plugin')}
+				src={attributes.logo_url}
+			/>
+		</div>
+	);
 
 	const socials: { url: string; icon: string }[] = [
 		{
@@ -118,8 +119,59 @@ export const AsideDynamicArea = ({
 	];
 
 	const hasSocials = socials.some((elem) => elem.url);
+	const contact = (attributes.email || hasSocials) && (
+		<>
+			<h3>{__('Contact', 'ftek-plugin')}</h3>
+			{attributes.email && (
+				<p>
+					<a href={`mailto:${attributes.email}`}>
+						{attributes.email}
+					</a>
+				</p>
+			)}
+			{hasSocials && (
+				<div>
+					{socials.map(
+						(social, i) =>
+							social.url && (
+								<a
+									key={i}
+									href={social.url}
+									style={{
+										display: 'inline-block',
+										margin: '0.5rem',
+									}}
+								>
+									<SVGImage
+										url={social.icon}
+										style={{
+											width: '2rem',
+											height: '2rem',
+											marginRight: '0.5rem',
+										}}
+									/>
+								</a>
+							)
+					)}
+				</div>
+			)}
+		</>
+	);
+
+	if (save) {
+		return (
+			<>
+				{logo}
+				<LoadingPosts heading={relatedPages} />
+				<LoadingPosts heading={latestPosts} />
+				{socials}
+			</>
+		);
+	}
+
 	return (
 		<>
+			{logo}
 			{attributes.group_tag_id > 0 && (
 				<>
 					<PostsByTag
@@ -135,44 +187,7 @@ export const AsideDynamicArea = ({
 					/>
 				</>
 			)}
-			{(attributes.email || hasSocials) && (
-				<>
-					<h3>{__('Contact', 'ftek-plugin')}</h3>
-					{attributes.email && (
-						<p>
-							<a href={`mailto:${attributes.email}`}>
-								{attributes.email}
-							</a>
-						</p>
-					)}
-					{hasSocials && (
-						<div>
-							{socials.map(
-								(social, i) =>
-									social.url && (
-										<a
-											key={i}
-											href={social.url}
-											style={{
-												display: 'inline-block',
-												margin: '0.5rem',
-											}}
-										>
-											<SVGImage
-												url={social.icon}
-												style={{
-													width: '2rem',
-													height: '2rem',
-													marginRight: '0.5rem',
-												}}
-											/>
-										</a>
-									)
-							)}
-						</div>
-					)}
-				</>
-			)}
+			{contact}
 		</>
 	);
 };
@@ -212,15 +227,6 @@ export const GroupPage = ({
 				)}
 			</SectionedPage.Main>
 			<SectionedPage.Aside>
-				{attributes.logo_url && (
-					<div>
-						<img
-							style={{ width: '100%' }}
-							alt={__('Logo', 'ftek-plugin')}
-							src={attributes.logo_url}
-						/>
-					</div>
-				)}
 				<div className="aside-dynamic-area">
 					<AsideDynamicArea attributes={attributes} save={save} />
 				</div>
