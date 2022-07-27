@@ -31,6 +31,7 @@ class Group_Pages {
 		add_action( 'init', array( self::class, 'support_group_as_parent_page' ) );
 		add_action( 'wp_insert_post_data', array( self::class, 'update_tag' ), 10, 2 );
 		add_action( 'pre_get_posts', array( self::class, 'work_around_empty_slug' ) );
+		add_filter( 'the_content', array( self::class, 'add_aside_to_children' ) );
 
 		Group_Blocks::init();
 	}
@@ -228,11 +229,11 @@ class Group_Pages {
 			} elseif ( is_array( $term_id ) ) {
 				$group_tag_id = $term_id['term_id'];
 			} else {
-				$term                 = wp_insert_term( $data['post_title'], 'post_tag', $taxonomy );
-				$group_tag_id         = $term['term_id'];
-				$meta['group_tag_id'] = $group_tag_id;
-				update_post_meta( $postarr['ID'], 'ftek_plugin_group_page_meta', $meta );
+				$term         = wp_insert_term( $data['post_title'], 'post_tag', $taxonomy );
+				$group_tag_id = $term['term_id'];
 			}
+			$meta['group_tag_id'] = $group_tag_id;
+			update_post_meta( $postarr['ID'], 'ftek_plugin_group_page_meta', $meta );
 		}
 
 		if ( $group_tag_id < 0 ) {
@@ -288,5 +289,38 @@ class Group_Pages {
 	 */
 	public static function support_group_as_parent_page(): void {
 		add_rewrite_tag( '%group-page%', '(.+?)', 'post_type=group-page&name=' );
+	}
+
+	/**
+	 * Callback for the the_content filter hook
+	 *
+	 * Adds aside area to posts whose parent is a group page.
+	 *
+	 * @param string $content Content of the current post.
+	 */
+	public static function add_aside_to_children( string $content ): string {
+		$current_id = wp_get_post_parent_id( get_the_ID() );
+		for ( $i = 0; $i < 10 && $current_id; $i++ ) {
+			if ( get_post_type( $current_id ) === 'group-page' ) {
+				$meta = get_post_meta( $current_id, 'ftek_plugin_group_page_meta', true );
+				enqueue_entrypoint_script( 'ftek-plugin-group-aside', 'group-aside.tsx' );
+				ob_start();
+				?>
+				<div class="wp-block-ftek-plugin-group-page" data="<?php echo esc_attr( wp_json_encode( $meta ) ); ?>">
+					<div class="ftek-plugin-sectioned-page">
+						<div class="ftek-plugin-sectioned-page-main">
+							<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						</div>
+						<aside class="ftek-plugin-sectioned-page-aside">
+							<div class="aside-dynamic-area"></div>
+						</aside>
+					</div>
+				</div>
+				<?php
+				return ob_get_clean();
+			}
+			$current_id = wp_get_post_parent_id( $current_id );
+		}
+		return $content;
 	}
 }
