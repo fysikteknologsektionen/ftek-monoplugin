@@ -1,5 +1,5 @@
 import { PageAttributesCheck, store as editorStore } from '@wordpress/editor';
-import { PluginSidebar } from '@wordpress/edit-post';
+import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 import { PanelBody, PanelRow, ComboboxControl } from '@wordpress/components';
 import { registerPlugin } from '@wordpress/plugins';
 import { __ } from '@wordpress/i18n';
@@ -87,26 +87,17 @@ const PageAttributesPanel = (): JSX.Element => {
 
 	return (
 		<PageAttributesCheck>
-			<PanelBody
-				title={
-					postType?.labels?.attributes ||
-					__('Page attributes', 'ftek-plugin')
-				}
-			>
-				<PanelRow>
-					<div style={{ flexGrow: 1 }}>
-						<ComboboxControl
-							label={__('Parent group', 'ftek-plugin')}
-							value={parentPostId}
-							options={parentOptions}
-							onFilterValueChange={(value) =>
-								setFieldValue(value)
-							}
-							onChange={(value) => editPost({ parent: value })}
-						/>
-					</div>
-				</PanelRow>
-			</PanelBody>
+			<PanelRow>
+				<div style={{ flexGrow: 1 }}>
+					<ComboboxControl
+						label={__('Parent group', 'ftek-plugin')}
+						value={parentPostId}
+						options={parentOptions}
+						onFilterValueChange={(value) => setFieldValue(value)}
+						onChange={(value) => editPost({ parent: value })}
+					/>
+				</div>
+			</PanelRow>
 		</PageAttributesCheck>
 	);
 };
@@ -116,12 +107,12 @@ const Plugin = (): JSX.Element => {
 
 	return (
 		pageAttributesPanel && (
-			<PluginSidebar
-				name="plugin-sidebar-test"
+			<PluginDocumentSettingPanel
 				title={__('Ftek', 'ftek-plugin')}
+				opened={true}
 			>
 				{pageAttributesPanel}
-			</PluginSidebar>
+			</PluginDocumentSettingPanel>
 		)
 	);
 };
