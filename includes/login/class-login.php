@@ -20,8 +20,17 @@ class Login {
 		add_action( 'init', array( self::class, 'perform_login' ) );
 		add_filter( 'wp_login_errors', array( self::class, 'wp_login_errors' ) );
 
+		Users::init();
 		Profile::init();
 	}
+
+	/**
+	 * Called on plugin activation
+	 */
+	public static function activate(): void {
+		Users::activate();
+	}
+
 
 	/**
 	 * Callback for login_init action hook
@@ -144,7 +153,7 @@ class Login {
 			return;
 		}
 
-		$user = self::update_or_create_user( $user_info, $roles );
+		$user = Users::update_or_create_user( $user_info, $roles, $oauth->get_refresh_token() );
 		if ( ! $user ) {
 			redirect_to_login_with_error( __( 'Unable to assign a user to your session' ) );
 			return;
@@ -168,70 +177,6 @@ class Login {
 		if ( wp_safe_redirect( $redirect ) ) {
 			exit;
 		}
-	}
-
-	/**
-	 * Creates or updates a user
-	 *
-	 * @param array $user_info User info from the OAuth userinfo endpoint.
-	 * @param array $roles     Roles to apply to the user.
-	 */
-	private static function update_or_create_user( array $user_info, array $roles ): ?\WP_User {
-		if ( ! isset( $user_info['email'] ) ) {
-			return false;
-		}
-
-		$user = get_user_by( 'email', $user_info['email'] );
-		if ( ! $user ) {
-			$user_id = wp_insert_user(
-				array_filter(
-					array(
-						'user_pass'       => wp_generate_password( 24 ),
-						'user_login'      => $user_info['email'],
-						'user_email'      => $user_info['email'],
-						'user_registered' => gmdate( 'Y-m-d H:i:s' ),
-					)
-				)
-			);
-
-			if ( is_wp_error( $user_id ) ) {
-				return null;
-			}
-
-			$user = get_user_by( 'id', $user_id );
-		}
-
-		foreach (
-			array(
-				'first_name'   => 'given_name',
-				'last_name'    => 'family_name',
-				'display_name' => 'name',
-			) as $meta_key => $user_info_key
-		) {
-			if ( isset( $user_info[ $user_info_key ] ) ) {
-				update_user_meta(
-					$user->ID,
-					$meta_key,
-					$user_info[ $user_info_key ]
-				);
-			}
-		}
-
-		$meta                  = User_Meta::get( $user->ID );
-		$meta['picture']       = isset( $user_info['picture'] ) ? $user_info['picture'] : '';
-		$meta['is_oauth_user'] = true;
-		User_Meta::set( $user->ID, $meta );
-
-		$roles_to_remove = array_diff( $user->roles, $roles );
-		foreach ( $roles_to_remove as $role ) {
-			$user->remove_role( $role );
-		}
-		$roles_to_add = array_diff( $roles, $user->roles );
-		foreach ( $roles_to_add as $role ) {
-			$user->add_role( $role );
-		}
-
-		return $user;
 	}
 
 	/**
@@ -276,10 +221,13 @@ class Login {
 	 * @see OAuth
 	 */
 	private static function create_oauth(): OAuth {
-		return new OAuth(
-			Options::get( 'oauth_discovery_doc_url' ),
-			Options::get( 'oauth_client_id' ),
-			Options::get( 'oauth_client_secret' )
-		);
+		return new OAuth();
+	}
+
+	/**
+	 * Called on plugin deactivation
+	 */
+	public static function deactivate(): void {
+		Users::deactivate();
 	}
 }

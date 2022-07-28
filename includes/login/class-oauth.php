@@ -55,15 +55,11 @@ class OAuth {
 
 	/**
 	 * OAuth constructor
-	 *
-	 * @param string $discovery_doc_url OAuth discovery document URL.
-	 * @param string $client_id         OAuth client id.
-	 * @param string $client_secret     OAuth client secret.
 	 */
-	public function __construct( string $discovery_doc_url, string $client_id, string $client_secret ) {
-		$this->discovery_doc_url = $discovery_doc_url;
-		$this->client_id         = $client_id;
-		$this->client_secret     = $client_secret;
+	public function __construct() {
+		$this->discovery_doc_url = Options::get( 'oauth_discovery_doc_url' );
+		$this->client_id         = Options::get( 'oauth_client_id' );
+		$this->client_secret     = Options::get( 'oauth_client_secret' );
 	}
 
 	/**
@@ -80,7 +76,8 @@ class OAuth {
 				'redirect_uri'  => self::get_redirect_uri(),
 				'state'         => $this->get_state(),
 				'nonce'         => $this->generate_random_key(),
-				'prompt'        => 'select_account',
+				'access_type'   => 'offline',
+				'prompt'        => 'consent',
 			),
 			$this->get_endpoints()['authorization_endpoint']
 		);
@@ -89,24 +86,50 @@ class OAuth {
 	/**
 	 * Fetches OAuth authorization token
 	 *
-	 * @param string $code          The authorization code that is returned
-	 *                              from the authorization request.
+	 * @param string $code The authorization code that is returned from the
+	 *                     authorization request.
 	 *
 	 * @throws \Exception On discovery document or network errors.
 	 */
 	public function fetch_auth_token( string $code ): array {
-		$response = wp_remote_post(
-			$this->get_endpoints()['token_endpoint'],
+		return $this->update_auth_token(
 			array(
-				'body' => array(
-					'code'          => $code,
-					'client_id'     => $this->client_id,
-					'client_secret' => $this->client_secret,
-					'redirect_uri'  => self::get_redirect_uri(),
-					'grant_type'    => 'authorization_code',
-				),
-			)
+				'code'          => $code,
+				'client_id'     => $this->client_id,
+				'client_secret' => $this->client_secret,
+				'redirect_uri'  => self::get_redirect_uri(),
+				'grant_type'    => 'authorization_code',
+			),
 		);
+	}
+
+	/**
+	 * Refreshes OAuth authorization token
+	 *
+	 * @param string $refresh_token OAuth refresh token.
+	 *
+	 * @throws \Exception On discovery document or network errors.
+	 */
+	public function refresh_auth_token( string $refresh_token ): array {
+		return $this->update_auth_token(
+			array(
+				'refresh_token' => $refresh_token,
+				'client_id'     => $this->client_id,
+				'client_secret' => $this->client_secret,
+				'grant_type'    => 'refresh_token',
+			),
+		);
+	}
+
+	/**
+	 * Updates the auth token using the token endpoint
+	 *
+	 * @param array $body POST request body.
+	 *
+	 * @throws \Exception On discovery document or network errors.
+	 */
+	private function update_auth_token( array $body ) : array {
+		$response = wp_remote_post( $this->get_endpoints()['token_endpoint'], array( 'body' => $body ) );
 
 		$response_code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== $response_code ) {
@@ -120,13 +143,13 @@ class OAuth {
 	}
 
 	/**
-	 * Fetches user info from
+	 * Fetches user info from userinfo endpoint
 	 *
 	 * @throws \Exception On discovery document or network errors.
 	 */
 	public function fetch_user_info(): array {
-		if ( ! $this->auth_token ) {
-			throw new \Exception( 'Auth token must be provided, or fetch_auth_token() must be called before fetch_user_info()' );
+		if ( ! $this->auth_token && ! $refresh_token ) {
+			throw new \Exception( 'fetch_auth_token() or refresh_auth_token() must be called before fetch_user_info()' );
 		}
 
 		$response = wp_remote_get(
@@ -210,5 +233,19 @@ class OAuth {
 		}
 
 		return $endpoints;
+	}
+
+	/**
+	 * Returns the OAuth refresh token if present
+	 *
+	 * @throws \Exception If fetch_auth_token() or refresh_auth_token() was not
+	 *                    called first.
+	 */
+	public function get_refresh_token(): ?string {
+		if ( ! $this->auth_token ) {
+			throw new \Exception( 'fetch_auth_token() or refresh_auth_token() must be called before get_refresh_token()' );
+		}
+
+		return isset( $this->auth_token['refresh_token'] ) ? $this->auth_token['refresh_token'] : null;
 	}
 }

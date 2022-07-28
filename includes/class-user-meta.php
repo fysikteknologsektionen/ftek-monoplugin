@@ -14,6 +14,7 @@ class User_Meta {
 
 	public const DEFAULTS = array(
 		'is_oauth_user' => '',
+		'refresh_token' => '',
 		'picture'       => '',
 	);
 

@@ -15,7 +15,7 @@ class Profile {
 	/**
 	 * Initialize resources
 	 */
-	public static function init() {
+	public static function init(): void {
 		add_filter( 'get_avatar_url', array( self::class, 'get_avatar_url' ), 9, 2 );
 		add_filter( 'show_password_fields', array( self::class, 'show_password_fields' ), 2, 10 );
 		add_filter( 'allow_password_reset', array( self::class, 'allow_password_reset' ), 2, 10 );

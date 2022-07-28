@@ -108,11 +108,19 @@ function enqueue_entrypoint_script( string $handle, string $src ): void {
 /**
  * Activation hook callback
  */
-function activate() {
+function activate(): void {
 	Options::activate();
 	Roles::activate();
 	Course_Pages::activate();
 	Group_Pages::activate();
+	Login::activate();
+}
+
+/**
+ * Deactivation hook callback
+ */
+function deactivate(): void {
+	Login::deactivate();
 }
 
 /**
@@ -134,6 +142,7 @@ add_action(
 );
 
 register_activation_hook( PLUGIN_FILE, __NAMESPACE__ . '\activate' );
+register_deactivation_hook( PLUGIN_FILE, __NAMESPACE__ . '\deactivate' );
 register_uninstall_hook( PLUGIN_FILE, __NAMESPACE__ . '\uninstall' );
 
 Options::init();
