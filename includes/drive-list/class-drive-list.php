@@ -93,6 +93,12 @@ class Drive_List {
 	public static function get_drive_tree( string $url, int $depth, bool $download ): array {
 		// phpcs:disable WordPress.WP.AlternativeFunctions
 
+		$request_key = md5( $depth . '/' . $download . '/' . $url );
+		$cache       = get_transient( 'ftek_plugin_drive_tree_' . $request_key );
+		if ( $cache ) {
+			return $cache;
+		}
+
 		$tree   = array();
 		$leaves = array(
 			array(
@@ -170,6 +176,8 @@ class Drive_List {
 		}
 
 		curl_multi_close( $curl_multi );
+
+		set_transient( 'ftek_plugin_drive_tree_' . $request_key, $tree, 60 * 60 );
 
 		return $tree;
 
