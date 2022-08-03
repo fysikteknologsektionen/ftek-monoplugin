@@ -128,7 +128,7 @@ const Edit = ({
 	}
 
 	return (
-		<>
+		<div {...useBlockProps()}>
 			<InspectorControls>
 				<PanelBody
 					title={__('Group page', 'ftek-plugin')}
@@ -139,7 +139,7 @@ const Edit = ({
 				</PanelBody>
 			</InspectorControls>
 			<GroupPage attributes={meta} />
-		</>
+		</div>
 	);
 };
 
