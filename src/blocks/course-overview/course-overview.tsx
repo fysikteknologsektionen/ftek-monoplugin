@@ -1,5 +1,6 @@
 import { _x, __ } from '@wordpress/i18n';
-import { Fragment } from '@wordpress/element';
+import { Fragment, useMemo, useState } from '@wordpress/element';
+import { filter as filterIcon, Icon } from '@wordpress/icons';
 
 import useFetchAll from '../../hooks/useFetchAll';
 import {
@@ -10,8 +11,10 @@ import {
 	BACHELOR_YEARS,
 	PROGRAMS,
 	STUDY_PERIODS,
+	WPTaxonomyTerm,
 } from '../../utils/types';
 import { fmtProgramsYear, fmtYear } from '../../utils/format';
+import Dropdown from '../../components/dropdown';
 
 const EXTENDED_PROGRAMS = ['multiple', ...PROGRAMS] as const;
 
@@ -195,17 +198,28 @@ const YearOverview = ({
 
 const OverviewTable = ({
 	posts,
+	controls = false,
 	footnotes,
 	loading,
 }: {
 	posts: AllBachelorsCourses;
+	controls?: React.ReactNode;
 	footnotes: Footnotes;
 	loading: boolean;
 }): JSX.Element => (
 	<>
 		{BACHELOR_YEARS.map((year, i) => (
 			<Fragment key={i}>
-				<h3>{fmtYear(year)}</h3>
+				<div
+					style={{
+						display: 'flex',
+						flexWrap: 'wrap-reverse',
+						alignItems: 'center',
+					}}
+				>
+					<h3 style={{ flexGrow: 1 }}>{fmtYear(year)}</h3>
+					{i === 0 && <span>{controls}</span>}
+				</div>
 				<YearOverview
 					year={year}
 					posts={posts[year]}
@@ -218,19 +232,60 @@ const OverviewTable = ({
 );
 
 export const CourseOverview = (): JSX.Element => {
-	const [allPosts, loading] = useFetchAll<WPPost<WPCoursePageMeta>>({
+	const [allPosts, loadingPosts] = useFetchAll<WPPost<WPCoursePageMeta>>({
 		path: '/wp/v2/course-page',
 	});
+	const [programSyllabuses, loadingProgramSyllabuses] =
+		useFetchAll<WPTaxonomyTerm>({
+			path: '/wp/v2/program-syllabus',
+		});
 
-	const [posts, footnotes] = organizePosts(allPosts);
+	const [programSyllabusId, setProgramSyllabusId] = useState(-1);
+
+	const [posts, footnotes] = useMemo(
+		() =>
+			organizePosts(
+				programSyllabusId < 0
+					? allPosts
+					: allPosts.filter(
+							(post) =>
+								post['program-syllabus'].length > 0 &&
+								post['program-syllabus'].includes(
+									programSyllabusId
+								)
+					  )
+			),
+		[allPosts, programSyllabuses, programSyllabusId]
+	);
 	const footnotesEntries = Object.entries(footnotes);
+
+	const controls = programSyllabuses.length > 0 && (
+		<Dropdown.Select
+			disabled={loadingProgramSyllabuses}
+			content={
+				[
+					{ id: -1, name: __('Program syllabus', 'ftek-plugin') },
+					...programSyllabuses,
+				].find((syllabus) => syllabus.id === programSyllabusId)?.name
+			}
+			options={[
+				{ id: -1, name: __('All program syllabuses', 'ftek-plugin') },
+				...programSyllabuses,
+			].map((syllabus) => ({
+				value: syllabus.id,
+				label: syllabus.name,
+			}))}
+			onSelect={setProgramSyllabusId}
+		/>
+	);
 
 	return (
 		<>
 			<OverviewTable
 				posts={posts}
+				controls={controls}
 				footnotes={footnotes}
-				loading={loading}
+				loading={loadingPosts}
 			/>
 			{footnotesEntries.length > 0 && (
 				<p>

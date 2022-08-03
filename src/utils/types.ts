@@ -82,6 +82,7 @@ export type WPPost<T = unknown> = {
 	title: {
 		rendered: string;
 	};
+	'program-syllabus': T extends WPCoursePageMeta ? number[] : never;
 };
 
 export type WPTag = {
@@ -99,4 +100,9 @@ export type BlockJson<T extends {}> = {
 			default: T[K];
 		};
 	};
+};
+
+export type WPTaxonomyTerm = {
+	id: number;
+	name: string;
 };

@@ -1,5 +1,6 @@
 import { useState } from '@wordpress/element';
 import { __, _x } from '@wordpress/i18n';
+import { filter as filterIcon, Icon } from '@wordpress/icons';
 
 import {
 	fmtCourseCode,
@@ -18,11 +19,13 @@ import {
 	YEARS,
 	PROGRAMS,
 	STUDY_PERIODS,
+	WPTaxonomyTerm,
 } from '../../utils/types';
-import { filter as filterIcon, Icon } from '@wordpress/icons';
 import useFetchAll from '../../hooks/useFetchAll';
 import Dropdown from '../../components/dropdown';
 import CourseLinks from '../../components/course-links';
+import { withLabel } from '../../hocs/withLabel';
+import CheckboxGroup from '../../components/checkbox-group';
 
 type Filter = {
 	pageIndex: number;
@@ -31,6 +34,7 @@ type Filter = {
 	years: Year[];
 	programs: Program[];
 	sps: StudyPeriod[];
+	programSyllabusIdBlacklist: number[];
 };
 
 const initialFilter = {
@@ -40,6 +44,7 @@ const initialFilter = {
 	years: [...YEARS],
 	programs: [...PROGRAMS],
 	sps: [...STUDY_PERIODS],
+	programSyllabusIdBlacklist: [],
 };
 
 const intersects = <T,>(a: T[], b: T[]) => {
@@ -51,84 +56,20 @@ const intersects = <T,>(a: T[], b: T[]) => {
 	return false;
 };
 
-const withLabel =
-	<T,>(
-		Elem: (attr: T) => JSX.Element
-	): ((
-		attr: T & { label?: string; labelPosition?: 'before' | 'after' }
-	) => JSX.Element) =>
-	(props) => {
-		if (!props.label) {
-			return <Elem {...props} />;
-		}
-
-		const key = props.label
-			.split('')
-			.map((v) => v.charCodeAt(0))
-			.reduce((a, v) => (a + ((a << 7) + (a << 3))) ^ v) // eslint-disable-line no-bitwise
-			.toString(16);
-
-		return (
-			<label htmlFor={key}>
-				{props?.labelPosition !== 'after' && props.label}
-				<Elem {...props} id={key} />
-				{props?.labelPosition === 'after' && props.label}
-			</label>
-		);
-	};
-
 const Input = withLabel(
 	(props: React.InputHTMLAttributes<HTMLInputElement>) => <input {...props} />
-);
-
-const Select = withLabel(
-	(props: React.SelectHTMLAttributes<HTMLSelectElement>) => (
-		<select {...props} />
-	)
-);
-
-const CheckboxGroup = <T,>({
-	values,
-	boxes,
-	onChange,
-}: {
-	values: T[];
-	boxes: { label: string; value: T }[];
-	onChange: (v: T[]) => void;
-}): JSX.Element => (
-	<>
-		{boxes.map((box, i) => (
-			<div key={i} style={{ textAlign: 'left' }}>
-				<Input
-					type="checkbox"
-					defaultChecked={values.includes(box.value)}
-					label={box.label}
-					labelPosition="after"
-					onChange={(e) => {
-						const v = [...values];
-						const index = v.indexOf(box.value);
-						if (e.target.checked && index < 0) {
-							v.push(box.value);
-						}
-						if (!e.target.checked && index >= 0) {
-							v.splice(index, 1);
-						}
-						onChange(v);
-					}}
-				/>
-			</div>
-		))}
-	</>
 );
 
 function CourseList({
 	filter,
 	setFilter,
+	programSyllabuses,
 	posts,
 	loading,
 }: {
 	filter: Filter;
 	setFilter: (f: Filter) => void;
+	programSyllabuses: WPTaxonomyTerm[];
 	posts: WPPost<WPCoursePageMeta>[];
 	loading: boolean;
 }): JSX.Element {
@@ -147,7 +88,11 @@ function CourseList({
 				(filter.programs.length === PROGRAMS.length ||
 					intersects(filter.programs, meta.programs)) &&
 				(filter.sps.length === STUDY_PERIODS.length ||
-					intersects(filter.sps, meta.study_perionds))
+					intersects(filter.sps, meta.study_perionds)) &&
+				(filter.programSyllabusIdBlacklist.length === 0 ||
+					!!post['program-syllabus'].find(
+						(id) => !filter.programSyllabusIdBlacklist.includes(id)
+					))
 			);
 		})
 		.sort(
@@ -158,43 +103,23 @@ function CourseList({
 
 	return (
 		<div>
-			<div style={{ display: 'flex', flexWrap: 'wrap-reverse' }}>
+			<div
+				style={{
+					display: 'flex',
+					flexWrap: 'wrap-reverse',
+					marginBottom: '0.5rem',
+				}}
+			>
 				<div style={{ flexGrow: 1 }}>
-					<Dropdown
+					<Dropdown.Select
 						disabled={loading}
-						content={
-							<span>
-								{filter.perPage}
-								<span
-									style={{
-										marginLeft: '0.5rem',
-										display: 'inline-block',
-										transform: 'rotate(90deg)',
-									}}
-								>
-									❯
-								</span>
-							</span>
-						}
-					>
-						{(close) =>
-							[10, 20, 50, 100].map((value) => (
-								<button
-									key={value}
-									style={{
-										display: 'block',
-										cursor: 'pointer',
-									}}
-									onClick={() => {
-										close();
-										updateFilter({ perPage: value });
-									}}
-								>
-									{value}
-								</button>
-							))
-						}
-					</Dropdown>
+						content={filter.perPage}
+						options={[10, 20, 50, 100].map((value) => ({
+							value,
+							label: `${value}`,
+						}))}
+						onSelect={(value) => updateFilter({ perPage: value })}
+					/>
 					&nbsp;
 					<button
 						onClick={() =>
@@ -202,6 +127,7 @@ function CourseList({
 								years: [...YEARS],
 								programs: [...PROGRAMS],
 								sps: [...STUDY_PERIODS],
+								programSyllabusIdBlacklist: [],
 							})
 						}
 					>
@@ -306,6 +232,56 @@ function CourseList({
 									</span>
 								</div>
 							</th>
+							{programSyllabuses.length > 0 && (
+								<th>
+									{__('Program syllabuses', 'ftek-plugin')}
+									&nbsp;
+									<span style={{ fontWeight: 'normal' }}>
+										<Dropdown
+											disabled={loading}
+											content={
+												<Icon
+													icon={filterIcon}
+													size={20}
+												/>
+											}
+										>
+											<CheckboxGroup
+												values={programSyllabuses
+													.map((plan) => plan.id)
+													.filter(
+														(id) =>
+															!filter.programSyllabusIdBlacklist.includes(
+																id
+															)
+													)}
+												boxes={programSyllabuses.map(
+													(plan) => ({
+														value: plan.id,
+														label: plan.name,
+													})
+												)}
+												onChange={(plans) =>
+													updateFilter({
+														programSyllabusIdBlacklist:
+															programSyllabuses
+																.map(
+																	(plan) =>
+																		plan.id
+																)
+																.filter(
+																	(id) =>
+																		!plans.includes(
+																			id
+																		)
+																),
+													})
+												}
+											/>
+										</Dropdown>
+									</span>
+								</th>
+							)}
 							<th>{__('Links', 'ftek-plugin')}</th>
 						</tr>
 					</thead>
@@ -337,6 +313,22 @@ function CourseList({
 											)}
 										</td>
 										<td>{fmtSPs(meta.study_perionds)}</td>
+										{programSyllabuses.length > 0 && (
+											<td>
+												{item['program-syllabus']
+													.map((id) =>
+														programSyllabuses.flatMap(
+															(plan) =>
+																plan.id === id
+																	? [
+																			plan.name,
+																	  ]
+																	: []
+														)
+													)
+													.join(', ')}
+											</td>
+										)}
 										<td>
 											<CourseLinks meta={meta} />
 										</td>
@@ -416,16 +408,21 @@ function CourseList({
 
 export const AllCourses = (): JSX.Element => {
 	const [filter, setFilter] = useState<Filter>(initialFilter);
-	const [posts, loading] = useFetchAll<WPPost<WPCoursePageMeta>>({
+	const [posts, loadingPosts] = useFetchAll<WPPost<WPCoursePageMeta>>({
 		path: '/wp/v2/course-page',
 	});
+	const [programSyllabuses, loadingProgramSyllabuses] =
+		useFetchAll<WPTaxonomyTerm>({
+			path: '/wp/v2/program-syllabus',
+		});
 
 	return (
 		<CourseList
 			filter={filter}
 			setFilter={setFilter}
+			programSyllabuses={programSyllabuses}
 			posts={posts}
-			loading={loading}
+			loading={loadingPosts || loadingProgramSyllabuses}
 		/>
 	);
 };
@@ -434,6 +431,7 @@ AllCourses.Loading = (): JSX.Element => (
 	<CourseList
 		filter={initialFilter}
 		setFilter={(f) => {}}
+		programSyllabuses={[]}
 		posts={[]}
 		loading={true}
 	/>

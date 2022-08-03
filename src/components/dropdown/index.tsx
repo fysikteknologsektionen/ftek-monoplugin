@@ -5,6 +5,12 @@ type ButtonProps = {
 	active?: boolean;
 };
 
+type Props = {
+	content: React.ReactNode;
+	children: React.ReactNode | ((close: () => void) => React.ReactNode);
+	disabled?: boolean;
+};
+
 const Menu = ({
 	Button,
 	children,
@@ -103,11 +109,7 @@ const Dropdown = ({
 	content,
 	children,
 	disabled = false,
-}: {
-	content: React.ReactNode;
-	children: React.ReactNode | ((close: () => void) => React.ReactNode);
-	disabled?: boolean;
-}): JSX.Element => {
+}: Props): JSX.Element => {
 	const Button = (props: ButtonProps): JSX.Element => (
 		<button
 			className="ftek-plugin-dropdown-button"
@@ -124,5 +126,52 @@ const Dropdown = ({
 
 	return disabled ? <Button /> : <Menu Button={Button}>{children}</Menu>;
 };
+
+Dropdown.Select = <T,>({
+	options,
+	onSelect,
+	...props
+}: Omit<Props, 'children'> & {
+	options: { value: T; label: string }[];
+	onSelect: (value: T) => void;
+}): JSX.Element => (
+	<Dropdown
+		{...props}
+		content={
+			<span>
+				{props.content}
+				<span
+					style={{
+						marginLeft: '0.5rem',
+						display: 'inline-block',
+						transform: 'rotate(90deg)',
+					}}
+				>
+					❯
+				</span>
+			</span>
+		}
+	>
+		{(close) =>
+			options.map((option, i) => (
+				<button
+					key={i}
+					style={{
+						display: 'block',
+						cursor: 'pointer',
+						width: '100%',
+						textAlign: 'inherit',
+					}}
+					onClick={() => {
+						onSelect(option.value);
+						close();
+					}}
+				>
+					{option.label}
+				</button>
+			))
+		}
+	</Dropdown>
+);
 
 export default Dropdown;

@@ -70,7 +70,6 @@ class Course_Pages {
 
 		$capabilities = array(
 			'edit_course_page',
-			'edit_course_page',
 			'read_course_page',
 			'delete_course_page',
 			'edit_course_pages',
@@ -275,6 +274,55 @@ class Course_Pages {
 						),
 					),
 				),
+			)
+		);
+
+		register_taxonomy(
+			'program-syllabus',
+			'course-page',
+			array(
+				'labels'            => array(
+					'name'                       => __( 'Program syllabuses', 'ftek-plugin' ),
+					'singular_name'              => __( 'Program syllabus', 'ftek-plugin' ),
+					'search_items'               => __( 'Search program syllabuses', 'ftek-plugin' ),
+					'popular_items'              => __( 'Popular program syllabuses', 'ftek-plugin' ),
+					'all_items'                  => __( 'All program syllabuses', 'ftek-plugin' ),
+					'name_field_description'     => __( 'The name displayed when the user is selecting which program syllabus to view', 'ftek-plugin' ),
+					'slug_field_description'     => __( 'URL friendly name of the program syllabus', 'ftek-plugin' ),
+					'desc_field_description'     => __( 'The description is not prominent', 'ftek-plugin' ),
+					'edit_item'                  => __( 'Edit program syllabus', 'ftek-plugin' ),
+					'view_item'                  => __( 'View program syllabus', 'ftek-plugin' ),
+					'update_item'                => __( 'Update program syllabus', 'ftek-plugin' ),
+					'add_new_item'               => __( 'Add new program syllabus', 'ftek-plugin' ),
+					'new_item_name'              => __( 'New program syllabus', 'ftek-plugin' ),
+					'separate_items_with_commas' => __( 'Separate program syllabuses with commas', 'ftek-plugin' ),
+					'add_or_remove_items'        => __( 'Add or remove program syllabus', 'ftek-plugin' ),
+					'choose_from_most_used'      => __( 'Choose from most used program syllabuses', 'ftek-plugin' ),
+					'not_found'                  => __( 'No program syllabuses found', 'ftek-plugin' ),
+					'no_terms'                   => __( 'No program syllabuses', 'ftek-plugin' ),
+					'filter_by_item'             => __( 'Filter by program syllabus', 'ftek-plugin' ),
+					'items_list_navigation'      => __( 'Program syllabus list navigaion', 'ftek-plugin' ),
+					'items_list'                 => __( 'Program syllabus list', 'ftek-plugin' ),
+					'most_used'                  => _x( 'Most used', 'program syllabus', 'ftek-plugin' ),
+					'back_to_items'              => __( 'Back to program syllabuses', 'ftek-plugin' ),
+					'item_link'                  => __( 'Program syllabus link', 'ftek-plugin' ),
+					'item_link_description'      => __( 'A link to a program syllabus', 'ftek-plugin' ),
+				),
+				'description'       => __( 'Users will be able to select which program syllabus to view', 'ftek-plugin' ),
+				'public'            => false,
+				'show_ui'           => true,
+				'show_in_menu'      => true,
+				'show_in_rest'      => true,
+				'show_tagcloud'     => false,
+				'show_admin_column' => true,
+				'capabilities'      => array(
+					'manage_terms' => 'edit_course_page',
+					'edit_terms'   => 'edit_course_page',
+					'delete_terms' => 'edit_course_page',
+					'assign_terms' => 'edit_course_page',
+				),
+				'rewrite'           => false,
+				'query_var'         => false,
 			)
 		);
 	}

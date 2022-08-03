@@ -11,21 +11,25 @@ import {
 	StudyPeriodEnd,
 	BACHELOR_YEARS,
 	PROGRAMS,
+	WPTaxonomyTerm,
 } from '../../utils/types';
 import useFetchAll from '../../hooks/useFetchAll';
 import { fmtYear } from '../../utils/format';
+import Dropdown from '../../components/dropdown';
 
 const CurrentCoursesList = ({
 	posts,
+	controls = false,
 	option,
 	loading,
 }: {
 	posts: WPPost<WPCoursePageMeta>[];
+	controls?: React.ReactNode;
 	option: Option;
 	loading: boolean;
 }): JSX.Element => (
 	<>
-		{BACHELOR_YEARS.map((year) => {
+		{BACHELOR_YEARS.map((year, i) => {
 			const currentPosts = posts
 				.filter(
 					(post) =>
@@ -65,7 +69,19 @@ const CurrentCoursesList = ({
 
 			return (
 				<Fragment key={year}>
-					<h3 dangerouslySetInnerHTML={{ __html }} />
+					<div
+						style={{
+							display: 'flex',
+							flexWrap: 'wrap-reverse',
+							alignItems: 'center',
+						}}
+					>
+						<h3
+							style={{ flexGrow: 1 }}
+							dangerouslySetInnerHTML={{ __html }}
+						/>
+						{i === 0 && <span>{controls}</span>}
+					</div>
 					{currentPosts.length > 0 ? (
 						<>
 							<ul>
@@ -95,6 +111,59 @@ const CurrentCoursesList = ({
 export const CurrentCourses = (): JSX.Element => {
 	const [option, setOption] = useState<Option>(null);
 	const [currentSp, setCurrentSp] = useState<StudyPeriod>(null);
+
+	const [allPosts, loadingPosts] = useFetchAll<WPPost<WPCoursePageMeta>>({
+		path: '/wp/v2/course-page',
+	});
+
+	const [programSyllabuses, loadingProgramSyllabuses] =
+		useFetchAll<WPTaxonomyTerm>({
+			path: '/wp/v2/program-syllabus',
+		});
+
+	const [programSyllabusId, _setProgramSyllabusId] = useState(
+		Number(localStorage?.getItem('ftek-plugin-prgram-syllabus-id')) || -1
+	);
+	const setProgramSyllabusId = (value: number) => {
+		try {
+			localStorage?.setItem('ftek-plugin-prgram-syllabus-id', `${value}`);
+		} catch {}
+		_setProgramSyllabusId(value);
+	};
+
+	const posts = (
+		programSyllabusId < 0
+			? allPosts
+			: allPosts.filter(
+					(post) =>
+						post['program-syllabus'].length > 0 &&
+						post['program-syllabus'].includes(programSyllabusId)
+			  )
+	).filter((post) =>
+		post.meta.ftek_plugin_course_page_meta.study_perionds.includes(
+			currentSp
+		)
+	);
+
+	const controls = programSyllabuses.length > 0 && (
+		<Dropdown.Select
+			disabled={loadingProgramSyllabuses}
+			content={
+				[
+					{ id: -1, name: __('Program syllabus', 'ftek-plugin') },
+					...programSyllabuses,
+				].find((syllabus) => syllabus.id === programSyllabusId)?.name
+			}
+			options={[
+				{ id: -1, name: __('All program syllabuses', 'ftek-plugin') },
+				...programSyllabuses,
+			].map((syllabus) => ({
+				value: syllabus.id,
+				label: syllabus.name,
+			}))}
+			onSelect={setProgramSyllabusId}
+		/>
+	);
 
 	useEffect(() => {
 		apiFetch<WPOption>({ path: '/wp/v2/settings' }).then((response) => {
@@ -126,18 +195,13 @@ export const CurrentCourses = (): JSX.Element => {
 		});
 	}, []);
 
-	const [allPosts, loading] = useFetchAll<WPPost<WPCoursePageMeta>>({
-		path: '/wp/v2/course-page',
-	});
-
-	const posts = allPosts.filter((post) =>
-		post.meta.ftek_plugin_course_page_meta.study_perionds.includes(
-			currentSp
-		)
-	);
-
 	return (
-		<CurrentCoursesList posts={posts} option={option} loading={loading} />
+		<CurrentCoursesList
+			posts={posts}
+			controls={controls}
+			option={option}
+			loading={loadingPosts}
+		/>
 	);
 };
 
