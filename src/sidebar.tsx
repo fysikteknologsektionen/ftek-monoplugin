@@ -20,7 +20,7 @@ function getItemPriority(name: string, searchValue: string): number {
 	return name.startsWith(searchValue) ? name.length : 10000;
 }
 
-const PageAttributesPanel = (): JSX.Element => {
+const Plugin = (): JSX.Element => {
 	const { editPost } = useDispatch(editorStore);
 	const [fieldValue, setFieldValue] = useState<string>(null);
 	const { parentPost, parentPostId, items, postType } = useSelect(
@@ -82,38 +82,30 @@ const PageAttributesPanel = (): JSX.Element => {
 	}, [pageItems, fieldValue]);
 
 	if (!isHierarchical) {
-		return null;
+		return <></>;
 	}
 
 	return (
 		<PageAttributesCheck>
-			<PanelRow>
-				<div style={{ flexGrow: 1 }}>
-					<ComboboxControl
-						label={__('Parent group', 'ftek-plugin')}
-						value={parentPostId}
-						options={parentOptions}
-						onFilterValueChange={(value) => setFieldValue(value)}
-						onChange={(value) => editPost({ parent: value })}
-					/>
-				</div>
-			</PanelRow>
-		</PageAttributesCheck>
-	);
-};
-
-const Plugin = (): JSX.Element => {
-	const pageAttributesPanel = <PageAttributesPanel />;
-
-	return (
-		pageAttributesPanel && (
 			<PluginDocumentSettingPanel
 				title={__('Ftek', 'ftek-plugin')}
 				opened={true}
 			>
-				{pageAttributesPanel}
+				<PanelRow>
+					<div style={{ flexGrow: 1 }}>
+						<ComboboxControl
+							label={__('Parent group', 'ftek-plugin')}
+							value={parentPostId}
+							options={parentOptions}
+							onFilterValueChange={(value) =>
+								setFieldValue(value)
+							}
+							onChange={(value) => editPost({ parent: value })}
+						/>
+					</div>
+				</PanelRow>
 			</PluginDocumentSettingPanel>
-		)
+		</PageAttributesCheck>
 	);
 };
 
