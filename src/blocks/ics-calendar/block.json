@@ -1,0 +1,15 @@
+{
+	"apiVersion": 2,
+	"name": "ftek-plugin/ics-calendar",
+	"title": "ICS Calendar",
+	"category": "widgets",
+	"textdomain": "ftek-plugin",
+	"attributes": {
+		"calendars": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"editorScript": "file:editor.js",
+	"script": "file:script.js"
+}

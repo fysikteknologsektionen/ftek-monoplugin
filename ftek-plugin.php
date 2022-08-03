@@ -152,3 +152,4 @@ Login::init();
 Drive_List::init();
 Course_Pages::init();
 Group_Pages::init();
+Calendar::init();

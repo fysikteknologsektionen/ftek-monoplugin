@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-plugin\n"
-"POT-Creation-Date: 2022-07-27T15:49:26+00:00\n"
+"POT-Creation-Date: 2022-07-29T22:32:54+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -157,141 +157,141 @@ msgctxt "User role"
 msgid "Course page editor"
 msgstr "Kurssidoredaktör"
 
-#: includes/group-pages/class-group-pages.php:83
+#: includes/group-pages/class-group-pages.php:84
 msgid "Group pages"
 msgstr "Föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:84
+#: includes/group-pages/class-group-pages.php:85
 #: build/blocks/group-page/editor.js:1
 msgid "Group page"
 msgstr "Föreningssida"
 
-#: includes/group-pages/class-group-pages.php:85
+#: includes/group-pages/class-group-pages.php:86
 msgctxt "group page"
 msgid "Add new"
 msgstr "Skapa ny"
 
-#: includes/group-pages/class-group-pages.php:86
+#: includes/group-pages/class-group-pages.php:87
 msgid "Add new group page"
 msgstr "Skapa ny föreningssida"
 
-#: includes/group-pages/class-group-pages.php:87
+#: includes/group-pages/class-group-pages.php:88
 msgid "Edit group page"
 msgstr "Redigera föreningssida"
 
-#: includes/group-pages/class-group-pages.php:88
+#: includes/group-pages/class-group-pages.php:89
 msgid "New group page"
 msgstr "Ny föreningssida"
 
-#: includes/group-pages/class-group-pages.php:89
+#: includes/group-pages/class-group-pages.php:90
 msgid "View group page"
 msgstr "Visa föreningssida"
 
-#: includes/group-pages/class-group-pages.php:90
+#: includes/group-pages/class-group-pages.php:91
 msgid "View group pages"
 msgstr "Visa föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:91
+#: includes/group-pages/class-group-pages.php:92
 msgid "Search group pages"
 msgstr "Sök föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:92
+#: includes/group-pages/class-group-pages.php:93
 msgid "No group pages found"
 msgstr "Inga föreningssidor hittades"
 
-#: includes/group-pages/class-group-pages.php:93
+#: includes/group-pages/class-group-pages.php:94
 msgid "No group pages found in Trash"
 msgstr "Inga föreningssidor hittades i papperskorgen"
 
-#: includes/group-pages/class-group-pages.php:94
+#: includes/group-pages/class-group-pages.php:95
 msgid "All group pages"
 msgstr "Alla föreningssidor"
 
-#: includes/group-pages/class-group-pages.php:95
+#: includes/group-pages/class-group-pages.php:96
 msgid "Group page Attributes"
 msgstr "Föreningssidoattribut"
 
-#: includes/group-pages/class-group-pages.php:96
+#: includes/group-pages/class-group-pages.php:97
 msgid "Insert into group page"
 msgstr "Infoga i föreningssida"
 
-#: includes/group-pages/class-group-pages.php:97
+#: includes/group-pages/class-group-pages.php:98
 msgid "Uploaded to this group page"
 msgstr "Uppladdad till denna föreningssida"
 
-#: includes/group-pages/class-group-pages.php:98
+#: includes/group-pages/class-group-pages.php:99
 msgid "Filter group page list"
 msgstr "Filtrera föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:99
+#: includes/group-pages/class-group-pages.php:100
 msgid "Group page list navigation"
 msgstr "Navigera föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:100
+#: includes/group-pages/class-group-pages.php:101
 msgid "Group page list"
 msgstr "Föreningssidolista"
 
-#: includes/group-pages/class-group-pages.php:101
+#: includes/group-pages/class-group-pages.php:102
 msgid "Group page published"
 msgstr "Föreningssida publicerad"
 
-#: includes/group-pages/class-group-pages.php:102
+#: includes/group-pages/class-group-pages.php:103
 msgid "Group page reverted to draft"
 msgstr "Föreningssida återställd från utkast"
 
-#: includes/group-pages/class-group-pages.php:103
+#: includes/group-pages/class-group-pages.php:104
 msgid "Group page scheduled"
 msgstr "Föreningssida schemalagd"
 
-#: includes/group-pages/class-group-pages.php:104
+#: includes/group-pages/class-group-pages.php:105
 msgid "Group page updated"
 msgstr "Föreningssida uppdaterad"
 
-#: includes/group-pages/class-group-pages.php:105
+#: includes/group-pages/class-group-pages.php:106
 msgid "Group page link"
 msgstr "Länk till föreningssida"
 
-#: includes/group-pages/class-group-pages.php:106
+#: includes/group-pages/class-group-pages.php:107
 msgid "A link to a group page"
 msgstr "En länk till en föreningssida"
 
-#: includes/group-pages/class-group-pages.php:108
+#: includes/group-pages/class-group-pages.php:109
 msgid "Information about a group"
 msgstr "Information om en förening"
 
 #. translators: %1$s Name of group.
-#: includes/group-pages/class-group-pages.php:218
+#: includes/group-pages/class-group-pages.php:219
 msgid "Posts related to %1$s"
 msgstr "Inlägg relaterade till %1$s"
 
-#: includes/login/class-login.php:31 includes/login/class-login.php:84
+#: includes/login/class-login.php:40 includes/login/class-login.php:93
 msgid "OAuth login was not possible since required settings are unset"
 msgstr ""
 "Kan inte logga in med OAuth eftersom obligatoriska inställningar saknas"
 
-#: includes/login/class-login.php:102
+#: includes/login/class-login.php:111
 msgid "Malformatted response to OpenID authentication request"
 msgstr "Felformatterat svar på på OpenID-autentiseringsfrågan"
 
-#: includes/login/class-login.php:114
+#: includes/login/class-login.php:123
 msgid "Anti-forgery state token mismatch"
 msgstr "Anti-förfalskningsnyckeln matchade inte"
 
-#: includes/login/class-login.php:119
+#: includes/login/class-login.php:128
 msgid "There was an error recieving the OAuth access token"
 msgstr "Ett fel uppstod vid hämtningen av OAuth-accessnyckeln"
 
-#: includes/login/class-login.php:125
+#: includes/login/class-login.php:134
 msgid "There was an error fetching user info from the OAuth provider"
 msgstr ""
 "Ett fel uppstod vid hämningen av användärinformation från OAuth-servern"
 
-#: includes/login/class-login.php:143
+#: includes/login/class-login.php:152
 msgid "Sorry, your account cannot login to this site"
 msgstr "Ditt konto kan inte logga in på denna sida"
 
 #. translators: %1$s: Anchor attributes.
-#: includes/login/class-login.php:255
+#: includes/login/class-login.php:200
 msgid ""
 "Since the OpenID login failed, you were taken to the default WordPress login "
 "page. If you want to attempt another sign in with OpenID, click <a "
@@ -302,26 +302,26 @@ msgstr ""
 "klicka <a %1$s>här</a>."
 
 #. translators: %1$s: HTTP status code.
-#: includes/login/class-oauth.php:114
+#: includes/login/class-oauth.php:137
 msgid "Unexpected status (%1$s) when fetching OAuth token"
 msgstr "Uväntad status (%1$s) vid hämtingen av OAuth-nyckeln"
 
 #. translators: %1$s: HTTP status code.
-#: includes/login/class-oauth.php:144
+#: includes/login/class-oauth.php:167
 msgid "Unexpected status (%1$s) when fetching user info"
 msgstr "Uväntad status (%1$s) vid hämtingen av användainfo"
 
 #. translators: %1$s: HTTP status code.
-#: includes/login/class-oauth.php:197
+#: includes/login/class-oauth.php:220
 msgid "Unexpected status (%1$s) when fetching discovery document"
 msgstr "Uväntad status (%1$s) vid hämtingen av OAuth:s ändpunktslista"
 
-#: includes/login/class-oauth.php:202
+#: includes/login/class-oauth.php:225
 msgid "Error while parsing discovery document"
 msgstr "Ett fel uppstod vid inläsningen av OAuth:s ändpunktslista"
 
 #. translators: %1$s: Array keys.
-#: includes/login/class-oauth.php:208
+#: includes/login/class-oauth.php:231
 msgid "Missing one of (%1$s) in discovery document"
 msgstr "En av (%1$s) saknas i OAuth:s ändpunktslista"
 
@@ -554,11 +554,12 @@ msgstr "Kontakta <a %1$s>SNF</a>."
 
 #: build/blocks/course-page/editor.js:6 build/blocks/group-member/editor.js:1
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
 msgid "Description"
 msgstr "Beskrivning"
 
 #: build/blocks/course-page/editor.js:6 build/blocks/group-page/editor.js:1
-#: build/blocks/group-page/script.js:1
+#: build/blocks/group-page/script.js:1 build/group-aside.tsx.js:1
 msgid "Description goes here."
 msgstr "Skriv beskrivning här."
 
@@ -582,6 +583,7 @@ msgid "Loading files…"
 msgstr "Laddar filer…"
 
 #: build/blocks/drive-list/editor.js:1 build/blocks/group-member/editor.js:1
+#: build/blocks/ics-calendar/editor.js:1
 msgid "Basic settings"
 msgstr "Grundläggande inställningar"
 
@@ -689,32 +691,39 @@ msgid "Remove picture"
 msgstr "Ta bort profilbild"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
 msgid "Loading…"
 msgstr "Laddar…"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
 msgid "More…"
 msgstr "Fler…"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
 msgid "Related pages"
 msgstr "Relaterade sidor"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
 msgid "Latest posts"
 msgstr "Senaste inlägg"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
+msgid "Logo"
+msgstr "Logga"
+
+#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
 msgid "Contact"
 msgstr "Kontakt"
 
 #: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
+#: build/group-aside.tsx.js:1
 msgid "Members"
 msgstr "Medlemmar"
-
-#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
-msgid "Logo"
-msgstr "Logga"
 
 #: build/blocks/group-page/editor.js:1
 msgid "Select logo"
@@ -739,6 +748,66 @@ msgstr "Snapchat-url"
 #: build/blocks/group-page/editor.js:1
 msgid "YouTube url"
 msgstr "YouTube-url"
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+#, fuzzy
+msgctxt "day of week short"
+msgid "Mon"
+msgstr "Månad"
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+msgctxt "day of week short"
+msgid "Tue"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+msgctxt "day of week short"
+msgid "Wed"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+msgctxt "day of week short"
+msgid "Thu"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+msgctxt "day of week short"
+msgid "Fri"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+msgctxt "day of week short"
+msgid "Sat"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+msgctxt "day of week short"
+msgid "Sun"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1 build/blocks/ics-calendar/script.js:1
+#: build/settings.tsx.js:6
+msgid "Day"
+msgstr "Dag"
+
+#: build/blocks/ics-calendar/editor.js:1
+msgid "Calendar urls"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1
+#, fuzzy
+msgid "Name"
+msgstr "Namn"
+
+#: build/blocks/ics-calendar/editor.js:1
+msgid "ICal url"
+msgstr ""
+
+#: build/blocks/ics-calendar/editor.js:1
+#, fuzzy
+msgctxt "calendar"
+msgid "Add"
+msgstr "Ny"
 
 #: build/settings.tsx.js:1
 msgid ""
@@ -820,10 +889,6 @@ msgstr "Sista dagen i läsperiod %1$s"
 #: build/settings.tsx.js:6
 msgid "Month"
 msgstr "Månad"
-
-#: build/settings.tsx.js:6
-msgid "Day"
-msgstr "Dag"
 
 #: build/settings.tsx.js:6
 msgid ""
@@ -938,3 +1003,8 @@ msgstr "Föreningsmedlem"
 msgctxt "block title"
 msgid "Group page"
 msgstr "Föreningssida"
+
+#: build/blocks/ics-calendar/block.json src/blocks/ics-calendar/block.json
+msgctxt "block title"
+msgid "ICS Calendar"
+msgstr ""

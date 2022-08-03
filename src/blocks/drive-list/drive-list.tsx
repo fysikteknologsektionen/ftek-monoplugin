@@ -100,7 +100,7 @@ export const DriveList = ({
 	const [tree, setTree] = useState<Tree>([]);
 	useEffect(() => {
 		apiFetch<Tree>({
-			path: `ftek-plugin/v1/drive/tree?url=${url}&depth=${depth}&download=${download}`,
+			path: `/ftek-plugin/v1/drive/tree?url=${url}&depth=${depth}&download=${download}`,
 		})
 			.then((response) => setTree(response))
 			.finally(() => setLoading(false));
