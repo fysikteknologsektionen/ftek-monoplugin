@@ -337,7 +337,11 @@ function CourseList({
 							})}
 						{filteredPosts.length === 0 && (
 							<tr>
-								<td colSpan={6}>
+								<td
+									colSpan={
+										programSyllabuses.length > 0 ? 7 : 6
+									}
+								>
 									{loading
 										? __('Loading courses…', 'ftek-plugin')
 										: __('No courses found', 'ftek-plugin')}
@@ -346,7 +350,11 @@ function CourseList({
 						)}
 						{filteredPosts.length > 0 && loading && (
 							<tr>
-								<td colSpan={6}>
+								<td
+									colSpan={
+										programSyllabuses.length > 0 ? 7 : 6
+									}
+								>
 									{__('Loading more courses…', 'ftek-plugin')}
 								</td>
 							</tr>
