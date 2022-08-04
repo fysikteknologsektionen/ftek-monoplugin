@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ftek Plugin 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ftek-plugin\n"
-"POT-Creation-Date: 2022-08-03T18:40:03+00:00\n"
+"POT-Creation-Date: 2022-08-04T17:41:25+00:00\n"
 "PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,8 +184,7 @@ msgstr "Alla programplaner"
 #: includes/course-pages/class-course-pages.php:290
 msgid ""
 "The name displayed when the user is selecting which program syllabus to view"
-msgstr ""
-"Namn som anges när användaren väljer vilken programplan ska visas"
+msgstr "Namn som anges när användaren väljer vilken programplan ska visas"
 
 #: includes/course-pages/class-course-pages.php:291
 msgid "URL friendly name of the program syllabus"
@@ -669,13 +668,11 @@ msgid "Contact <a %1$s>SNF</a>."
 msgstr "Kontakta <a %1$s>SNF</a>."
 
 #: build/blocks/course-page/editor.js:6 build/blocks/group-member/editor.js:1
-#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
-#: build/group-aside.tsx.js:1
+#: build/blocks/group-page/editor.js:1
 msgid "Description"
 msgstr "Beskrivning"
 
 #: build/blocks/course-page/editor.js:6 build/blocks/group-page/editor.js:1
-#: build/blocks/group-page/script.js:1 build/group-aside.tsx.js:1
 msgid "Description goes here."
 msgstr "Skriv beskrivning här."
 
@@ -835,8 +832,7 @@ msgstr "Logga"
 msgid "Contact"
 msgstr "Kontakt"
 
-#: build/blocks/group-page/editor.js:1 build/blocks/group-page/script.js:1
-#: build/group-aside.tsx.js:1
+#: build/blocks/group-page/editor.js:1
 msgid "Members"
 msgstr "Medlemmar"
 

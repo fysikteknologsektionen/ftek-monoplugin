@@ -309,6 +309,7 @@ class Group_Pages {
 				<div class="wp-block-ftek-plugin-group-page" data="<?php echo esc_attr( wp_json_encode( $meta ) ); ?>">
 					<div class="ftek-plugin-sectioned-page">
 						<div class="ftek-plugin-sectioned-page-main">
+							<div class="main-dynamic-area"></div>
 							<?php echo $content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						</div>
 						<aside class="ftek-plugin-sectioned-page-aside">

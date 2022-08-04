@@ -1,7 +1,7 @@
 import { InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 
 import { Attributes as GroupMemberAttributes } from '../group-member/group-member';
 import {
@@ -120,7 +120,7 @@ export const AsideDynamicArea = ({
 
 	const hasSocials = socials.some((elem) => elem.url);
 	const contact = (attributes.email || hasSocials) && (
-		<>
+		<div id="ftek-plugin-group-page-contact">
 			<h3>{__('Contact', 'ftek-plugin')}</h3>
 			{attributes.email && (
 				<p>
@@ -155,7 +155,7 @@ export const AsideDynamicArea = ({
 					)}
 				</div>
 			)}
-		</>
+		</div>
 	);
 
 	if (save) {
@@ -164,7 +164,7 @@ export const AsideDynamicArea = ({
 				{logo}
 				<LoadingPosts heading={relatedPages} />
 				<LoadingPosts heading={latestPosts} />
-				{socials}
+				{contact}
 			</>
 		);
 	}
@@ -173,7 +173,7 @@ export const AsideDynamicArea = ({
 		<>
 			{logo}
 			{attributes.group_tag_id > 0 && (
-				<>
+				<div id="ftek-plugin-group-page-related">
 					<PostsByTag
 						heading={relatedPages}
 						postType="pages"
@@ -185,19 +185,69 @@ export const AsideDynamicArea = ({
 						tagId={attributes.group_tag_id}
 						limit={4}
 					/>
-				</>
+				</div>
 			)}
 			{contact}
 		</>
 	);
 };
 
-export const GroupPage = ({
+export const MainDynamicArea = ({
+	asideElement,
+}: {
+	asideElement: Element;
+}): JSX.Element => {
+	const [related, setRelated] = useState<ChildNode>(null);
+	const [contact, setContact] = useState<ChildNode>(null);
+
+	useEffect(() => {
+		if (asideElement) {
+			const observer = new MutationObserver(() => {
+				setRelated(
+					asideElement.querySelector(
+						'#ftek-plugin-group-page-related'
+					)?.firstChild
+				);
+				setContact(
+					asideElement.querySelector(
+						'#ftek-plugin-group-page-contact'
+					)?.firstChild
+				);
+			});
+
+			observer.observe(asideElement, { childList: true, subtree: true });
+
+			return () => observer.disconnect();
+		}
+
+		setRelated(null);
+		setContact(null);
+	}, [asideElement]);
+
+	return (
+		<div>
+			{related && (
+				<button onClick={() => related.parentElement.scrollIntoView()}>
+					{__('Related pages', 'ftek-plugin')}
+				</button>
+			)}
+			{contact && (
+				<button onClick={() => contact.parentElement.scrollIntoView()}>
+					{__('Contact', 'ftek-plugin')}
+				</button>
+			)}
+		</div>
+	);
+};
+
+export const StatelessGroupPage = ({
 	attributes,
-	save = false,
+	save,
+	asideRef = null,
 }: {
 	attributes: GroupPageMeta;
-	save?: boolean;
+	save: boolean;
+	asideRef?: React.MutableRefObject<HTMLDivElement>;
 }): JSX.Element => {
 	const innerBlocksTemplate: WPBlock[] = [
 		[
@@ -217,6 +267,11 @@ export const GroupPage = ({
 	return (
 		<SectionedPage>
 			<SectionedPage.Main>
+				<div className="main-dynamic-area">
+					{!save && (
+						<MainDynamicArea asideElement={asideRef.current} />
+					)}
+				</div>
 				{save ? (
 					<InnerBlocks.Content />
 				) : (
@@ -227,7 +282,10 @@ export const GroupPage = ({
 				)}
 			</SectionedPage.Main>
 			<SectionedPage.Aside>
-				<div className="aside-dynamic-area">
+				<div
+					className="aside-dynamic-area"
+					{...(asideRef ? { ref: asideRef } : {})}
+				>
 					<AsideDynamicArea attributes={attributes} save={save} />
 				</div>
 			</SectionedPage.Aside>
@@ -235,8 +293,25 @@ export const GroupPage = ({
 	);
 };
 
+export const GroupPage = ({
+	attributes,
+	save = false,
+}: {
+	attributes: GroupPageMeta;
+	save?: boolean;
+}): JSX.Element => {
+	const asideRef = useRef<HTMLDivElement>();
+	return (
+		<StatelessGroupPage
+			attributes={attributes}
+			save={save}
+			asideRef={asideRef}
+		/>
+	);
+};
+
 GroupPage.Loading = ({
 	attributes,
 }: {
 	attributes: GroupPageMeta;
-}): JSX.Element => <GroupPage attributes={attributes} save={true} />;
+}): JSX.Element => <StatelessGroupPage attributes={attributes} save={true} />;

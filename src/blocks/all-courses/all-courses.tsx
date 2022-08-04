@@ -103,13 +103,7 @@ function CourseList({
 
 	return (
 		<div>
-			<div
-				style={{
-					display: 'flex',
-					flexWrap: 'wrap-reverse',
-					marginBottom: '0.5rem',
-				}}
-			>
+			<div style={{ display: 'flex', flexWrap: 'wrap-reverse' }}>
 				<div style={{ flexGrow: 1 }}>
 					<Dropdown.Select
 						disabled={loading}

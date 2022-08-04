@@ -1,4 +1,4 @@
-import { AsideDynamicArea } from './group-page';
+import { AsideDynamicArea, MainDynamicArea } from './group-page';
 import { render } from '@wordpress/element';
 import { parse } from '../../utils/dataAttribute';
 
@@ -11,14 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
 		const data: string | undefined =
 			root.attributes.getNamedItem('data')?.value;
 		if (data) {
-			Array.from(
-				root.getElementsByClassName('aside-dynamic-area')
-			).forEach((area) =>
+			const aside = root
+				.getElementsByClassName('aside-dynamic-area')
+				.item(0);
+			if (aside) {
 				render(
 					<AsideDynamicArea attributes={parse(data, metadata)} />,
-					area
-				)
-			);
+					aside
+				);
+
+				const main = root
+					.getElementsByClassName('main-dynamic-area')
+					.item(0);
+				if (main) {
+					render(<MainDynamicArea asideElement={aside} />, main);
+				}
+			}
 		}
 	});
 });
