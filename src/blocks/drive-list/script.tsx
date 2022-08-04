@@ -1,6 +1,6 @@
-import { DriveList } from './drive-list';
 import { render } from '@wordpress/element';
 import { parse } from '../../utils/dataAttribute';
+import { DriveList } from './drive-list';
 
 import metadata from './block.json';
 

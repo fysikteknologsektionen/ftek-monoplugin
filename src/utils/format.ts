@@ -1,4 +1,4 @@
-import { __, _x } from '@wordpress/i18n';
+import { _x, __ } from '@wordpress/i18n';
 import { Program, StudyPeriod, Year } from './types';
 
 export const fmtCourseCode = (code: string): string =>

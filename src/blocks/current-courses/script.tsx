@@ -1,5 +1,5 @@
-import { CurrentCourses } from './current-courses';
 import { render } from '@wordpress/element';
+import { CurrentCourses } from './current-courses';
 
 document.addEventListener('DOMContentLoaded', () => {
 	Array.from(

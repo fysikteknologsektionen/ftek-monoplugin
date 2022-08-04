@@ -1,19 +1,19 @@
-import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
 import {
+	InspectorControls,
 	MediaUpload,
 	MediaUploadCheck,
 	useBlockProps,
-	InspectorControls,
 } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
 import {
+	Button,
+	CheckboxControl,
 	PanelBody,
 	PanelRow,
 	TextControl,
-	Button,
-	CheckboxControl,
 } from '@wordpress/components';
-import { GroupMember, Attributes } from './group-member';
+import { __ } from '@wordpress/i18n';
+import { Attributes, GroupMember } from './group-member';
 
 import { serialize } from '../../utils/dataAttribute';
 

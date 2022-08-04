@@ -1,25 +1,25 @@
 import {
+	InspectorControls,
 	MediaUpload,
 	MediaUploadCheck,
-	InspectorControls,
 	useBlockProps,
 } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
 import {
+	Button,
 	PanelBody,
 	PanelRow,
-	Button,
 	TextControl,
 } from '@wordpress/components';
 import { useDispatch } from '@wordpress/data';
-import { registerBlockType } from '@wordpress/blocks';
-import { registerPlugin } from '@wordpress/plugins';
-import { GroupPage } from './group-page';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
 import { __ } from '@wordpress/i18n';
+import { registerPlugin } from '@wordpress/plugins';
+import { GroupPage } from './group-page';
 
-import { GroupPageMeta, Inline, WPGroupPageMeta } from '../../utils/types';
 import usePostMeta from '../../hooks/usePostMeta';
 import { serialize } from '../../utils/dataAttribute';
+import { GroupPageMeta, Inline, WPGroupPageMeta } from '../../utils/types';
 
 import SVGImage from '../../components/svg-image';
 

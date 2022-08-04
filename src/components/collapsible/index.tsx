@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 
 const Collapsible = ({
 	header,

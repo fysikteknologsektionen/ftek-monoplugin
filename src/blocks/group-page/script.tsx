@@ -1,6 +1,6 @@
-import { AsideDynamicArea, MainDynamicArea } from './group-page';
 import { render } from '@wordpress/element';
 import { parse } from '../../utils/dataAttribute';
+import { AsideDynamicArea, MainDynamicArea } from './group-page';
 
 import metadata from './block.json';
 

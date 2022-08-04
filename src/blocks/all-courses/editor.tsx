@@ -1,8 +1,8 @@
-import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
-import { AllCourses } from './all-courses';
+import { registerBlockType } from '@wordpress/blocks';
 
 import { serialize } from '../../utils/dataAttribute';
+import { AllCourses } from './all-courses';
 
 import metadata from './block.json';
 

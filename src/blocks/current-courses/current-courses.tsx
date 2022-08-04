@@ -1,21 +1,21 @@
-import { Fragment, useState, useEffect } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
+import { Fragment, useEffect, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
-import {
-	Option,
-	WPCoursePageMeta,
-	WPPost,
-	StudyPeriod,
-	WPOption,
-	StudyPeriodEnd,
-	BACHELOR_YEARS,
-	PROGRAMS,
-	WPTaxonomyTerm,
-} from '../../utils/types';
+import Dropdown from '../../components/dropdown';
 import useFetchAll from '../../hooks/useFetchAll';
 import { fmtYear } from '../../utils/format';
-import Dropdown from '../../components/dropdown';
+import {
+	BACHELOR_YEARS,
+	Option,
+	PROGRAMS,
+	StudyPeriod,
+	StudyPeriodEnd,
+	WPCoursePageMeta,
+	WPOption,
+	WPPost,
+	WPTaxonomyTerm,
+} from '../../utils/types';
 
 const CurrentCoursesList = ({
 	posts,

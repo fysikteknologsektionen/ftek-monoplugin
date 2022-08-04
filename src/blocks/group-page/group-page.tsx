@@ -1,9 +1,8 @@
-import { InnerBlocks } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { useEffect, useRef, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
-import { Attributes as GroupMemberAttributes } from '../group-member/group-member';
 import {
 	GroupPageMeta,
 	Inline,
@@ -11,9 +10,10 @@ import {
 	WPPost,
 	WPTag,
 } from '../../utils/types';
+import { Attributes as GroupMemberAttributes } from '../group-member/group-member';
 
-import SVGImage from '../../components/svg-image';
 import SectionedPage from '../../components/sectioned-page';
+import SVGImage from '../../components/svg-image';
 
 declare const ftekInline: Inline;
 

@@ -1,30 +1,31 @@
-import { registerBlockType } from '@wordpress/blocks';
 import {
-	useBlockProps,
 	InnerBlocks,
 	InspectorControls,
+	useBlockProps,
 } from '@wordpress/block-editor';
-import { useSelect, useDispatch } from '@wordpress/data';
+import { registerBlockType } from '@wordpress/blocks';
 import {
-	PanelBody,
-	PanelRow,
-	TextControl,
 	Button,
 	CheckboxControl,
+	PanelBody,
+	PanelRow,
 	RadioControl,
+	TextControl,
 } from '@wordpress/components';
-import { useState } from '@wordpress/element';
-import { trash } from '@wordpress/icons';
-import { __, _x } from '@wordpress/i18n';
-import { registerPlugin } from '@wordpress/plugins';
+import { useDispatch, useSelect } from '@wordpress/data';
 import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { useState } from '@wordpress/element';
+import { _x, __ } from '@wordpress/i18n';
+import { trash } from '@wordpress/icons';
+import { registerPlugin } from '@wordpress/plugins';
 
 import { Attributes as DriveListAttributes } from '../drive-list/drive-list';
 
-import SVGImage from '../../components/svg-image';
-import SectionedPage from '../../components/sectioned-page';
 import CourseLinks from '../../components/course-links';
+import SectionedPage from '../../components/sectioned-page';
+import SVGImage from '../../components/svg-image';
 
+import usePostMeta from '../../hooks/usePostMeta';
 import {
 	fmtCourseCode,
 	fmtCourseCredits,
@@ -42,7 +43,6 @@ import {
 	Year,
 	YEARS,
 } from '../../utils/types';
-import usePostMeta from '../../hooks/usePostMeta';
 
 import metadata from './block.json';
 

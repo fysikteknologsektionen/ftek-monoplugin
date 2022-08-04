@@ -1,5 +1,5 @@
-import { useState, useEffect } from '@wordpress/element';
 import apiFetch, { APIFetchOptions } from '@wordpress/api-fetch'; // eslint-disable-line import/named
+import { useEffect, useState } from '@wordpress/element';
 import { addQueryArgs } from '@wordpress/url';
 
 const PAGE_SIZE = 100;

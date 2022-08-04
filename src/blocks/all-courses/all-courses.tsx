@@ -1,7 +1,12 @@
 import { useState } from '@wordpress/element';
-import { __, _x } from '@wordpress/i18n';
+import { _x, __ } from '@wordpress/i18n';
 import { filter as filterIcon, Icon } from '@wordpress/icons';
 
+import CheckboxGroup from '../../components/checkbox-group';
+import CourseLinks from '../../components/course-links';
+import Dropdown from '../../components/dropdown';
+import { withLabel } from '../../hocs/withLabel';
+import useFetchAll from '../../hooks/useFetchAll';
 import {
 	fmtCourseCode,
 	fmtCourseCredits,
@@ -10,22 +15,17 @@ import {
 	fmtYear,
 } from '../../utils/format';
 import {
-	Year,
-	WPPost,
-	WPCoursePageMeta,
-	StudyPeriod,
-	Program,
 	CoursePageMeta,
-	YEARS,
+	Program,
 	PROGRAMS,
+	StudyPeriod,
 	STUDY_PERIODS,
+	WPCoursePageMeta,
+	WPPost,
 	WPTaxonomyTerm,
+	Year,
+	YEARS,
 } from '../../utils/types';
-import useFetchAll from '../../hooks/useFetchAll';
-import Dropdown from '../../components/dropdown';
-import CourseLinks from '../../components/course-links';
-import { withLabel } from '../../hocs/withLabel';
-import CheckboxGroup from '../../components/checkbox-group';
 
 type Filter = {
 	pageIndex: number;

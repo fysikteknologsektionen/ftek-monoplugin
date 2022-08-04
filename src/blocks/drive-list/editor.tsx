@@ -1,13 +1,13 @@
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import {
+	CheckboxControl,
 	PanelBody,
 	PanelRow,
 	TextControl,
-	CheckboxControl,
 } from '@wordpress/components';
-import { DriveList, Attributes, attrsOrDefault } from './drive-list';
+import { __ } from '@wordpress/i18n';
+import { Attributes, attrsOrDefault, DriveList } from './drive-list';
 
 import { serialize } from '../../utils/dataAttribute';
 

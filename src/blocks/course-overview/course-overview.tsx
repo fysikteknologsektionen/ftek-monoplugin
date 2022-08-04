@@ -1,20 +1,19 @@
-import { _x, __ } from '@wordpress/i18n';
 import { Fragment, useMemo, useState } from '@wordpress/element';
-import { filter as filterIcon, Icon } from '@wordpress/icons';
+import { _x, __ } from '@wordpress/i18n';
 
+import Dropdown from '../../components/dropdown';
 import useFetchAll from '../../hooks/useFetchAll';
+import { fmtProgramsYear, fmtYear } from '../../utils/format';
 import {
-	WPPost,
-	WPCoursePageMeta,
-	StudyPeriod,
 	BachelorYear,
 	BACHELOR_YEARS,
 	PROGRAMS,
+	StudyPeriod,
 	STUDY_PERIODS,
+	WPCoursePageMeta,
+	WPPost,
 	WPTaxonomyTerm,
 } from '../../utils/types';
-import { fmtProgramsYear, fmtYear } from '../../utils/format';
-import Dropdown from '../../components/dropdown';
 
 const EXTENDED_PROGRAMS = ['multiple', ...PROGRAMS] as const;
 

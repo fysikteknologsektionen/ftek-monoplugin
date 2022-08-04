@@ -1,32 +1,30 @@
-import { render, useEffect, useState, Fragment } from '@wordpress/element';
-import { __, _x } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
-import { check, trash, menu } from '@wordpress/icons';
 import {
+	Button,
+	CheckboxControl,
+	DropdownMenu,
+	Icon,
+	MenuItem,
 	Placeholder,
+	SelectControl,
 	Spinner,
 	TextControl,
-	Button,
-	Icon,
-	DropdownMenu,
-	MenuItem,
-	CheckboxControl,
-	SelectControl,
 } from '@wordpress/components';
+import { Fragment, render, useEffect, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
+import { check, menu, trash } from '@wordpress/icons';
 
-import {
-	Option,
-	OAuthUser,
-	RoleKey,
-	Year,
-	Program,
-	WPOption,
-	Inline,
-	STUDY_PERIODS,
-	BACHELOR_YEARS,
-	PROGRAMS,
-} from './utils/types';
 import { fmtProgramsYear, fmtYear } from './utils/format';
+import {
+	BACHELOR_YEARS,
+	Inline,
+	OAuthUser,
+	Option,
+	PROGRAMS,
+	RoleKey,
+	STUDY_PERIODS,
+	WPOption,
+} from './utils/types';
 
 declare const ftekInline: Inline;
 

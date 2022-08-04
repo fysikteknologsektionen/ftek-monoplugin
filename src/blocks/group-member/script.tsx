@@ -1,6 +1,6 @@
-import { GroupMember } from './group-member';
 import { render } from '@wordpress/element';
 import { parse } from '../../utils/dataAttribute';
+import { GroupMember } from './group-member';
 
 import metadata from './block.json';
 

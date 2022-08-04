@@ -1,5 +1,5 @@
-import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
 import { CurrentCourses } from './current-courses';
 
 import { serialize } from '../../utils/dataAttribute';

@@ -1,12 +1,12 @@
-import { PageAttributesCheck, store as editorStore } from '@wordpress/editor';
-import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
-import { PanelBody, PanelRow, ComboboxControl } from '@wordpress/components';
-import { registerPlugin } from '@wordpress/plugins';
-import { __ } from '@wordpress/i18n';
-import { useState, useMemo } from '@wordpress/element';
-import { useSelect, useDispatch } from '@wordpress/data';
-import { decodeEntities } from '@wordpress/html-entities';
+import { ComboboxControl, PanelRow } from '@wordpress/components';
 import { store as coreStore } from '@wordpress/core-data';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { PageAttributesCheck, store as editorStore } from '@wordpress/editor';
+import { useMemo, useState } from '@wordpress/element';
+import { decodeEntities } from '@wordpress/html-entities';
+import { __ } from '@wordpress/i18n';
+import { registerPlugin } from '@wordpress/plugins';
 
 import { WPPost } from './utils/types';
 
