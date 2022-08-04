@@ -90,7 +90,7 @@ export const AsideDynamicArea = ({
 	const latestPosts = <h3>{__('Latest posts', 'ftek-plugin')}</h3>;
 
 	const logo = attributes.logo_url && (
-		<div>
+		<div className="ftek-plugin-group-page-logo">
 			<img
 				style={{ width: '100%' }}
 				alt={__('Logo', 'ftek-plugin')}
@@ -227,7 +227,10 @@ export const MainDynamicArea = ({
 	return (
 		<div>
 			{related && (
-				<button onClick={() => related.parentElement.scrollIntoView()}>
+				<button
+					style={{ marginRight: '0.5rem' }}
+					onClick={() => related.parentElement.scrollIntoView()}
+				>
 					{__('Related pages', 'ftek-plugin')}
 				</button>
 			)}
