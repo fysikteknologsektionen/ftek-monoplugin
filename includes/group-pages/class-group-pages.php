@@ -56,7 +56,7 @@ class Group_Pages {
 			update_post_meta(
 				$post->ID,
 				'ftek_plugin_group_page_meta',
-				array_merge( get_post_meta( $post->ID, 'ftek_plugin_group_page_meta', true ), self::DEFAULTS )
+				array_merge( self::DEFAULTS, get_post_meta( $post->ID, 'ftek_plugin_group_page_meta', true ) )
 			);
 		}
 	}
