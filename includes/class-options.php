@@ -59,6 +59,7 @@ class Options {
 		add_action( 'init', array( self::class, 'add_option' ) );
 		add_action( 'admin_menu', array( self::class, 'add_settings_page' ) );
 		add_filter( 'plugin_action_links_ftek-plugin/ftek-plugin.php', array( self::class, 'add_settings_action_link' ) );
+		add_action( 'rest_api_init', array( self::class, 'add_options_rest_route' ) );
 	}
 
 	/**
@@ -243,5 +244,30 @@ class Options {
 		<?php
 		$actions[] = ob_get_clean();
 		return $actions;
+	}
+
+		/**
+		 * Adds the /options/public rest route
+		 */
+	public static function add_options_rest_route(): void {
+		register_rest_route(
+			'ftek-plugin/v1',
+			'/options/public',
+			array(
+				'methods'             => 'GET',
+				'callback'            => function( \WP_REST_Request $request ): array {
+					return array_intersect_key(
+						Options::get(),
+						array_flip(
+							array(
+								'study_period_ends',
+								'schedules',
+							)
+						)
+					);
+				},
+				'permission_callback' => '__return_true',
+			)
+		);
 	}
 }

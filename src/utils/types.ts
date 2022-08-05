@@ -16,15 +16,18 @@ export type StudyPeriod = typeof STUDY_PERIODS[number];
 
 export type StudyPeriodEnd = { month: number; day: number };
 
+export type PublicOption = {
+	study_period_ends: { [sp in StudyPeriod]: StudyPeriodEnd };
+	schedules: { [y in Exclude<Year, 'master'>]: { [p in Program]: string } };
+};
+
 export type Option = {
 	oauth_discovery_doc_url: string;
 	oauth_client_id: string;
 	oauth_client_secret: string;
 	oauth_users: OAuthUser[];
 	google_api_key: string;
-	study_period_ends: { [sp in StudyPeriod]: StudyPeriodEnd };
-	schedules: { [y in Exclude<Year, 'master'>]: { [p in Program]: string } };
-};
+} & PublicOption;
 
 export type WPOption = { ftek_plugin_option: Option };
 

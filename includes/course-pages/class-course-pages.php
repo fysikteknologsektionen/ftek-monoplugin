@@ -64,9 +64,7 @@ class Course_Pages {
 	 * Called on plugin activation
 	 */
 	public static function activate(): void {
-		// Update rewrite rules used to assign nicer urls to posts.
 		self::register_post_type();
-		flush_rewrite_rules();
 
 		$capabilities = array(
 			'edit_course_page',
@@ -100,24 +98,20 @@ class Course_Pages {
 		);
 
 		foreach ( $posts as $post ) {
-			$meta = array_merge(
-				self::DEFAULTS,
-				get_post_meta( $post->ID, 'ftek_plugin_course_page_meta', true )
-			);
-
-			if ( isset( $meta['year'] ) && ! empty( $meta['year'] ) ) {
-				$meta['years'] = array( $meta['year'] );
-			}
-
 			update_post_meta(
 				$post->ID,
 				'ftek_plugin_course_page_meta',
 				array_intersect_key(
-					$meta,
+					array_merge(
+						self::DEFAULTS,
+						get_post_meta( $post->ID, 'ftek_plugin_course_page_meta', true )
+					),
 					self::DEFAULTS
 				)
 			);
 		}
+
+		flush_rewrite_rules();
 	}
 
 	/**

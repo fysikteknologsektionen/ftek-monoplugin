@@ -7,12 +7,11 @@ import useFetchAll from '../../hooks/useFetchAll';
 import { fmtProgramsYears } from '../../utils/format';
 import {
 	BACHELOR_YEARS,
-	Option,
 	PROGRAMS,
+	PublicOption,
 	StudyPeriod,
 	StudyPeriodEnd,
 	WPCoursePageMeta,
-	WPOption,
 	WPPost,
 	WPTaxonomyTerm,
 } from '../../utils/types';
@@ -25,7 +24,7 @@ const CurrentCoursesList = ({
 }: {
 	posts: WPPost<WPCoursePageMeta>[];
 	controls?: React.ReactNode;
-	option: Option;
+	option: PublicOption;
 	loading: boolean;
 }): JSX.Element => (
 	<>
@@ -108,7 +107,7 @@ const CurrentCoursesList = ({
 );
 
 export const CurrentCourses = (): JSX.Element => {
-	const [option, setOption] = useState<Option>(null);
+	const [option, setOption] = useState<PublicOption>(null);
 	const [currentSp, setCurrentSp] = useState<StudyPeriod>(null);
 
 	const [allPosts, loadingPosts] = useFetchAll<WPPost<WPCoursePageMeta>>({
@@ -161,33 +160,36 @@ export const CurrentCourses = (): JSX.Element => {
 	);
 
 	useEffect(() => {
-		apiFetch<WPOption>({ path: '/wp/v2/settings' }).then((response) => {
-			setOption(response.ftek_plugin_option);
+		apiFetch<PublicOption>({ path: '/ftek-plugin/v1/options/public' }).then(
+			(response) => {
+				setOption(response);
 
-			const currentDate = new Date();
-			const sps = (
-				Object.entries(
-					response.ftek_plugin_option.study_period_ends
-				) as [StudyPeriod, StudyPeriodEnd][]
-			)
-				.map(([sp, ends]) => ({
-					end: new Date(
-						currentDate.getFullYear(),
-						ends.month - 1,
-						ends.day
-					),
-					sp,
-				}))
-				.sort((a, b) => a.end.valueOf() - b.end.valueOf());
+				const currentDate = new Date();
+				const sps = (
+					Object.entries(response.study_period_ends) as [
+						StudyPeriod,
+						StudyPeriodEnd
+					][]
+				)
+					.map(([sp, ends]) => ({
+						end: new Date(
+							currentDate.getFullYear(),
+							ends.month - 1,
+							ends.day
+						),
+						sp,
+					}))
+					.sort((a, b) => a.end.valueOf() - b.end.valueOf());
 
-			for (let i = sps.length - 1; i >= 0; i--) {
-				if (currentDate > sps[i].end) {
-					setCurrentSp(sps[(i + 1) % sps.length].sp);
-					return;
+				for (let i = sps.length - 1; i >= 0; i--) {
+					if (currentDate > sps[i].end) {
+						setCurrentSp(sps[(i + 1) % sps.length].sp);
+						return;
+					}
 				}
+				setCurrentSp(sps[0].sp);
 			}
-			setCurrentSp(sps[0].sp);
-		});
+		);
 	}, []);
 
 	return (

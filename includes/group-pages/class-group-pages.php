@@ -43,7 +43,6 @@ class Group_Pages {
 	 */
 	public static function activate(): void {
 		self::register_post_type();
-		flush_rewrite_rules();
 
 		$posts = get_posts(
 			array(
@@ -65,6 +64,8 @@ class Group_Pages {
 				)
 			);
 		}
+
+		flush_rewrite_rules();
 	}
 
 	/**
