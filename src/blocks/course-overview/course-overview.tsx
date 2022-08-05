@@ -23,6 +23,7 @@ type PostView = {
 	title: string;
 	link: string;
 	comments: string[];
+	participantCount: number;
 };
 
 type CoursesInAYear = {
@@ -82,9 +83,21 @@ const organizePosts = (
 				title: post.title.rendered,
 				link: post.link,
 				comments,
+				participantCount:
+					post.meta.ftek_plugin_course_page_meta.participant_count,
 			});
 		});
 	});
+
+	BACHELOR_YEARS.forEach((year) =>
+		EXTENDED_PROGRAMS.forEach((program) =>
+			STUDY_PERIODS.forEach((sp) =>
+				posts[year][program][sp].sort(
+					(a, b) => b.participantCount - a.participantCount
+				)
+			)
+		)
+	);
 
 	return [posts, footnotes];
 };
@@ -246,15 +259,13 @@ export const CourseOverview = (): JSX.Element => {
 	const [posts, footnotes] = useMemo(
 		() =>
 			organizePosts(
-				programSyllabusId < 0
-					? allPosts
-					: allPosts.filter(
-							(post) =>
-								post['program-syllabus'].length > 0 &&
-								post['program-syllabus'].includes(
-									programSyllabusId
-								)
-					  )
+				allPosts.filter(
+					(post) =>
+						(programSyllabusId < 0 &&
+							post['program-syllabus'].length > 0) ||
+						programSyllabuses.length === 0 ||
+						post['program-syllabus'].includes(programSyllabusId)
+				)
 			),
 		[allPosts, programSyllabuses, programSyllabusId]
 	);

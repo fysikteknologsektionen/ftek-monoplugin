@@ -131,18 +131,14 @@ export const CurrentCourses = (): JSX.Element => {
 		_setProgramSyllabusId(value);
 	};
 
-	const posts = (
-		programSyllabusId < 0
-			? allPosts
-			: allPosts.filter(
-					(post) =>
-						post['program-syllabus'].length > 0 &&
-						post['program-syllabus'].includes(programSyllabusId)
-			  )
-	).filter((post) =>
-		post.meta.ftek_plugin_course_page_meta.study_perionds.includes(
-			currentSp
-		)
+	const posts = allPosts.filter(
+		(post) =>
+			((programSyllabusId < 0 && post['program-syllabus'].length > 0) ||
+				programSyllabuses.length === 0 ||
+				post['program-syllabus'].includes(programSyllabusId)) &&
+			post.meta.ftek_plugin_course_page_meta.study_perionds.includes(
+				currentSp
+			)
 	);
 
 	const controls = programSyllabuses.length > 0 && (
