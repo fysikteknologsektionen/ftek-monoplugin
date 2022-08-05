@@ -65,6 +65,7 @@ export type WPCoursePageMeta = {
 export type GroupPageMeta = {
 	logo_url: string;
 	group_tag_id: number;
+	permalink: string;
 	email: string;
 	facebook: string;
 	instagram: string;

@@ -81,16 +81,20 @@ const PostsByTag = ({
 
 const GroupPageLogo = ({
 	attributes,
+	save,
 }: {
 	attributes: GroupPageMeta;
+	save: boolean;
 }): JSX.Element =>
 	attributes.logo_url ? (
 		<div className="ftek-plugin-group-page-logo">
-			<img
-				style={{ width: '100%' }}
-				alt={__('Logo', 'ftek-plugin')}
-				src={attributes.logo_url}
-			/>
+			<a {...(save ? {} : { href: attributes.permalink })}>
+				<img
+					style={{ width: '100%' }}
+					alt={__('Logo', 'ftek-plugin')}
+					src={attributes.logo_url}
+				/>
+			</a>
 		</div>
 	) : (
 		<></>
@@ -106,7 +110,7 @@ export const AsideDynamicArea = ({
 	const relatedPages = <h3>{__('Related pages', 'ftek-plugin')}</h3>;
 	const latestPosts = <h3>{__('Latest posts', 'ftek-plugin')}</h3>;
 
-	const logo = <GroupPageLogo attributes={attributes} />;
+	const logo = <GroupPageLogo attributes={attributes} save={save} />;
 
 	const socials: { url: string; icon: string }[] = [
 		{
@@ -279,7 +283,7 @@ export const StatelessGroupPage = ({
 	return (
 		<SectionedPage>
 			<SectionedPage.Main>
-				<GroupPageLogo attributes={attributes} />
+				<GroupPageLogo attributes={attributes} save={save} />
 				<div className="main-dynamic-area">
 					{!save && (
 						<MainDynamicArea asideElement={asideRef.current} />

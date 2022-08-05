@@ -15,6 +15,7 @@ class Group_Pages {
 	const DEFAULTS = array(
 		'logo_url'     => '',
 		'group_tag_id' => -1,
+		'permalink'    => '',
 		'email'        => '',
 		'facebook'     => '',
 		'instagram'    => '',
@@ -30,6 +31,7 @@ class Group_Pages {
 		add_action( 'init', array( self::class, 'add_tag_to_pages' ) );
 		add_action( 'init', array( self::class, 'support_group_as_parent_page' ) );
 		add_action( 'wp_insert_post_data', array( self::class, 'update_tag' ), 10, 2 );
+		add_action( 'wp_insert_post_data', array( self::class, 'update_permalink_meta' ), 10, 2 );
 		add_action( 'pre_get_posts', array( self::class, 'work_around_empty_slug' ) );
 		add_filter( 'the_content', array( self::class, 'add_aside_to_children' ) );
 
@@ -158,6 +160,10 @@ class Group_Pages {
 								'type'     => 'number',
 								'required' => true,
 							),
+							'permalink'    => array(
+								'type'     => 'string',
+								'required' => true,
+							),
 							'email'        => array(
 								'type'     => 'string',
 								'required' => true,
@@ -250,6 +256,27 @@ class Group_Pages {
 			sprintf( '"group_tag_id":%d', $group_tag_id ),
 			$data['post_content']
 		);
+
+		return $data;
+	}
+
+	/**
+	 * Callback for the wp_insert_post_data filter hook.
+	 * Updates post meta holding the post permalink
+	 *
+	 * @param array $data    An array of slashed, sanitized, and processed post
+	 *                       data.
+	 * @param array $postarr An array of sanitized (and slashed) but otherwise
+	 *                       unmodified post data.
+	 */
+	public static function update_permalink_meta( array $data, array $postarr ): array {
+		if ( 'group-page' !== $data['post_type'] ) {
+			return $data;
+		}
+
+		$meta              = get_post_meta( $postarr['ID'], 'ftek_plugin_group_page_meta', true );
+		$meta['permalink'] = get_permalink( $postarr['ID'] );
+		update_post_meta( $postarr['ID'], 'ftek_plugin_group_page_meta', $meta );
 
 		return $data;
 	}
