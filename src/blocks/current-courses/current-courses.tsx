@@ -41,14 +41,14 @@ const CurrentCoursesList = ({
 						a.meta.ftek_plugin_course_page_meta.participant_count
 				);
 
-			const scheduleLinks = PROGRAMS.filter(
-				(prog) => option?.schedules?.[prog]
-			)
-				.map(
-					(prog) =>
-						`<a href="${option?.schedules?.[prog]}">${prog}</a>`
-				)
-				.join(', ');
+			const scheduleLinks = PROGRAMS.flatMap((prog) => {
+				const schedule = option?.schedules?.[year]?.[prog];
+				return schedule
+					? [
+							`<a href="${schedule}" target="_blank" rel="noopener noreferrer">${prog}</a>`,
+					  ]
+					: [];
+			}).join(', ');
 
 			const __html =
 				fmtYear(year) +
