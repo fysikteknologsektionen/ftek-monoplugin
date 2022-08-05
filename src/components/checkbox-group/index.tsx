@@ -18,7 +18,7 @@ const CheckboxGroup = <T,>({
 			<div key={i} style={{ textAlign: 'left' }}>
 				<Input
 					type="checkbox"
-					defaultChecked={values.includes(box.value)}
+					checked={values.includes(box.value)}
 					label={box.label}
 					labelPosition="after"
 					onChange={(e) => {
