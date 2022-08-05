@@ -51,7 +51,7 @@ export type CoursePageMeta = {
 	survey_url: string;
 	student_representatives: { name: string; cid: string }[];
 	study_perionds: StudyPeriod[];
-	year: '' | Year;
+	years: Year[];
 	programs: Program[];
 	participant_count: number;
 	elective: boolean;

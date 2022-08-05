@@ -14,7 +14,7 @@ import { Fragment, render, useEffect, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { check, menu, trash } from '@wordpress/icons';
 
-import { fmtProgramsYear, fmtYear } from './utils/format';
+import { fmtProgramsYears } from './utils/format';
 import {
 	BACHELOR_YEARS,
 	Inline,
@@ -310,14 +310,14 @@ const SchedulesSettings = ({
 	<>
 		<p>
 			{__(
-				'Enter the URL to the schedule for each class. The schedule should begin at the current week and end one year later.',
+				'Enter the URL to the schedule for each year. The schedule should begin at the current week and end one year later.',
 				'ftek-plugin'
 			)}
 		</p>
 		{BACHELOR_YEARS.map((year, i) => {
 			return (
 				<Fragment key={i}>
-					<h4>{fmtYear(year)}</h4>
+					<h4>{fmtProgramsYears([], [year])}</h4>
 					{PROGRAMS.map((program, j) => (
 						<TextControl
 							key={j}
@@ -328,7 +328,7 @@ const SchedulesSettings = ({
 									'ftek-plugin'
 								).replace(
 									'%1$s',
-									fmtProgramsYear([program], year)
+									fmtProgramsYears([program], [year])
 								)
 							}
 							value={option.schedules[year][program]}

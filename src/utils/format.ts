@@ -11,30 +11,55 @@ export const fmtCourseCredits = (credits: number): string =>
 		(credits || 0).toString()
 	);
 
-export const fmtProgramsYear = (
+export const fmtProgramsYears = (
 	programs: Program[],
-	year: '' | Year
+	years: Year[]
 ): string => {
-	if (year === 'master') {
-		return __("Master's course", 'ftek-plugin');
+	if (programs.length === 0 && years.length === 0) {
+		return '–';
 	}
-	if (programs.length > 0) {
-		return programs
-			.sort()
-			.map((program) => program + year || '')
-			.join(' ');
-	}
-	return _x('Year', 'grade', 'ftek-plugin');
-};
 
-export const fmtYear = (year: Year): string => {
-	if (year === 'master') {
-		return __("Master's course", 'ftek-plugin');
+	const ys = years.filter((y) => y !== 'master');
+	const numerics =
+		ys.length > 0
+			? ys
+					.sort()
+					.map((a) => [[parseInt(a)]])
+					.reduce((previous, current) => {
+						const range = previous[previous.length - 1];
+						if (current[0][0] - range[range.length - 1] === 1) {
+							range.push(current[0][0]);
+						} else {
+							previous.push(current[0]);
+						}
+						return previous;
+					})
+					.map((range) =>
+						range.length > 1
+							? range[0] + '-' + range[range.length - 1]
+							: range[0].toString()
+					)
+			: [];
+
+	const words =
+		programs.length > 0
+			? programs
+					.sort()
+					.flatMap((prog) =>
+						(numerics.length > 0 ? numerics : ['']).map(
+							(num) => `${prog}${num}`
+						)
+					)
+			: numerics.map((num) =>
+					// translators: %1$s Numeric year range
+					_x('Year %1$s', 'grade', 'ftek-plugin').replace('%1$s', num)
+			  );
+
+	if (years.includes('master')) {
+		words.push(__("Master's course", 'ftek-plugin'));
 	}
-	return (
-		// translators: %1$s Number of the year
-		_x('Year %1$s', 'grade', 'ftek-plugin').replace('%1$s', year)
-	);
+
+	return words.join(' ');
 };
 
 export const fmtSPs = (sps: StudyPeriod[]): string =>

@@ -4,7 +4,7 @@ import { __ } from '@wordpress/i18n';
 
 import Dropdown from '../../components/dropdown';
 import useFetchAll from '../../hooks/useFetchAll';
-import { fmtYear } from '../../utils/format';
+import { fmtProgramsYears } from '../../utils/format';
 import {
 	BACHELOR_YEARS,
 	Option,
@@ -31,9 +31,8 @@ const CurrentCoursesList = ({
 	<>
 		{BACHELOR_YEARS.map((year, i) => {
 			const currentPosts = posts
-				.filter(
-					(post) =>
-						post.meta.ftek_plugin_course_page_meta.year === year
+				.filter((post) =>
+					post.meta.ftek_plugin_course_page_meta.years.includes(year)
 				)
 				.sort(
 					(a, b) =>
@@ -51,7 +50,7 @@ const CurrentCoursesList = ({
 			}).join(', ');
 
 			const __html =
-				fmtYear(year) +
+				fmtProgramsYears([], [year]) +
 				(scheduleLinks
 					? ' ' +
 					  // translators: %1$s Hyperlink to a schedule

@@ -10,9 +10,8 @@ import useFetchAll from '../../hooks/useFetchAll';
 import {
 	fmtCourseCode,
 	fmtCourseCredits,
-	fmtProgramsYear,
+	fmtProgramsYears,
 	fmtSPs,
-	fmtYear,
 } from '../../utils/format';
 import {
 	CoursePageMeta,
@@ -84,7 +83,7 @@ function CourseList({
 				(post.title.rendered.toLowerCase().includes(lcSearch) ||
 					meta.code.toLocaleLowerCase().includes(lcSearch)) &&
 				(filter.years.length === YEARS.length ||
-					(filter.years as ('' | Year)[]).includes(meta.year)) &&
+					intersects(filter.years, meta.years)) &&
 				(filter.programs.length === PROGRAMS.length ||
 					intersects(filter.programs, meta.programs)) &&
 				(filter.sps.length === STUDY_PERIODS.length ||
@@ -169,7 +168,10 @@ function CourseList({
 												values={filter.years}
 												boxes={YEARS.map((year) => ({
 													value: year,
-													label: fmtYear(year),
+													label: fmtProgramsYears(
+														[],
+														[year]
+													),
 												}))}
 												onChange={(years) =>
 													updateFilter({ years })
@@ -301,9 +303,9 @@ function CourseList({
 											{fmtCourseCredits(meta.credits)}
 										</td>
 										<td>
-											{fmtProgramsYear(
+											{fmtProgramsYears(
 												meta.programs,
-												meta.year
+												meta.years
 											)}
 										</td>
 										<td>{fmtSPs(meta.study_perionds)}</td>

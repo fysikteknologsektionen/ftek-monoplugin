@@ -3,7 +3,7 @@ import { _x, __ } from '@wordpress/i18n';
 
 import Dropdown from '../../components/dropdown';
 import useFetchAll from '../../hooks/useFetchAll';
-import { fmtProgramsYear, fmtYear } from '../../utils/format';
+import { fmtProgramsYears } from '../../utils/format';
 import {
 	BachelorYear,
 	BACHELOR_YEARS,
@@ -56,13 +56,13 @@ const organizePosts = (
 	allPosts.forEach((post) => {
 		const {
 			programs: prog,
-			year,
+			years,
 			study_perionds: studyPerionds,
 			comment,
 			elective,
 		} = post.meta.ftek_plugin_course_page_meta;
 
-		if (prog.length <= 0 || !year) {
+		if (prog.length <= 0 || years.length <= 0) {
 			return;
 		}
 
@@ -79,13 +79,18 @@ const organizePosts = (
 		const program: ExtendedProgram = prog.length > 1 ? 'multiple' : prog[0];
 
 		studyPerionds.forEach((sp) => {
-			posts[year as BachelorYear][program][sp].push({
-				title: post.title.rendered,
-				link: post.link,
-				comments,
-				participantCount:
-					post.meta.ftek_plugin_course_page_meta.participant_count,
-			});
+			years.forEach(
+				(year) =>
+					year !== 'master' &&
+					posts[year][program][sp].push({
+						title: post.title.rendered,
+						link: post.link,
+						comments,
+						participantCount:
+							post.meta.ftek_plugin_course_page_meta
+								.participant_count,
+					})
+			);
 		});
 	});
 
@@ -163,7 +168,7 @@ const YearOverview = ({
 									'%1$s',
 									year
 							  )
-							: fmtProgramsYear([program], year)}
+							: fmtProgramsYears([program], [year])}
 					</th>
 				)}
 				{STUDY_PERIODS.flatMap((sp, l) => {
@@ -231,7 +236,9 @@ const OverviewTable = ({
 						alignItems: 'center',
 					}}
 				>
-					<h3 style={{ flexGrow: 1 }}>{fmtYear(year)}</h3>
+					<h3 style={{ flexGrow: 1 }}>
+						{fmtProgramsYears([], [year])}
+					</h3>
 					{i === 0 && <span>{controls}</span>}
 				</div>
 				<YearOverview

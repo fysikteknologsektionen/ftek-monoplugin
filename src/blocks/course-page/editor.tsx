@@ -9,7 +9,6 @@ import {
 	CheckboxControl,
 	PanelBody,
 	PanelRow,
-	RadioControl,
 	TextControl,
 } from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
@@ -29,9 +28,8 @@ import usePostMeta from '../../hooks/usePostMeta';
 import {
 	fmtCourseCode,
 	fmtCourseCredits,
-	fmtProgramsYear,
+	fmtProgramsYears,
 	fmtSPs,
-	fmtYear,
 } from '../../utils/format';
 import {
 	CoursePageMeta,
@@ -40,10 +38,10 @@ import {
 	STUDY_PERIODS,
 	WPBlock,
 	WPCoursePageMeta,
-	Year,
 	YEARS,
 } from '../../utils/types';
 
+import CheckboxGroup from '../../components/checkbox-group';
 import metadata from './block.json';
 
 declare const ftekInline: Inline;
@@ -194,60 +192,43 @@ const Controls = ({
 			<PanelRow>
 				<div>
 					<p>{__('Study period', 'ftek-plugin')}</p>
-					{STUDY_PERIODS.map((sp, i) => (
-						<CheckboxControl
-							key={i}
-							label={fmtSPs([sp])}
-							checked={meta.study_perionds.includes(sp)}
-							onChange={() => {
-								const sps = [...meta.study_perionds];
-								const index = sps.indexOf(sp);
-								if (index >= 0) {
-									sps.splice(index, 1);
-								} else {
-									sps.push(sp);
-								}
-								updateMeta({
-									study_perionds: sps,
-								});
-							}}
-						/>
-					))}
+					<CheckboxGroup
+						boxes={STUDY_PERIODS.map((sp) => ({
+							label: fmtSPs([sp]),
+							value: sp,
+						}))}
+						values={meta.study_perionds}
+						onChange={(value) => {
+							updateMeta({ study_perionds: value });
+						}}
+					/>
 				</div>
 			</PanelRow>
 			<hr />
 			<PanelRow>
-				<RadioControl
-					label={_x('Year', 'grade', 'ftek-plugin')}
-					selected={meta.year}
-					options={YEARS.map((year) => ({
-						label: fmtYear(year),
-						value: year,
-					}))}
-					onChange={(value: Year) => updateMeta({ year: value })}
-				/>
+				<div>
+					<CheckboxGroup
+						boxes={YEARS.map((year) => ({
+							label: fmtProgramsYears([], [year]),
+							value: year,
+						}))}
+						values={meta.years}
+						onChange={(value) => updateMeta({ years: value })}
+					/>
+				</div>
 			</PanelRow>
 			<hr />
 			<PanelRow>
 				<div>
 					<p>{__('Progammes', 'ftek-plugin')}</p>
-					{PROGRAMS.map((program, i) => (
-						<CheckboxControl
-							key={i}
-							label={program}
-							checked={meta.programs.includes(program)}
-							onChange={() => {
-								const prgs = [...meta.programs];
-								const index = prgs.indexOf(program);
-								if (index >= 0) {
-									prgs.splice(index, 1);
-								} else {
-									prgs.push(program);
-								}
-								updateMeta({ programs: prgs });
-							}}
-						/>
-					))}
+					<CheckboxGroup
+						boxes={PROGRAMS.map((program) => ({
+							label: program,
+							value: program,
+						}))}
+						values={meta.programs}
+						onChange={(value) => updateMeta({ programs: value })}
+					/>
 				</div>
 			</PanelRow>
 			<hr />
@@ -309,7 +290,7 @@ const CoursePage = ({
 		<>
 			<h2>{`${fmtCourseCode(meta.code)} | ${fmtCourseCredits(
 				meta.credits
-			)} | ${fmtProgramsYear(meta.programs, meta.year)} | ${fmtSPs(
+			)} | ${fmtProgramsYears(meta.programs, meta.years)} | ${fmtSPs(
 				meta.study_perionds
 			)}`}</h2>
 			<SectionedPage>

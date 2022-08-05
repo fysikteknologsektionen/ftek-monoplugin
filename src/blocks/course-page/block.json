@@ -33,9 +33,9 @@
 			"type": "array",
 			"default": []
 		},
-		"year": {
-			"enum": ["", "1", "2", "3", "master"],
-			"default": ""
+		"years": {
+			"type": "array",
+			"default": []
 		},
 		"programs": {
 			"type": "array",

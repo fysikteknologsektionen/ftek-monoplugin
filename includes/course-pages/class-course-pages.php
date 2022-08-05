@@ -20,7 +20,7 @@ class Course_Pages {
 		'survey_url'              => '',
 		'student_representatives' => array(),
 		'study_perionds'          => array(),
-		'year'                    => '',
+		'years'                   => array(),
 		'programs'                => array(),
 		'participant_count'       => 0,
 		'elective'                => false,
@@ -100,10 +100,22 @@ class Course_Pages {
 		);
 
 		foreach ( $posts as $post ) {
+			$meta = array_merge(
+				self::DEFAULTS,
+				get_post_meta( $post->ID, 'ftek_plugin_course_page_meta', true )
+			);
+
+			if ( isset( $meta['year'] ) && ! empty( $meta['year'] ) ) {
+				$meta['years'] = array( $meta['year'] );
+			}
+
 			update_post_meta(
 				$post->ID,
 				'ftek_plugin_course_page_meta',
-				array_merge( self::DEFAULTS, get_post_meta( $post->ID, 'ftek_plugin_course_page_meta', true ) )
+				array_intersect_key(
+					$meta,
+					self::DEFAULTS
+				)
 			);
 		}
 	}
@@ -246,9 +258,12 @@ class Course_Pages {
 								),
 								'required' => true,
 							),
-							'year'                    => array(
-								'type'     => 'string',
-								'enum'     => array( '', '1', '2', '3', 'master' ),
+							'years'                   => array(
+								'type'     => 'array',
+								'items'    => array(
+									'type' => 'string',
+									'enum' => array( '1', '2', '3', 'master' ),
+								),
 								'required' => true,
 							),
 							'programs'                => array(
