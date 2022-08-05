@@ -379,11 +379,9 @@ const Settings = (): JSX.Element => {
 			.catch(setError);
 	};
 
-	const SettingsSection = ({
-		section: Element,
-	}: {
-		section: (props: SettingsSectionParams) => JSX.Element;
-	}): JSX.Element =>
+	const doSettingsSection = (
+		Element: (props: SettingsSectionParams) => JSX.Element
+	): JSX.Element =>
 		option ? (
 			<Element option={option} onChange={updateOption} />
 		) : (
@@ -409,15 +407,15 @@ const Settings = (): JSX.Element => {
 			) : (
 				<>
 					<h3>{__('OAuth', 'ftek-plugin')}</h3>
-					<SettingsSection section={OAuthSettings} />
+					{doSettingsSection(OAuthSettings)}
 					<h3>{__('Users', 'ftek-plugin')}</h3>
-					<SettingsSection section={UsersSettings} />
+					{doSettingsSection(UsersSettings)}
 					<h3>{__('Google API', 'ftek-plugin')}</h3>
-					<SettingsSection section={GoogleApiSettings} />
+					{doSettingsSection(GoogleApiSettings)}
 					<h3>{__('Study Periods', 'ftek-plugin')}</h3>
-					<SettingsSection section={StudyPeriodsSettings} />
+					{doSettingsSection(StudyPeriodsSettings)}
 					<h3>{__('Schedules', 'ftek-plugin')}</h3>
-					<SettingsSection section={SchedulesSettings} />
+					{doSettingsSection(SchedulesSettings)}
 					<p>
 						<Button
 							onClick={save}
