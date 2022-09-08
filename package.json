@@ -20,7 +20,6 @@
 	},
 	"devDependencies": {
 		"@types/eslint": "^8.4.5",
-		"@types/ical": "^0.8.0",
 		"@types/prettier": "^2.6.3",
 		"@types/webpack": "^5.28.0",
 		"@typescript-eslint/parser": "^5.30.5",
@@ -39,9 +38,7 @@
 		"@wordpress/stylelint-config": "^20.0.2",
 		"@wordpress/url": "^3.12.0",
 		"concurrently": "^7.2.2",
-		"ical": "^0.8.0",
 		"ical-expander": "^3.1.0",
-		"ical.js": "^1.5.0",
 		"typescript": "^4.7.4"
 	}
 }

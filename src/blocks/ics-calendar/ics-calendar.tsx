@@ -3,6 +3,7 @@ import IcalExpander from 'ical-expander';
 import { useState, useEffect } from '@wordpress/element';
 import { __, _x } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
+import Dropdown from '../../components/dropdown';
 
 export type Calendar = {
 	name: string;
@@ -40,14 +41,76 @@ const dayNames = [
 	_x('Sun', 'day of week short', 'ftek-plugin'),
 ];
 
-const CalendarGrid = ({ grid, range }: { grid: Entry[][]; range?: Range }) => {
+function zeroPad(num: number, size: number): string {
+	let str = num.toString();
+	while (str.length < size) {
+		str = '0' + str;
+	}
+	return str;
+}
+
+function formatTime(date: Date) {
+	return `${zeroPad(date.getHours(), 2)}:${zeroPad(date.getMinutes(), 2)}`;
+}
+
+const CalendarEntry = ({
+	entry,
+	day,
+}: {
+	entry: Entry;
+	day?: Date;
+}): JSX.Element => {
+	const [expanded, setExpanded] = useState(false);
+
+	let time: JSX.Element = null;
+	if (day) {
+		const dayStart = new Date(day);
+		const dayEnd = new Date(dayStart);
+		dayEnd.setDate(dayEnd.getDate() + 1);
+		const startTime = entry.start < dayStart ? dayStart : entry.start;
+		const endTime = entry.end > dayEnd ? dayEnd : entry.end;
+		time = (
+			<>
+				{formatTime(startTime)}-{formatTime(endTime)}
+			</>
+		);
+	}
+	return (
+		<li>
+			<Dropdown
+				disabled={!entry.description}
+				content={
+					<>
+						{time} {entry.title}
+					</>
+				}
+			>
+				<div
+					dangerouslySetInnerHTML={{ __html: entry.description }}
+					style={{ maxWidth: '50vw' }}
+				/>
+			</Dropdown>
+		</li>
+	);
+};
+
+const CalendarGrid = ({
+	grid,
+	range,
+}: {
+	grid: Entry[][];
+	range?: Range;
+}): JSX.Element => {
 	const daysInRange = range ? range.days : 7 * 6;
 
-	let startDate = null, endDate = null;
+	let startDate = null;
 	if (range) {
-		startDate = new Date(range.start.year, range.start.month, range.start.date);
+		startDate = new Date(
+			range.start.year,
+			range.start.month,
+			range.start.date
+		);
 	}
-	const endDate = range && new Date()
 
 	const headers = [...Array(Math.min(7, daysInRange)).keys()].map((i) => {
 		if (!startDate) {
@@ -88,12 +151,11 @@ const CalendarGrid = ({ grid, range }: { grid: Entry[][]; range?: Range }) => {
 
 		const items = events.map((event) => {
 			if (startDate) {
-				const startTime =
-					event.start < startDate ? startDate : event.start;
-				const end
-				const endTime = 
+				const dayStart = new Date(startDate);
+				dayStart.setDate(dayStart.getDate() + i);
+				return <CalendarEntry entry={event} day={dayStart} />;
 			}
-			return <li>{event.title}</li>;
+			return <CalendarEntry entry={event} />;
 		});
 
 		row.push(
@@ -185,6 +247,7 @@ export const IcsCalendar = ({
 			const endDate = new Date(startDate);
 			endDate.setDate(endDate.getDate() + range.days);
 			const inRange = evt.response.between(startDate, endDate);
+			console.log(inRange);
 
 			const events = inRange.events.map((e) => ({
 				startDate: e.startDate.toJSDate(),
