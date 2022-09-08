@@ -121,7 +121,9 @@ const CalendarGrid = ({
 		date.setDate(date.getDate() + i);
 		const DDMM = ` ${date.getDate()}/${date.getMonth() + 1}`;
 		return (
-			<th>{dayNames[date.getDay()] + (daysInRange <= 7 ? DDMM : '')}</th>
+			<th key={i}>
+				{dayNames[date.getDay()] + (daysInRange <= 7 ? DDMM : '')}
+			</th>
 		);
 	});
 
@@ -130,8 +132,10 @@ const CalendarGrid = ({
 	const flushRow = () => {
 		body.push(
 			<tr>
-				{row.map((cell) => (
-					<td style={{ verticalAlign: 'top' }}>{cell}</td>
+				{row.map((cell, i) => (
+					<td key={i} style={{ verticalAlign: 'top' }}>
+						{cell}
+					</td>
 				))}
 			</tr>
 		);
@@ -149,13 +153,13 @@ const CalendarGrid = ({
 
 		const events = grid?.[i] || [];
 
-		const items = events.map((event) => {
+		const items = events.map((event, j) => {
 			if (startDate) {
 				const dayStart = new Date(startDate);
 				dayStart.setDate(dayStart.getDate() + i);
 				return <CalendarEntry entry={event} day={dayStart} />;
 			}
-			return <CalendarEntry entry={event} />;
+			return <CalendarEntry key={j} entry={event} />;
 		});
 
 		row.push(
@@ -169,7 +173,7 @@ const CalendarGrid = ({
 			</div>
 		);
 
-		if ((i + 1) % 7 == 0) {
+		if ((i + 1) % 7 === 0) {
 			flushRow();
 		}
 	}
@@ -236,7 +240,7 @@ export const IcsCalendar = ({
 			return;
 		}
 
-		let _grid: Entry[][] = [...Array(range.days)].map(() => []);
+		const _grid: Entry[][] = [...Array(range.days)].map(() => []);
 
 		allEvents.forEach((evt) => {
 			const startDate = new Date(
@@ -247,7 +251,6 @@ export const IcsCalendar = ({
 			const endDate = new Date(startDate);
 			endDate.setDate(endDate.getDate() + range.days);
 			const inRange = evt.response.between(startDate, endDate);
-			console.log(inRange);
 
 			const events = inRange.events.map((e) => ({
 				startDate: e.startDate.toJSDate(),
@@ -269,7 +272,7 @@ export const IcsCalendar = ({
 
 				let d = new Date(startDate);
 				d.setDate(d.getDate() + i0);
-				let nextD = new Date(d);
+				const nextD = new Date(d);
 				nextD.setDate(nextD.getDate() + 1);
 				for (let i = i0; d < event.endDate && i < range.days; i++) {
 					if (event.startDate < nextD) {
